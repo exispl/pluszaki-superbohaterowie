@@ -11,7 +11,9 @@
       "roomOrigin": "Okrągły biały pluszak kotka w foremce z posypką na różowej pościeli minky",
       "images": {
         "original": "originals/cat_original.jpg",
+        "originalPng": "originals_png/cat_original.png",
         "cutoutNoBg": "cyber_cupcake_cat_nobg_1788267229454.jpg",
+        "transparentPng": "cyber_cupcake_cat_transparent.png",
         "scene3D": "cyber_cupcake_cat_hero_1788263620524.jpg",
         "duoRoom": "duo_cat_penguin_1788270940922.jpg"
       },
@@ -31,7 +33,9 @@
       "roomOrigin": "Puszysty błękitny pingwinek o wielkich lśniących oczach",
       "images": {
         "original": "originals/penguin_original.jpg",
+        "originalPng": "originals_png/penguin_original.png",
         "cutoutNoBg": "astral_penguin_nobg_1788267200543.jpg",
+        "transparentPng": "astral_penguin_transparent.png",
         "scene3D": "mystic_astral_penguin_hero_1788263649251.jpg",
         "duoRoom": "duo_cat_penguin_1788270940922.jpg"
       },
@@ -51,7 +55,9 @@
       "roomOrigin": "Szara lalka-króliczek z haftem metryczki narodzin 13.06.2022 r. godz. 13:13",
       "images": {
         "original": "originals/diana_original.jpg",
+        "originalPng": "originals_png/diana_original.png",
         "cutoutNoBg": "lunar_bunny_nobg_1788267172073.jpg",
+        "transparentPng": "lunar_bunny_transparent.png",
         "scene3D": "lunar_bunny_guardian_hero_1788263677418.jpg"
       },
       "stages": [
