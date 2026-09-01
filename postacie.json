@@ -1,0 +1,195 @@
+{
+  "project": "Pluszaki: Uniwersum Supermocy",
+  "version": "1.0.0",
+  "totalCharacters": 11,
+  "characters": [
+    {
+      "id": "cat",
+      "name": "Kotek-Babeczka",
+      "heroName": "Sprinkle-Cat (Sparkle-Kat)",
+      "element": "⚡ Tęczowa Plazma & Antygrawitacja",
+      "roomOrigin": "Okrągły biały pluszak kotka w foremce z posypką na różowej pościeli minky",
+      "images": {
+        "original": "originals/cat_original.jpg",
+        "cutoutNoBg": "cyber_cupcake_cat_nobg_1788267229454.jpg",
+        "scene3D": "cyber_cupcake_cat_hero_1788263620524.jpg",
+        "duoRoom": "duo_cat_penguin_1788270940922.jpg"
+      },
+      "stages": [
+        { "level": 1, "name": "Puszek-Babisia", "skill": "Kolory Tęczy", "powers": ["✨ Mruczenie Mocy", "🧁 Posypka Kolorów"] },
+        { "level": 2, "name": "Iskierka Cukrowa", "skill": "Liczenie Gwiazdek 1-5", "powers": ["⭐ Błysk Posypki", "🐾 Zwinny Skok"] },
+        { "level": 3, "name": "Cyber-Kotek Turbo", "skill": "Pierwsze Literki", "powers": ["🚀 Napęd Odrzutowy", "⚡ Laserowe Wąsy"] },
+        { "level": 4, "name": "Plazmowy Obrońca", "skill": "Zagadki Logiczne", "powers": ["🛡️ Tarcza Plazmy", "⚡ Piorun z Łapek"] },
+        { "level": 5, "name": "Kosmiczny Feniks-Kot 👑", "skill": "Mistrz Wiedzy", "powers": ["👑 Korona Gwiazd", "🌌 Zorza Antygrawitacji", "💖 Super-Przyjaźń"] }
+      ]
+    },
+    {
+      "id": "penguin",
+      "name": "Błękitny Pingwinek",
+      "heroName": "Frosty-Nova",
+      "element": "❄️ Astralny Lód & Światło",
+      "roomOrigin": "Puszysty błękitny pingwinek o wielkich lśniących oczach",
+      "images": {
+        "original": "originals/penguin_original.jpg",
+        "cutoutNoBg": "astral_penguin_nobg_1788267200543.jpg",
+        "scene3D": "mystic_astral_penguin_hero_1788263649251.jpg",
+        "duoRoom": "duo_cat_penguin_1788270940922.jpg"
+      },
+      "stages": [
+        { "level": 1, "name": "Kropek Puchaty", "skill": "Dźwięki i Melodie", "powers": ["🐣 Lodowy Plusk"] },
+        { "level": 2, "name": "Śnieżynkowy Pływak", "skill": "Porównywanie Rozmiarów", "powers": ["❄️ Śnieżna Kula", "⛸️ Lodowy Ślizg"] },
+        { "level": 3, "name": "Astralny Nowicjusz", "skill": "Rymowanki i Wiersze", "powers": ["💎 Kryształ Lodu", "✨ Gwiezdne Oczy"] },
+        { "level": 4, "name": "Władca Runicznej Zorzy", "skill": "Ekologia i Przyroda", "powers": ["🔮 Kręgi Runiczne", "🌊 Rzeka Światła"] },
+        { "level": 5, "name": "Tytan Polarnych Komet 👑", "skill": "Mistrz Przyjaźni", "powers": ["🌌 Polarna Zorza", "👑 Serce Zimy", "✨ Wieczne Światło"] }
+      ]
+    },
+    {
+      "id": "diana",
+      "name": "Króliczka Diana",
+      "heroName": "Lunar-Diana",
+      "element": "🌙 Magia Księżyca & Gwiezdne Sny",
+      "roomOrigin": "Szara lalka-króliczek z haftem metryczki narodzin 13.06.2022 r. godz. 13:13",
+      "images": {
+        "original": "originals/diana_original.jpg",
+        "cutoutNoBg": "lunar_bunny_nobg_1788267172073.jpg",
+        "scene3D": "lunar_bunny_guardian_hero_1788263677418.jpg"
+      },
+      "stages": [
+        { "level": 1, "name": "Śpiąca Diana", "skill": "Pory Dnia i Rytm Snu", "powers": ["💤 Spokojny Sen"] },
+        { "level": 2, "name": "Gwiezdna Ścieżynka", "skill": "Dni Tygodnia i Cyfry", "powers": ["⭐ Świecące Uszy"] },
+        { "level": 3, "name": "Księżycowa Diana", "skill": "Magiczne Słowa", "powers": ["💖 Kryształ Serca", "🦋 Motyle Światła"] },
+        { "level": 4, "name": "Kapłanka Srebrnej Pełni", "skill": "Empatia i Pomaganie", "powers": ["🌸 Wirujące Płatki", "🛡️ Tarcza Snów"] },
+        { "level": 5, "name": "Bogini Gwiezdnego Pyłu 👑", "skill": "Królowa Marzeń", "powers": ["👑 Srebrna Korona", "✨ Gwiezdny Pył", "💖 Miłość i Spokój"] }
+      ]
+    },
+    {
+      "id": "dog",
+      "name": "Dźwiękowy Piesek K9",
+      "heroName": "Sonic-Pup (Sonic Bark)",
+      "element": "🔊 Ultradźwięki & Błyskawice",
+      "roomOrigin": "Brązowy piesek z dzwoneczkiem na obroży i białymi łapkami",
+      "images": {
+        "original": "originals/dog_original.jpg",
+        "cutoutNoBg": "sonic_puppy_hero_nobg_1788267042270.jpg"
+      },
+      "stages": [
+        { "level": 1, "name": "Szczeniak Hau", "skill": "Kierunki Lewo/Prawo", "powers": ["🔔 Dzyń-Dzyń"] },
+        { "level": 2, "name": "Bystry Tropiciel", "skill": "Odnajdywanie Par", "powers": ["🐾 Tropienie", "⚡ Iskry z Łapek"] },
+        { "level": 3, "name": "Soniczny Pies K9", "skill": "Sygnalizacja i Bezpieczeństwo", "powers": ["🔊 Fale Sonaru", "⚡ Piorunujące Łapy"] },
+        { "level": 4, "name": "Gromowładny Ogar", "skill": "Szybkość i Zwinność", "powers": ["💨 Naddźwiękowy Bieg", "👁️ Wzrok Rentgena"] },
+        { "level": 5, "name": "Gwiezdny Awatar Lojalności 👑", "skill": "Mistrz Odwagi", "powers": ["👑 Złoty Pancerz", "🌟 Piorun Światła", "🛡️ Wieczna Ochrona"] }
+      ]
+    },
+    {
+      "id": "monkey",
+      "name": "Cybernetyczna Małpka (Gizmo)",
+      "heroName": "Gizmo-Prime",
+      "element": "🦾 Cyber-Technologia & Antygrawitacja",
+      "roomOrigin": "Brązowa małpka ssąca kciuk przy szafce z klockami",
+      "images": {
+        "original": "originals/monkey_original.jpg",
+        "cutoutNoBg": "techno_monkey_hero_nobg_1788267143753.jpg"
+      },
+      "stages": [
+        { "level": 1, "name": "Małpka Paluszek", "skill": "Rozpoznawanie Kształtów", "powers": ["🐒 Wesoły Chwyt"] },
+        { "level": 2, "name": "Mały Majsterkowicz", "skill": "Układanie Klocków", "powers": ["🔧 Klucz Energetyczny"] },
+        { "level": 3, "name": "Gizmo Cyber-Ręka", "skill": "Liczenie Elementów", "powers": ["🦾 Ramię Siły", "🥽 Wizjer HUD"] },
+        { "level": 4, "name": "Arcy-Inżynier Grawitacji", "skill": "Łamigłówki Przestrzenne", "powers": ["🌀 Dysk Kinetyczny"] },
+        { "level": 5, "name": "Mecha-Tytan Technologii 👑", "skill": "Mistrz Wynalazków", "powers": ["👑 Nano-Pancerz", "⚡ Plazmowy Promień"] }
+      ]
+    },
+    {
+      "id": "cow",
+      "name": "Tytaniczna Krowa Piorunów",
+      "heroName": "Thunder-Moo",
+      "element": "⚡ Grzmot & Złote Rogi",
+      "roomOrigin": "Wielka pluszowa łaciata krowa z różowym pyszczkiem na fotelu",
+      "images": {
+        "original": "originals/cow_original.jpg",
+        "cutoutNoBg": "thunder_cow_hero_nobg_1788268487338.jpg"
+      },
+      "stages": [
+        { "level": 1, "name": "Łatka Malutka", "skill": "Skąd bierze się mleko", "powers": ["🐮 Wesołe Muu"] },
+        { "level": 2, "name": "Dzwoneczkowa Mućka", "skill": "Rośliny i Zioła", "powers": ["🔔 Dzwon Łąki"] },
+        { "level": 3, "name": "Elektryczna Krowa Burzy", "skill": "Orientacja w Pokoju", "powers": ["⚡ Rogi Piorunów"] },
+        { "level": 4, "name": "Tytan Piorunów", "skill": "Zdrowe Nawyki", "powers": ["💥 Sejsmiczne Kopyta"] },
+        { "level": 5, "name": "Gaia - Matka Burzy 👑", "skill": "Opiekunka Planety", "powers": ["👑 Korona Burzy", "🌿 Regeneracja Natury"] }
+      ]
+    },
+    {
+      "id": "pooh",
+      "name": "Złoty Miś Miodowy",
+      "heroName": "Solar-Pooh (Amber-Bear)",
+      "element": "🍯 Słoneczny Bursztyn & Ciepło",
+      "roomOrigin": "Żółty pluszowy miś w czerwonej koszulce przy poduszce w sówki",
+      "images": { "original": "originals/pooh_original.jpg" },
+      "stages": [
+        { "level": 1, "name": "Misiu Pysiu", "skill": "Kolory Podstawowe", "powers": ["🍯 Baryłka Miodu"] },
+        { "level": 2, "name": "Bursztynowy Tropiciel", "skill": "Pracowite Pszczółki", "powers": ["🐝 Taniec Pszczół"] },
+        { "level": 3, "name": "Słoneczny Rycerz Miodu", "skill": "Dzielenie się z Innymi", "powers": ["🛡️ Tarcza Bursztynu"] },
+        { "level": 4, "name": "Solarny Mistrz Ciepła", "skill": "Ciepłe Słowa i Wierszyki", "powers": ["☀️ Promień Słońca"] },
+        { "level": 5, "name": "Astralny Niedźwiedź Słońca 👑", "skill": "Mistrz Przyjaźni", "powers": ["👑 Złota Korona", "🌟 Słoneczna Aura"] }
+      ]
+    },
+    {
+      "id": "mario",
+      "name": "Gwiezdny Skoczek Mario",
+      "heroName": "Super-Jump Mario",
+      "element": "🍄 Ogień & Super-Skok",
+      "roomOrigin": "Mario w czerwonej czapce i niebieskich ogrodniczkach",
+      "images": { "original": "originals/mario_original.jpg" },
+      "stages": [
+        { "level": 1, "name": "Czerwony Czapnik", "skill": "Litera M", "powers": ["🍄 Grzybek Skoku"] },
+        { "level": 2, "name": "Zwinny Skoczek", "skill": "Liczenie Skoków", "powers": ["👟 Sprężyste Buty"] },
+        { "level": 3, "name": "Ognisty Mario Płomieni", "skill": "Zwinność i Refleks", "powers": ["🔥 Ognisty Błysk"] },
+        { "level": 4, "name": "Super-Hydraulik Gwiazd", "skill": "Pokonywanie Trudności", "powers": ["⭐ Tęczowa Gwiazda"] },
+        { "level": 5, "name": "Kosmiczny Bohater Wymiarów 👑", "skill": "Nigdy się nie poddawaj", "powers": ["👑 Złota Czapka Mocy", "🚀 Gwiezdny Napęd"] }
+      ]
+    },
+    {
+      "id": "gabby",
+      "name": "Magiczna Kotka Gabby",
+      "heroName": "Star-Gabby",
+      "element": "🎀 Kocia Magia Wyobraźni",
+      "roomOrigin": "Lalka Gabby z burzą kręconych włosów i opaską z uszkami",
+      "images": { "original": "originals/gabby_original.jpg" },
+      "stages": [
+        { "level": 1, "name": "Kocia Dziewczynka", "skill": "Części Twarzy", "powers": ["🐱 Koci Uśmiech"] },
+        { "level": 2, "name": "Iskierka Radości", "skill": "Mieszanie Kolorów", "powers": ["✨ Brokatowy Błysk"] },
+        { "level": 3, "name": "Magiczna Czarodziejka", "skill": "Czarodziejskie Rymy", "powers": ["🪄 Kocia Różdżka"] },
+        { "level": 4, "name": "Wróżka Tęczowych Pokoi", "skill": "Sprzątanie Zabawek", "powers": ["🎨 Malowanie Światłem"] },
+        { "level": 5, "name": "Królowa Kosmicznej Wyobraźni 👑", "skill": "Twórcze Budowanie", "powers": ["👑 Korona Kotka", "🌈 Tęczowy Portal"] }
+      ]
+    },
+    {
+      "id": "minnie",
+      "name": "Wiśniowa Minnie",
+      "heroName": "Cherry-Minnie",
+      "element": "🍒 Wiśniowa Przyjaźń & Balet",
+      "roomOrigin": "Pluszowa Minnie w fioletowej piżamce w wisienki z kokardą",
+      "images": { "original": "originals/minnie_original.jpg" },
+      "stages": [
+        { "level": 1, "name": "Minnie w Piżamce", "skill": "Owoce i Witaminy", "powers": ["🍒 Słodka Wisienka"] },
+        { "level": 2, "name": "Wiśniowa Iskierka", "skill": "Rytmika i Taniec", "powers": ["🎀 Różowa Kokarda"] },
+        { "level": 3, "name": "Czarodziejka Kokardek", "skill": "Równowaga", "powers": ["✨ Magiczne Wstążki"] },
+        { "level": 4, "name": "Strażniczka Radości", "skill": "Dobre Maniery", "powers": ["🌸 Wiśniowy Pył"] },
+        { "level": 5, "name": "Kryształowa Księżniczka Uśmiechu 👑", "skill": "Czysta Radość", "powers": ["👑 Diamentowa Kokarda", "💖 Promień Radości"] }
+      ]
+    },
+    {
+      "id": "baby",
+      "name": "Kryształowy Niemowlaczek",
+      "heroName": "Starlight-Baby",
+      "element": "🍼 Czyste Światło & Opieka",
+      "roomOrigin": "Lalka niemowlaka w różowym śpiworku w kąciku łóżka",
+      "images": { "original": "originals/baby_original.jpg" },
+      "stages": [
+        { "level": 1, "name": "Słodki Bobasek", "skill": "Czułość i Opiekuńczość", "powers": ["🍼 Czyste Serduszko"] },
+        { "level": 2, "name": "Raczkujący Promyczek", "skill": "Pierwsze Słowa", "powers": ["✨ Świecące Ślady"] },
+        { "level": 3, "name": "Mały Aniołek Światła", "skill": "Kołysanki", "powers": ["🪽 Piórkowe Skrzydła"] },
+        { "level": 4, "name": "Strażnik Uśmiechu Maluchów", "skill": "Troska o Innych", "powers": ["🎶 Kołysanka Gwiazd"] },
+        { "level": 5, "name": "Złote Dziecko Gwiazd 👑", "skill": "Wieczna Miłość", "powers": ["👑 Aureola Nadziei", "✨ Wieczna Czystość"] }
+      ]
+    }
+  ]
+}

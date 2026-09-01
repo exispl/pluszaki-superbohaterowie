@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pluszaki: Uniwersum Supermocy | Galeria Postaci & Prompty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070913;
+      --bg-card: rgba(18, 22, 39, 0.75);
+      --bg-card-hover: rgba(28, 35, 62, 0.85);
+      --border-glow: rgba(0, 240, 255, 0.25);
+      --neon-cyan: #00f0ff;
+      --neon-pink: #ff007f;
+      --neon-purple: #9d4edd;
+      --neon-amber: #ffb703;
+      --neon-green: #06d6a0;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(157, 78, 221, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.08) 0%, transparent 60%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      padding: 3.5rem 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .badge-top {
+      display: inline-block;
+      padding: 0.35rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, rgba(255, 0, 127, 0.2), rgba(0, 240, 255, 0.2));
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 20%, var(--neon-cyan) 60%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 750px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1.25rem;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      font-size: 0.95rem;
+    }
+
+    .stat-pill strong {
+      color: var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* Filters */
+    .filter-section {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(7, 9, 19, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.6rem 1.25rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2.25rem;
+    }
+
+    /* Card */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 12px 35px rgba(0, 240, 255, 0.2);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.05);
+    }
+
+    .card-tags {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+
+    .tag {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(8px);
+    }
+
+    .tag-cyber { background: rgba(0, 240, 255, 0.85); color: #000; }
+    .tag-mystic { background: rgba(157, 78, 221, 0.85); color: #fff; }
+    .tag-nobg { background: rgba(255, 0, 127, 0.85); color: #fff; }
+    .tag-world { background: rgba(255, 183, 3, 0.9); color: #000; }
+
+    .view-zoom-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+      backdrop-filter: blur(5px);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 1rem;
+    }
+
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .card-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .card-alias {
+      font-size: 0.85rem;
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+
+    .origin-preview {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.6rem 0.85rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .origin-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .origin-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .origin-text strong {
+      color: var(--text-main);
+      display: block;
+    }
+
+    .card-lore {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .powers-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .power-pill {
+      font-size: 0.75rem;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      color: var(--neon-cyan);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    /* Prompt Box */
+    .prompt-box {
+      margin-top: auto;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 0.85rem;
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--neon-pink);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .copy-btn {
+      background: rgba(255, 0, 127, 0.15);
+      color: #ff5ca8;
+      border: 1px solid rgba(255, 0, 127, 0.3);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--neon-pink);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+    }
+
+    .prompt-content {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      max-height: 80px;
+      overflow-y: auto;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Modal / Lightbox */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .modal-caption {
+      margin-top: 1rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      color: #fff;
+      text-align: center;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--neon-pink);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      color: #fff;
+      padding: 0.85rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0, 240, 255, 0.4);
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge-top">Google Imagen 3 & Antigravity AI</div>
+    <h1>PLUSZAKI: UNIWERSUM SUPERMOCY</h1>
+    <p class="subtitle">
+      Cyfrowa transformacja rzeczywistych pluszaków w potężnych superbohaterów łączących estetykę Cyberpunk oraz Mistycznego Świecącego Lasu.
+    </p>
+    <div class="stats-bar">
+      <div class="stat-pill">🧸 <strong>6</strong> Bohaterów</div>
+      <div class="stat-pill">🎨 <strong>11</strong> Wygenerowanych Grafik</div>
+      <div class="stat-pill">⚡ <strong>2</strong> Wymiary Świata</div>
+      <div class="stat-pill">✂️ Wersje <strong>Bez Tła</strong> + <strong>Sceny 3D</strong></div>
+    </div>
+  </header>
+
+  <section class="filter-section">
+    <a href="gra_dla_4latki.html" style="text-decoration: none;"><button class="filter-btn" style="background: linear-gradient(135deg, #ff85a2, #ffd166); color: #1a1a2e; font-weight: 700; box-shadow: 0 0 20px rgba(255, 133, 162, 0.6);">🧸 Przygoda Krok po Kroku (4-Latka) 💖</button></a>
+    <a href="gra_edukacyjna.html" style="text-decoration: none;"><button class="filter-btn" style="background: linear-gradient(135deg, #ff007f, #00f0ff); color: #fff; font-weight: 700;">🎮 Akademia Ewolucji (11 Pluszaków)</button></a>
+    <button class="filter-btn active" onclick="filterCards('all')">Wszystkie Grafiki</button>
+    <button class="filter-btn" onclick="filterCards('duo')">🏠 Pokój & Duety</button>
+    <button class="filter-btn" onclick="filterCards('nobg')">✂️ Bez Tła / Cutouts</button>
+    <button class="filter-btn" onclick="filterCards('cyber')">⚡ Cyberpunk</button>
+    <button class="filter-btn" onclick="filterCards('mystic')">🌿 Mistyczna Magia</button>
+  </section>
+
+  <div class="container">
+    <div class="grid" id="galleryGrid">
+
+      <!-- CARD 0: DUO ROOM SCENE (Kotek & Pingwinek) -->
+      <div class="card" data-category="duo">
+        <div class="card-img-wrapper" onclick="openModal('duo_cat_penguin_1788270940922.jpg', 'Kotek i Pingwinek na Łóżeczku w Pokoju')">
+          <div class="card-tags">
+            <span class="tag" style="background: linear-gradient(135deg, #ff85a2, #ffd166); color: #1a1a2e; font-weight: 700;">🏠 Pokój Dziecięcy</span>
+            <span class="tag" style="background: #4cc9f0; color: #000; font-weight: 700;">Duet Pluszaków</span>
+          </div>
+          <img class="card-img" src="duo_cat_penguin_1788270940922.jpg" alt="Duo Cat and Penguin" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Duet: Kotek & Pingwinek w Pokoju</div>
+              <div class="card-alias">Lokacja: Różowe Łóżeczko Minky pod Lampkami</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <div style="display: flex; gap: 0.5rem;">
+              <img class="origin-thumb" src="originals/cat_original.jpg" alt="Kotek">
+              <img class="origin-thumb" src="originals/penguin_original.jpg" alt="Pingwinek">
+            </div>
+            <div class="origin-text">
+              <strong>Oryginalne Pluszaki:</strong>
+              Okrągły biały kotek z posypką oraz puszysty błękitny pingwinek
+            </div>
+          </div>
+          <div class="card-lore">
+            Ciepła, bajkowa scena 3D w dziecięcym pokoju. Kotek i Pingwinek siedzą przytuleni na różowej pościeli pod świecącymi girlandami lampek, a w tle widać półeczkę z książeczkami i poduszkę w sówki.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">💖 Przyjaźń i Ciepło</span>
+            <span class="power-pill">🌟 Bajkowe Sny</span>
+            <span class="power-pill">🦉 Ochrona Pokoju</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`Cute fluffy round white cat plush with sprinkles and fluffy blue penguin plush sitting together happily on a pink cozy bed in a child bedroom with soft warm lighting 3d animated pixar style`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">Cute fluffy round white cat plush with sprinkles and fluffy blue penguin plush sitting together happily on a pink cozy bed in a child bedroom with soft warm lighting 3d animated pixar style</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 1: Cyber Cupcake Cat (No BG) -->
+      <div class="card" data-category="nobg cyber">
+        <div class="card-img-wrapper" onclick="openModal('cyber_cupcake_cat_nobg_1788267229454.jpg', 'Cyber-Kotek Babeczkowy (Bez Tła)')">
+          <div class="card-tags">
+            <span class="tag tag-nobg">Bez Tła</span>
+            <span class="tag tag-cyber">Cyberpunk</span>
+          </div>
+          <img class="card-img" src="cyber_cupcake_cat_nobg_1788267229454.jpg" alt="Cyber Cupcake Cat Cutout" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Cyber-Kotek Babeczkowy</div>
+              <div class="card-alias">Kryptonim: Sprinkle Guardian Kat</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/cat_original.jpg" alt="Pluszak Kotek">
+            <div class="origin-text">
+              <strong>Oryginalny Pluszak:</strong>
+              Okrągły biały kotek-babeczka z tęczową posypką
+            </div>
+          </div>
+          <div class="card-lore">
+            Uzbrojony w skrzydła odrzutowe i kryształowe wąsy laserowe. Tęczowa posypka na czole służy jako reaktor plazmowy generujący strumienie elektryczności z łapek.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">⚡ Plazma z łapek</span>
+            <span class="power-pill">🚀 Napęd odrzutowy</span>
+            <span class="power-pill">🌈 Reaktor tęczowej energii</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A 3D superhero character version of the round white cat plush with sprinkles from the image, completely isolated on a pure solid white background. The character is a round cute white feline guardian floating in mid-air. Its sprinkles on its head glow with neon rainbow energy crystals, it has laser-glowing whiskers, high-tech cybernetic mini jet wings on its back, and twin streams of electric pink and cyan lightning shooting from its paws. Clean white background, isolated character cutout render, Unreal Engine 5 render style.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A 3D superhero character version of the round white cat plush with sprinkles from the image, completely isolated on a pure solid white background. The character is a round cute white feline guardian floating in mid-air. Its sprinkles on its head glow with neon rainbow energy crystals, it has laser-glowing whiskers, high-tech cybernetic mini jet wings on its back, and twin streams of electric pink and cyan lightning shooting from its paws. Clean white background, isolated character cutout render, Unreal Engine 5 render style.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: Cyber Cupcake Cat Hero (City Scene) -->
+      <div class="card" data-category="cyber">
+        <div class="card-img-wrapper" onclick="openModal('cyber_cupcake_cat_hero_1788263620524.jpg', 'Cyber-Kotek nad Miastem Przyszłości')">
+          <div class="card-tags">
+            <span class="tag tag-cyber">Cyberpunk</span>
+          </div>
+          <img class="card-img" src="cyber_cupcake_cat_hero_1788263620524.jpg" alt="Cyber Cat City" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Kotek: Obrońca Metropolii</div>
+              <div class="card-alias">Wersja: Pełna Scena Cyberpunk</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/cat_original.jpg" alt="Pluszak Kotek">
+            <div class="origin-text">
+              <strong>Oryginalny Pluszak:</strong>
+              Okrągły kotek w pastelowym pucharku
+            </div>
+          </div>
+          <div class="card-lore">
+            Lewituje ponad drapaczami chmur w neonowej metropolii o zmierzchu, roztaczając potężne pole ochronne i rozświetlając niebo promieniami energetycznymi.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">🛡️ Tarcza gradientowa</span>
+            <span class="power-pill">✨ Antygrawitacja</span>
+            <span class="power-pill">🏙️ Ochrona Neo-Metropolii</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A powerful cybernetic superhero version of the round white cat plush from the image. The character is a round, cute white cat guardian floating above a futuristic neon cyberpunk metropolis at night. Its sprinkles on its head now pulse with intense glowing rainbow energy, neon laser whiskers emit bright beams, and its pink and blue gradient lower body glows with a holographic forcefield. Vibrant energy lightning swirls around its paws as it channels supernatural cosmic powers, cinematic dramatic lighting, 8k resolution, Unreal Engine 5 render style.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A powerful cybernetic superhero version of the round white cat plush from the image. The character is a round, cute white cat guardian floating above a futuristic neon cyberpunk metropolis at night. Its sprinkles on its head now pulse with intense glowing rainbow energy, neon laser whiskers emit bright beams, and its pink and blue gradient lower body glows with a holographic forcefield. Vibrant energy lightning swirls around its paws as it channels supernatural cosmic powers, cinematic dramatic lighting, 8k resolution, Unreal Engine 5 render style.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: Astral Penguin (No BG) -->
+      <div class="card" data-category="nobg mystic">
+        <div class="card-img-wrapper" onclick="openModal('astral_penguin_nobg_1788267200543.jpg', 'Astralny Pingwinek Mrozu (Bez Tła)')">
+          <div class="card-tags">
+            <span class="tag tag-nobg">Bez Tła</span>
+            <span class="tag tag-mystic">Magia Mrozu</span>
+          </div>
+          <img class="card-img" src="astral_penguin_nobg_1788267200543.jpg" alt="Astral Penguin Cutout" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Astralny Pingwinek Lodu</div>
+              <div class="card-alias">Kryptonim: Frosty Nova</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/penguin_original.jpg" alt="Pluszak Pingwinek">
+            <div class="origin-text">
+              <strong>Oryginalny Pluszak:</strong>
+              Błękitny puszysty pingwin z lśniącymi oczami
+            </div>
+          </div>
+          <div class="card-lore">
+            Włada prastarą magią mrozu i gwiazd. Na piersi nosi kryształowy napierśnik ze śnieżynką, a wokół jego skrzydełek obracają się magiczne runiczne kręgi.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">❄️ Runiczne kręgi lodu</span>
+            <span class="power-pill">🌌 Oczy kosmicznej mgławicy</span>
+            <span class="power-pill">💎 Krystaliczny pancerz</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A cute fantasy superhero version of the fluffy blue penguin plush from the image, completely isolated on a pure solid white background. The character has ultra-soft blue down feathers, large anime eyes sparkling with cosmic nebula colors, a crystal elemental chest plate, and is hovering in the air summoning floating glowing aqua mana spheres and swirling snowflake runes around its wings. Clean white background, isolated character cutout render, 3D Disney Pixar style.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A cute fantasy superhero version of the fluffy blue penguin plush from the image, completely isolated on a pure solid white background. The character has ultra-soft blue down feathers, large anime eyes sparkling with cosmic nebula colors, a crystal elemental chest plate, and is hovering in the air summoning floating glowing aqua mana spheres and swirling snowflake runes around its wings. Clean white background, isolated character cutout render, 3D Disney Pixar style.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: Mystic Astral Penguin Hero (Forest Scene) -->
+      <div class="card" data-category="mystic">
+        <div class="card-img-wrapper" onclick="openModal('mystic_astral_penguin_hero_1788263649251.jpg', 'Pingwinek w Mistycznym Lesie')">
+          <div class="card-tags">
+            <span class="tag tag-mystic">Magia Lasu</span>
+          </div>
+          <img class="card-img" src="mystic_astral_penguin_hero_1788263649251.jpg" alt="Mystic Penguin Forest" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Pingwinek: Strażnik Przeznaczenia</div>
+              <div class="card-alias">Wersja: Święty Gaj Światła</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/penguin_original.jpg" alt="Pluszak Pingwinek">
+            <div class="origin-text">
+              <strong>Oryginalny Pluszak:</strong>
+              Niebieski miękki pingwinek z pomarańczowym dzióbkiem
+            </div>
+          </div>
+          <div class="card-lore">
+            Strzeże świętych kryształów i rzeki światła w bioluminescencyjnym gaju. Potrafi manipulować energią zorzy polarnej i uzdrawiać naturę.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">🌊 Rzeka światła</span>
+            <span class="power-pill">✨ Aura zorzy polarnej</span>
+            <span class="power-pill">🔮 Sfera many</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A mythical fantasy superhero version of the cute fluffy blue penguin plush from the image. The penguin is hovering in an enchanted glowing magical forest with bioluminescent plants and waterfalls. Its large eyes glow with brilliant celestial starlight and aurora borealis colors, its soft blue fur sparkles with glowing frost magic, and it is conjuring a floating sphere of mystical teal energy and swirling ice crystals between its glowing flippers. Epic fantasy lighting, hyper-detailed magical particle effects, cinematic atmosphere.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A mythical fantasy superhero version of the cute fluffy blue penguin plush from the image. The penguin is hovering in an enchanted glowing magical forest with bioluminescent plants and waterfalls. Its large eyes glow with brilliant celestial starlight and aurora borealis colors, its soft blue fur sparkles with glowing frost magic, and it is conjuring a floating sphere of mystical teal energy and swirling ice crystals between its glowing flippers. Epic fantasy lighting, hyper-detailed magical particle effects, cinematic atmosphere.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5: Lunar Bunny Diana (No BG) -->
+      <div class="card" data-category="nobg mystic">
+        <div class="card-img-wrapper" onclick="openModal('lunar_bunny_nobg_1788267172073.jpg', 'Króliczka Diana (Bez Tła)')">
+          <div class="card-tags">
+            <span class="tag tag-nobg">Bez Tła</span>
+            <span class="tag tag-mystic">Magia Księżyca</span>
+          </div>
+          <img class="card-img" src="lunar_bunny_nobg_1788267172073.jpg" alt="Lunar Diana Cutout" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Księżycowa Diana</div>
+              <div class="card-alias">Kryptonim: Celestial Bunny Guardian</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/diana_original.jpg" alt="Lalka Diana">
+            <div class="origin-text">
+              <strong>Oryginalna Lalka:</strong>
+              Pluszowy szary króliczek z haftem 'Diana 50cm / 2980g'
+            </div>
+          </div>
+          <div class="card-lore">
+            Metamorfizowana lalka z haftem metryczki narodzin, która stała się gwiezdną strażniczką. Jej długie uszy pokrywają świecące konstelacje, a z dłoni wylatują gwiezdne motyle.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">💖 Kryształowe serce światła</span>
+            <span class="power-pill">🦋 Eteryczne motyle ochronne</span>
+            <span class="power-pill">⭐ Runiczne konstelacje</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A magical fantasy superhero character version of the grey plush bunny doll from the image, completely isolated on a pure solid white background. The character has soft grey plush fabric, long floating bunny ears with glowing pink constellation runes, a glowing crystal heart on her chest, and is levitating while holding glowing pink magical spirit butterflies and swirling stardust rings. Clean white studio background, isolated character cutout, 3D animated movie render.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A magical fantasy superhero character version of the grey plush bunny doll from the image, completely isolated on a pure solid white background. The character has soft grey plush fabric, long floating bunny ears with glowing pink constellation runes, a glowing crystal heart on her chest, and is levitating while holding glowing pink magical spirit butterflies and swirling stardust rings. Clean white studio background, isolated character cutout, 3D animated movie render.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 6: Lunar Bunny Guardian (Moon Scene) -->
+      <div class="card" data-category="mystic">
+        <div class="card-img-wrapper" onclick="openModal('lunar_bunny_guardian_hero_1788263677418.jpg', 'Diana pod Pełnią Księżyca')">
+          <div class="card-tags">
+            <span class="tag tag-mystic">Magia Księżyca</span>
+          </div>
+          <img class="card-img" src="lunar_bunny_guardian_hero_1788263677418.jpg" alt="Lunar Diana Moon" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Diana: Kapłanka Pełni</div>
+              <div class="card-alias">Wersja: Magiczna Polana Nocy</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/diana_original.jpg" alt="Lalka Diana">
+            <div class="origin-text">
+              <strong>Oryginalna Lalka:</strong>
+              Króliczek z miękkim kapturem i haftami
+            </div>
+          </div>
+          <div class="card-lore">
+            Unosi się w zerowej grawitacji na tle wielkiego srebrnego księżyca. Wirujące różowe płatki tworzą nieprzeniknioną barierę chroniącą sny dzieci.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">🌕 Promienie pełni księżyca</span>
+            <span class="power-pill">🌸 Księżycowe płatki</span>
+            <span class="power-pill">🛡️ Tarcza snów</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A surreal superhero celestial fantasy version of the grey bunny doll from the image. The character maintains the cute plush doll aesthetic with grey fluffy bunny hood, long ears, and sweet face, but is now a powerful Lunar Spirit Guardian. Her long plush ears float gracefully in zero gravity, embroidered with glowing magical runes and pink starlight. She floats in a glowing enchanted night glade under a giant full moon, summoning swirling pink and silver celestial petals and glowing spirit butterflies around her hands. Ethereal, hyper-detailed, magical fantasy art.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A surreal superhero celestial fantasy version of the grey bunny doll from the image. The character maintains the cute plush doll aesthetic with grey fluffy bunny hood, long ears, and sweet face, but is now a powerful Lunar Spirit Guardian. Her long plush ears float gracefully in zero gravity, embroidered with glowing magical runes and pink starlight. She floats in a glowing enchanted night glade under a giant full moon, summoning swirling pink and silver celestial petals and glowing spirit butterflies around her hands. Ethereal, hyper-detailed, magical fantasy art.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 7: Sonic Puppy K9 (No BG) -->
+      <div class="card" data-category="nobg cyber">
+        <div class="card-img-wrapper" onclick="openModal('sonic_puppy_hero_nobg_1788267042270.jpg', 'Dźwiękowy Piesek K9 (Bez Tła)')">
+          <div class="card-tags">
+            <span class="tag tag-nobg">Bez Tła</span>
+            <span class="tag tag-cyber">Techno-Energia</span>
+          </div>
+          <img class="card-img" src="sonic_puppy_hero_nobg_1788267042270.jpg" alt="Sonic Puppy Cutout" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Dźwiękowy Piesek K9</div>
+              <div class="card-alias">Kryptonim: Sonic Bark</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/dog_original.jpg" alt="Pluszak Piesek">
+            <div class="origin-text">
+              <strong>Oryginalny Pluszak:</strong>
+              Brązowy piesek z dzwoneczkiem i białymi łapkami
+            </div>
+          </div>
+          <div class="card-lore">
+            Wyposażony w obrożę sonarną K9 emitującą niszczycielskie fale ultradźwiękowe. Jego białe łapy gromadzą energię kinetyczną pozwalającą na bieg z prędkością dźwięku.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">🔊 Dzwonek fal ultradźwiękowych</span>
+            <span class="power-pill">⚡ Piorunujące łapy</span>
+            <span class="power-pill">👁️ Szmaragdowy wzrok rentgenowski</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A superhero version of the brown puppy plush from the image, completely isolated on a pure solid white background with no environment. The character is a brave canine guardian standing proudly in 3D character render style. Its red collar and bell pulse with sonic soundwave energy rings, its big white paws crackle with electric lightning, and its green eyes glow with heroic power. Clean studio lighting, full body, isolated character cutout style, Unreal Engine 5 render.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A superhero version of the brown puppy plush from the image, completely isolated on a pure solid white background with no environment. The character is a brave canine guardian standing proudly in 3D character render style. Its red collar and bell pulse with sonic soundwave energy rings, its big white paws crackle with electric lightning, and its green eyes glow with heroic power. Clean studio lighting, full body, isolated character cutout style, Unreal Engine 5 render.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 8: Techno Monkey (No BG) -->
+      <div class="card" data-category="nobg cyber">
+        <div class="card-img-wrapper" onclick="openModal('techno_monkey_hero_nobg_1788267143753.jpg', 'Techno-Małpka Gizmo (Bez Tła)')">
+          <div class="card-tags">
+            <span class="tag tag-nobg">Bez Tła</span>
+            <span class="tag tag-cyber">Cyber-Inżynieria</span>
+          </div>
+          <img class="card-img" src="techno_monkey_hero_nobg_1788267143753.jpg" alt="Techno Monkey Cutout" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Cybernetyczna Małpka</div>
+              <div class="card-alias">Kryptonim: Gizmo Prime</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/monkey_original.jpg" alt="Pluszak Małpka">
+            <div class="origin-text">
+              <strong>Oryginalny Pluszak:</strong>
+              Brązowa puszysta małpka ssąca kciuk
+            </div>
+          </div>
+          <div class="card-lore">
+            Geniusz inżynierii z bionicznym ramieniem o sile hydraulicznej i taktycznym celownikiem holograficznym HUD. Potrafi lewitować na kinetycznym dysku energii.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">🦾 Bioniczna rękawica mocy</span>
+            <span class="power-pill">🥽 Holograficzny wizjer taktyczny</span>
+            <span class="power-pill">🌀 Pierścień kinetyczny</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A superhero version of the cute brown furry baby monkey plush from the image, completely isolated on a pure solid white background. The monkey has a glowing high-tech cybernetic robotic gauntlet on one hand, a sleek holographic visor over one eye glowing with orange HUD data, and is hovering with gravity-defying kinetic energy sparks around its feet. Clean white studio background, isolated character cutout, 3D animated character render style.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A superhero version of the cute brown furry baby monkey plush from the image, completely isolated on a pure solid white background. The monkey has a glowing high-tech cybernetic robotic gauntlet on one hand, a sleek holographic visor over one eye glowing with orange HUD data, and is hovering with gravity-defying kinetic energy sparks around its feet. Clean white studio background, isolated character cutout, 3D animated character render style.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 9: Thunder Titan Cow (No BG) -->
+      <div class="card" data-category="nobg mystic">
+        <div class="card-img-wrapper" onclick="openModal('thunder_cow_hero_nobg_1788268487338.jpg', 'Tytaniczna Krowa Piorunów (Bez Tła)')">
+          <div class="card-tags">
+            <span class="tag tag-nobg">Bez Tła</span>
+            <span class="tag tag-mystic">Władca Burzy</span>
+          </div>
+          <img class="card-img" src="thunder_cow_hero_nobg_1788268487338.jpg" alt="Thunder Cow Cutout" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Tytaniczna Krowa Piorunów</div>
+              <div class="card-alias">Kryptonim: Thunder Moo</div>
+            </div>
+          </div>
+          <div class="origin-preview">
+            <img class="origin-thumb" src="originals/cow_original.jpg" alt="Pluszak Krowa">
+            <div class="origin-text">
+              <strong>Oryginalny Pluszak:</strong>
+              Wielka pluszowa łaciata krowa z różowym pyszczkiem
+            </div>
+          </div>
+          <div class="card-lore">
+            Niezłomny strażnik burz o niesamowitej sile fizycznej. Jej złote rogi kumulują ładunki atmosferyczne, a uderzenie kopyt wywołuje fale uderzeniowe grzmotu.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">⚡ Złote rogi burzowe</span>
+            <span class="power-pill">🔔 Plazmowy dzwon grzmotu</span>
+            <span class="power-pill">💥 Sejsmiczne tupnięcie</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A powerful superhero version of the large fluffy black-and-white spotted cow plush from the image, completely isolated on a pure solid white background. The character has soft fluffy plush fur, cute curved golden horns crackling with electrical lightning, glowing blue eyes of thunder power, and a high-tech glowing energy bell collar. Glowing lightning bolts arc between its hooves. Clean white studio background, isolated character cutout render, 3D animated cinematic style.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A powerful superhero version of the large fluffy black-and-white spotted cow plush from the image, completely isolated on a pure solid white background. The character has soft fluffy plush fur, cute curved golden horns crackling with electrical lightning, glowing blue eyes of thunder power, and a high-tech glowing energy bell collar. Glowing lightning bolts arc between its hooves. Clean white studio background, isolated character cutout render, 3D animated cinematic style.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 10: Futuristic Cyberpunk City (World) -->
+      <div class="card" data-category="world cyber">
+        <div class="card-img-wrapper" onclick="openModal('futuristic_cyberpunk_city_1788260638860.jpg', 'Neo-Metropolia 2099')">
+          <div class="card-tags">
+            <span class="tag tag-world">Lokacja</span>
+            <span class="tag tag-cyber">Cyberpunk</span>
+          </div>
+          <img class="card-img" src="futuristic_cyberpunk_city_1788260638860.jpg" alt="Cyber City" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Neo-Metropolia 2099</div>
+              <div class="card-alias">Siedziba Frakcji Cyber-Bohaterów</div>
+            </div>
+          </div>
+          <div class="card-lore">
+            Futurystyczne miasto wieżowców, wielkich neonowych hologramów i podniebnych autostrad dla latających pojazdów. Główna arena działań Kotka i Techno-Małpki.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">🚗 Latające pojazdy</span>
+            <span class="power-pill">💡 Neonowe hologramy</span>
+            <span class="power-pill">🌃 Podniebna metropolia</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`A breathtaking ultra-detailed futuristic cyberpunk city at dusk, glowing neon lights, holographic billboards, flying vehicles in the sky, towering sleek skyscrapers with neon blue, magenta and cyan accents, reflections on wet asphalt, cinematic lighting, photorealistic 8k octane render.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">A breathtaking ultra-detailed futuristic cyberpunk city at dusk, glowing neon lights, holographic billboards, flying vehicles in the sky, towering sleek skyscrapers with neon blue, magenta and cyan accents, reflections on wet asphalt, cinematic lighting, photorealistic 8k octane render.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 11: Mystical Glowing Forest (World) -->
+      <div class="card" data-category="world mystic">
+        <div class="card-img-wrapper" onclick="openModal('mystical_glowing_forest_1788261471030.jpg', 'Bioluminescencyjny Gaj Światła')">
+          <div class="card-tags">
+            <span class="tag tag-world">Lokacja</span>
+            <span class="tag tag-mystic">Magia Natury</span>
+          </div>
+          <img class="card-img" src="mystical_glowing_forest_1788261471030.jpg" alt="Mystic Forest" loading="lazy">
+          <div class="view-zoom-hint">🔍 Powiększ</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title">Święty Gaj Bioluminescencji</div>
+              <div class="card-alias">Siedziba Strażników Natury</div>
+            </div>
+          </div>
+          <div class="card-lore">
+            Pradawny las pełen świecącej flory, lśniących kryształów, eterycznych stworzeń i rzek nasyconych czystą maną. Dom Pingwinka i Króliczki Diany.
+          </div>
+          <div class="powers-list">
+            <span class="power-pill">🌿 Świecące rośliny</span>
+            <span class="power-pill">🦌 Duchy zwierząt</span>
+            <span class="power-pill">💎 Źródła kryształów</span>
+          </div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span>Prompt AI</span>
+              <button class="copy-btn" onclick="copyText(`An enchanting mystical glowing forest at twilight, bioluminescent flora and magical giant mushrooms emitting cyan and lavender light, glowing deer with crystal antlers drinking from a luminous turquoise river, floating particles of light, ethereal foggy atmosphere, ultra high quality fantasy landscape illustration.`)">Kopiuj</button>
+            </div>
+            <div class="prompt-content">An enchanting mystical glowing forest at twilight, bioluminescent flora and magical giant mushrooms emitting cyan and lavender light, glowing deer with crystal antlers drinking from a luminous turquoise river, floating particles of light, ethereal foggy atmosphere, ultra high quality fantasy landscape illustration.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal / Lightbox -->
+  <div class="modal" id="imageModal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <img class="modal-img" id="modalImg" src="" alt="Powiększenie">
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Prompt skopiowany do schowka! ⚡</div>
+
+  <footer>
+    <p>Projekt wygenerowany przez <strong>Antigravity AI</strong> &bull; Model <strong>Google Imagen 3</strong></p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">Wszystkie pliki znajdują się lokalnie na Twoim Pulpicie w folderze <code>Desktop\Pluszaki_Superbohaterowie</code></p>
+  </footer>
+
+  <script>
+    function filterCards(category) {
+      const cards = document.querySelectorAll('.card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      cards.forEach(card => {
+        if (category === 'all') {
+          card.style.display = 'flex';
+        } else {
+          const cats = card.getAttribute('data-category').split(' ');
+          if (cats.includes(category)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    function openModal(imgSrc, caption) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalCaption = document.getElementById('modalCaption');
+
+      modalImg.src = imgSrc;
+      modalCaption.textContent = caption;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("Skopiowano prompt do schowka! ✨");
+      }).catch(err => {
+        showToast("Nie udało się skopiować promptu.");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>

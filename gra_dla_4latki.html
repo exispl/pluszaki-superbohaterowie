@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magiczny Pokój Pluszaków | Przygoda Krok po Kroku dla 4-Latki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink-soft: #ff85a2;
+      --pink-glow: #ff5c8a;
+      --cyan-soft: #4cc9f0;
+      --yellow-sun: #ffd166;
+      --purple-magic: #b5179e;
+      --green-mint: #06d6a0;
+      --bg-gradient: linear-gradient(135deg, #181938 0%, #2b1e4a 50%, #1a2a4f 100%);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-dark: rgba(20, 24, 48, 0.85);
+      --text-color: #2b2d42;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Fredoka', cursive, sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 3rem;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating stars background animation */
+    .star-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffd166, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 80px 120px, #ff85a2, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 150px 200px, #4cc9f0, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 250px 320px, #ffd166, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      opacity: 0.6;
+    }
+
+    /* App Header */
+    header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      max-width: 850px;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(90deg, #ff85a2, #ffd166);
+      color: #1a1a2e;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.4rem 1.4rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(255, 133, 162, 0.5);
+      margin-bottom: 0.75rem;
+      animation: floatBadge 3s ease-in-out infinite;
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    h1 {
+      font-family: 'Comfortaa', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #ffd166, #ff85a2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(255, 133, 162, 0.4);
+      margin-bottom: 0.5rem;
+    }
+
+    .room-reference-pill {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      color: #fed7aa;
+      display: inline-block;
+    }
+
+    /* Story Selector Bar */
+    .story-nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1rem;
+      max-width: 900px;
+    }
+
+    /* Auto-Play Cinema Bar */
+    .cinema-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 209, 102, 0.5);
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 25px rgba(255, 209, 102, 0.3);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cinema-toggle-btn {
+      font-family: 'Fredoka', cursive;
+      background: linear-gradient(135deg, #ffd166, #ff85a2);
+      color: #181938;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.5rem 1.4rem;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(255, 209, 102, 0.5);
+      transition: all 0.25s;
+    }
+
+    .cinema-toggle-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 25px #ffd166;
+    }
+
+    .cinema-toggle-btn.playing {
+      background: linear-gradient(135deg, #06d6a0, #4cc9f0);
+      color: #000;
+    }
+
+    .cinema-timer-track {
+      width: 140px;
+      height: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      overflow: hidden;
+      display: none;
+      position: relative;
+    }
+
+    .cinema-timer-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd166, #ff5c8a);
+      border-radius: 10px;
+      transition: width 0.1s linear;
+    }
+
+    .cinema-status-label {
+      font-size: 0.95rem;
+      color: #fed7aa;
+      font-weight: 600;
+    }
+
+    .story-btn {
+      font-family: 'Fredoka', cursive;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 0.6rem 1.25rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .story-btn:hover, .story-btn.active {
+      background: linear-gradient(135deg, #ff85a2, #ffd166);
+      color: #181938;
+      border-color: transparent;
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(255, 133, 162, 0.6);
+    }
+
+    /* Main Stage Card */
+    .game-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 850px;
+      background: var(--card-bg);
+      border-radius: 35px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 133, 162, 0.3);
+      padding: 2rem;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      animation: cardAppear 0.5s ease-out;
+    }
+
+    @keyframes cardAppear {
+      0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Step Progress Bubbles */
+    .step-progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f1f5f9;
+      padding: 0.75rem 1.25rem;
+      border-radius: 25px;
+    }
+
+    .step-title-badge {
+      font-weight: 700;
+      color: var(--purple-magic);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .step-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background: var(--pink-glow);
+      box-shadow: 0 0 15px var(--pink-glow);
+      transform: scale(1.15);
+    }
+
+    .dot.done {
+      background: var(--green-mint);
+    }
+
+    /* Scene Visuals Display */
+    .scene-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .main-scene-img-box {
+      position: relative;
+      width: 100%;
+      max-height: 420px;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border: 4px solid #fff;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main-scene-img {
+      width: 100%;
+      height: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .main-scene-img:hover {
+      transform: scale(1.03);
+    }
+
+    .room-sticker {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(5px);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Story Box and Voice Button */
+    .story-text-card {
+      background: #fdf2f8;
+      border: 2px solid #fbcfe8;
+      border-radius: 20px;
+      padding: 1.25rem 1.5rem;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .voice-read-btn {
+      position: absolute;
+      top: -16px;
+      right: 20px;
+      background: linear-gradient(135deg, var(--purple-magic), var(--pink-glow));
+      color: #fff;
+      border: none;
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      font-family: 'Fredoka', cursive;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(181, 23, 158, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .voice-read-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px var(--pink-glow);
+    }
+
+    .story-paragraph {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #374151;
+      margin-top: 0.5rem;
+    }
+
+    .story-room-detail {
+      font-size: 1rem;
+      color: #831843;
+      margin-top: 0.5rem;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 0.5rem 0.8rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Choices Area (Big Buttons for Little Hands) */
+    .choices-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .choices-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      text-align: center;
+    }
+
+    .choices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .choice-card-btn {
+      font-family: 'Fredoka', cursive;
+      background: #ffffff;
+      border: 3px solid #e2e8f0;
+      border-radius: 25px;
+      padding: 1.25rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.04);
+    }
+
+    .choice-card-btn:hover {
+      border-color: var(--pink-glow);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(255, 92, 138, 0.25);
+      background: #fff5f7;
+    }
+
+    .choice-icon {
+      font-size: 2.2rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .choice-texts {
+      flex-grow: 1;
+    }
+
+    .choice-main-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 0.2rem;
+    }
+
+    .choice-sub-text {
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    /* Stars / Badges Shelf */
+    .badges-shelf {
+      position: relative;
+      z-index: 10;
+      margin-top: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 1rem 1.5rem;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 850px;
+      width: 100%;
+    }
+
+    .badge-star {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffd166;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s;
+    }
+
+    .badge-star.unlocked {
+      background: linear-gradient(135deg, #ffd166, #ff85a2);
+      color: #181938;
+      box-shadow: 0 0 15px rgba(255, 209, 102, 0.6);
+      transform: scale(1.08);
+    }
+
+    /* Reset / Navigation */
+    .controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .action-btn {
+      font-family: 'Fredoka', cursive;
+      background: #f1f5f9;
+      border: none;
+      color: #475569;
+      padding: 0.6rem 1.25rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Confetti Modal */
+    .celebration-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .celebration-box {
+      background: #ffffff;
+      color: #1e293b;
+      border-radius: 35px;
+      padding: 2.5rem 2rem;
+      max-width: 550px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(255, 92, 138, 0.5);
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .celeb-btn {
+      font-family: 'Fredoka', cursive;
+      background: linear-gradient(135deg, var(--green-mint), var(--cyan-soft));
+      color: #000;
+      border: none;
+      font-size: 1.3rem;
+      font-weight: 700;
+      padding: 1rem 2.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      box-shadow: 0 8px 25px rgba(6, 214, 160, 0.5);
+      transition: transform 0.2s;
+    }
+
+    .celeb-btn:hover {
+      transform: scale(1.06);
+    }
+
+    footer {
+      position: relative;
+      z-index: 10;
+      margin-top: 2rem;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="star-bg"></div>
+
+  <header>
+    <div class="room-badge">
+      🛌 Magiczna Przygoda w Twoim Pokoju dla 4-Latki ✨
+    </div>
+    <h1>MAGICZNY POKÓJ PLUSZAKÓW</h1>
+    <div class="room-reference-pill">
+      🧸 Wszystkie 11 pluszaków z Twoich zdjęć: Kotek, Pingwinek, Króliczka Diana, Piesek, Małpka, Krówka, Kubuś i Mario!
+    </div>
+  </header>
+
+  <!-- Story Selection Navigation -->
+  <div class="story-nav">
+    <button class="story-btn active" onclick="loadStory('story1')">
+      🧁 Przygoda 1: Kotek i Pingwinek
+    </button>
+    <button class="story-btn" onclick="loadStory('story2')">
+      🌙 Przygoda 2: Króliczka Diana i Piesek
+    </button>
+    <button class="story-btn" onclick="loadStory('story3')">
+      🍯 Przygoda 3: Miodowy Piknik Kubusia
+    </button>
+    <button class="story-btn" onclick="loadStory('story4')">
+      🎀 Przygoda 4: Tęczowy Domek Gabby
+    </button>
+  </div>
+
+  <!-- Main Game Stage Card -->
+  <div class="game-card">
+    
+    <!-- Top Step Bar -->
+    <div class="step-progress-row">
+      <div class="step-title-badge" id="stepBadge">
+        <span>🐾 Krok 1 z 3</span>
+      </div>
+      <div class="step-dots" id="stepDots">
+        <div class="dot active">1</div>
+        <div class="dot">2</div>
+        <div class="dot">3</div>
+      </div>
+    </div>
+
+    <!-- Scene Visual Display -->
+    <div class="scene-display">
+      <div class="main-scene-img-box">
+        <img id="sceneImg" class="main-scene-img" src="duo_cat_penguin_1788270940922.jpg" alt="Scena w Pokoju">
+        <div class="room-sticker" id="roomSticker">
+          🛏️ Na różowym łóżeczku pod ciepłą lampką
+        </div>
+      </div>
+    </div>
+
+    <!-- Story Text Box with Audio Button -->
+    <div class="story-text-card">
+      <button class="voice-read-btn" onclick="speakCurrentStory()">
+        🔊 Posłuchaj Bajki
+      </button>
+      <div class="story-paragraph" id="storyText">
+        Kotek-Babeczka i Błękitny Pingwinek siedzą przytuleni na różowym kocyku minky. W pokoju świecą małe ciepłe lampki jak gwiazdki. Co nasi przyjaciele robią najpierw?
+      </div>
+      <div class="story-room-detail" id="roomDetail">
+        🦉 <em>Spójrz: w tle widać poduszkę w kolorowe sówki i książeczki z bajkami!</em>
+      </div>
+    </div>
+
+    <!-- Interactive Choices (What happens next?) -->
+    <div class="choices-container">
+      <div class="choices-title" id="choicesPrompt">
+        Wybierz rączką, co ma się teraz wydarzyć:
+      </div>
+      <div class="choices-grid" id="choicesGrid">
+        <!-- Choices dynamically populated -->
+      </div>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="controls-row">
+      <button class="action-btn" onclick="restartCurrentStory()">
+        🔄 Zacznij tę bajkę od nowa
+      </button>
+      <button class="action-btn" onclick="window.location.href='index.html'">
+        🖼️ Wróć do Galerii Grafik
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Stars / Badges Shelf -->
+  <div class="badges-shelf">
+    <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">Twoje Magiczne Odznaki:</span>
+    <div class="badge-star unlocked" id="badge1">⭐ Przytulasek Kotka</div>
+    <div class="badge-star" id="badge2">❄️ Lodowa Gwiazdka</div>
+    <div class="badge-star" id="badge3">🌙 Motylek Diany</div>
+    <div class="badge-star" id="badge4">🍯 Miodowe Serduszko</div>
+  </div>
+
+  <!-- Celebration Modal -->
+  <div class="celebration-overlay" id="celebModal">
+    <div class="celebration-box">
+      <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎉🌟👑</div>
+      <h2 style="font-size: 2.2rem; color: #b5179e; margin-bottom: 0.5rem;">Wspaniała Przygoda!</h2>
+      <p id="celebText" style="font-size: 1.3rem; line-height: 1.6; color: #475569;">
+        Wszystkie pluszaki w Twoim pokoju są bardzo szczęśliwe i bezpieczne! Odblokowałaś nową złotą odznakę!
+      </p>
+      <button class="celeb-btn" onclick="closeCelebration()">Zagraj w kolejną bajkę! 🚀</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>Magiczny Pokój Pluszaków &bull; Dedykowane dla 4-Latki &bull; Ilustracje z Twojego Pokoju</p>
+  </footer>
+
+  <script>
+    // Web Audio Synthesizer for rich friendly game sound effects
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'magic') {
+        const freqs = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        freqs.forEach((f, idx) => {
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.type = 'sine';
+          o.frequency.value = f;
+          g.gain.setValueAtTime(0.15, audioCtx.currentTime + idx * 0.08);
+          g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.08 + 0.3);
+          o.start(audioCtx.currentTime + idx * 0.08);
+          o.stop(audioCtx.currentTime + idx * 0.08 + 0.35);
+        });
+      } else if (type === 'click') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.15);
+      } else if (type === 'fanfare') {
+        [440, 554.37, 659.25, 880].forEach((freq, idx) => {
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(0.2, audioCtx.currentTime + idx * 0.12);
+          g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + idx * 0.12 + 0.4);
+          o.start(audioCtx.currentTime + idx * 0.12);
+          o.stop(audioCtx.currentTime + idx * 0.12 + 0.45);
+        });
+      }
+    }
+
+    // Branching Interactive Stories Database
+    const stories = {
+      story1: {
+        id: 'story1',
+        title: 'Przygoda Kotka i Pingwinka',
+        badge: 'badge2',
+        steps: [
+          {
+            stepNum: 1,
+            badge: '🐾 Krok 1 z 3: Wieczór w Pokoju',
+            img: 'duo_cat_penguin_1788270940922.jpg',
+            sticker: '🛏️ Na różowym łóżeczku pod ciepłą lampką',
+            text: 'Kotek-Babeczka i Błękitny Pingwinek siedzą przytuleni na różowym kocyku minky w kropeczki. Nad łóżkiem świecą ciepłe lampki, a za nimi stoi poduszka w kolorowe sówki. Co nasi przyjaciele robią najpierw?',
+            roomDetail: '🦉 Spójrz na poduszkę w sówki z Twojego pokoju – sówki pilnują bajkowego snu!',
+            choices: [
+              {
+                icon: '🧁',
+                main: 'Kotek szuka zaginionej tęczowej posypki',
+                sub: 'Kotek zagląda pod miękki kocyk!',
+                nextStep: 2,
+                branch: 'cat'
+              },
+              {
+                icon: '❄️',
+                main: 'Pingwinek macha skrzydełkami',
+                sub: 'Pingwinek robi małą lodową śnieżynkę!',
+                nextStep: 2,
+                branch: 'penguin'
+              }
+            ]
+          },
+          {
+            stepNum: 2,
+            badge: '✨ Krok 2 z 3: Magiczny Błysk Mocy',
+            img: 'cyber_cupcake_cat_nobg_1788267229454.jpg',
+            sticker: '⚡ Kolorowe kryształki rozbłysły!',
+            text: 'Popatrz! Kotek-Babeczka unosi się leciutko nad łóżkiem, a tęczowe kryształki na jego czole zaczynają świecić wesołymi kolorami! Pingwinek klaszcze skrzydełkami z radości. Kogo zawołamy do wspólnej zabawy?',
+            roomDetail: '✨ Kotek mruczy cieplutko: Mruu, mruu! Czuje się bezpiecznie w Twoim pokoju!',
+            choices: [
+              {
+                icon: '🐰',
+                main: 'Wołamy Króliczkę Dianę!',
+                sub: 'Diana przylatuje z gwiezdnymi motylami!',
+                nextStep: 3,
+                branch: 'diana'
+              },
+              {
+                icon: '🐶',
+                main: 'Wołamy Dźwiękowego Pieska K9!',
+                sub: 'Piesek dzwoni wesołym dzwoneczkiem: Dzyń!',
+                nextStep: 3,
+                branch: 'dog'
+              }
+            ]
+          },
+          {
+            stepNum: 3,
+            badge: '👑 Krok 3 z 3: Wielkie Przytulenie na Dobranoc',
+            img: 'astral_penguin_nobg_1788267200543.jpg',
+            sticker: '💖 Wszyscy przyjaciele razem!',
+            text: 'Wspaniale! Pingwinek, Kotek, Króliczka i Piesek stworzyli wielki krąg przyjaźni na dywaniku w pokoju. Pingwinek wyczarował ze swojego kryształu bezpieczną, ciepłą zorzę, która otula cały pokój do snu!',
+            roomDetail: '🌟 Czas na mocne przytulenie swojego ulubionego pluszaka!',
+            choices: [
+              {
+                icon: '💖',
+                main: 'Przytul mocno Kotka i Pingwinka!',
+                sub: 'Koniec przygody & Złota Odznaka!',
+                isFinal: true
+              }
+            ]
+          }
+        ]
+      },
+
+      story2: {
+        id: 'story2',
+        title: 'Króliczka Diana i Piesek z Dzwonkiem',
+        badge: 'badge3',
+        steps: [
+          {
+            stepNum: 1,
+            badge: '🌙 Krok 1 z 3: Nocna Strażniczka Diana',
+            img: 'lunar_bunny_nobg_1788267172073.jpg',
+            sticker: '🐰 Diana z gwiezdnym uszkiem 13.06.2022',
+            text: 'Króliczka Diana w szarym miękkim kapturku unosi się nad łóżeczkiem. Jej długie uszka z wyhaftowaną datą świecą różowym blaskiem, a z rączek wylatują gwiezdne motylki. Obok macha ogonkiem brązowy piesek z dzwoneczkiem!',
+            roomDetail: '🌸 Haft na uszku Diany: 13.06.2022 godz. 13:13 – najsłodsza pamiątka!',
+            choices: [
+              {
+                icon: '🦋',
+                main: 'Puszczamy motylki nad łóżeczko',
+                sub: 'Motylki pilnują pięknych snów!',
+                nextStep: 2
+              },
+              {
+                icon: '🔔',
+                main: 'Piesek dzwoni dzwoneczkiem',
+                sub: 'Dzyń, dzyń! Czas na wesołą zabawę!',
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            stepNum: 2,
+            badge: '⚡ Krok 2 z 3: Iskry z Łapek Pieska',
+            img: 'sonic_puppy_hero_nobg_1788267042270.jpg',
+            sticker: '🐶 Dźwiękowy Piesek K9 na dywanie',
+            text: 'Piesek zatańczył na miękkim dywanie! Jego białe łapki rozbłysły niebieskimi iskierkami, a szmaragdowe oczka świecą odwagą. Gdzie nasi bohaterowie idą na patrol?',
+            roomDetail: '🐾 Piesek sprawdza czy wszystkie klocki i lalki są bezpieczne!',
+            choices: [
+              {
+                icon: '🧸',
+                main: 'Sprawdzamy szafkę z zabawkami',
+                sub: 'Tam siedzi Małpka i Łaciata Krówka!',
+                nextStep: 3
+              },
+              {
+                icon: '🌕',
+                main: 'Patrzymy przez okno na Księżyc',
+                sub: 'Księżyc świeci jak wielkie okrągłe koło!',
+                nextStep: 3
+              }
+            ]
+          },
+          {
+            stepNum: 3,
+            badge: '👑 Krok 3 z 3: Srebrna Tarcza Marzeń',
+            img: 'lunar_bunny_guardian_hero_1788263677418.jpg',
+            sticker: '✨ Diana pod srebrnym księżycem',
+            text: 'Króliczka Diana rozkłada swoje różowe płatki ochronne. Żaden zły sen ani potworek nie ma wstępu do tego pokoju! Wszyscy czują się bezpieczni i przytuleni.',
+            roomDetail: '💖 Dobrej nocy i słodkich snów!',
+            choices: [
+              {
+                icon: '⭐',
+                main: 'Dziękuję, Diano i Piesku!',
+                sub: 'Odbierz Odznakę Motylka!',
+                isFinal: true
+              }
+            ]
+          }
+        ]
+      },
+
+      story3: {
+        id: 'story3',
+        title: 'Miodowy Piknik Kubusia i Mario',
+        badge: 'badge4',
+        steps: [
+          {
+            stepNum: 1,
+            badge: '🍯 Krok 1 z 3: Miodowe Odkrycie',
+            img: 'originals/pooh_original.jpg',
+            sticker: '🍯 Żółty Miś w czerwonej koszulce',
+            text: 'Kubuś Puchatek w czerwonej koszulce siedzi na miękkim różowym kocyku obok poduszki w sówki. Właśnie znalazł mały słoiczek złocistego miodku! Obok niego stoi Super Mario w czerwonej czapce.',
+            roomDetail: '🦉 Sówki na poduszce patrzą ciekawie na pyszny miodek!',
+            choices: [
+              {
+                icon: '🥄',
+                main: 'Częstujemy Kubusia łyżeczką miodu',
+                sub: 'Mniam! Miodek daje słoneczną moc!',
+                nextStep: 2
+              },
+              {
+                icon: '🍄',
+                main: 'Mario robi wielki wysoki skok!',
+                sub: 'Hop! Skacze z dywanu na fotel!',
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            stepNum: 2,
+            badge: '🌟 Krok 2 z 3: Wesoły Taniec Skoków',
+            img: 'originals/mario_original.jpg',
+            sticker: '🍄 Mario w ogrodniczkach skacze wysoko',
+            text: 'Mario podskoczył tak wysoko, że dotknął małej świecącej gwiazdki na ścianie! Kubuś klaszcze żółtymi łapkami. Do kogo idziemy podzielić się miodkiem?',
+            roomDetail: '👟 Mario mówi: Mamma Mia! Ale tu jest super!',
+            choices: [
+              {
+                icon: '🐮',
+                main: 'Dajemy miodek Łaciatej Krówce',
+                sub: 'Krówka robi wesołe: Muuuu!',
+                nextStep: 3
+              },
+              {
+                icon: '🐒',
+                main: 'Dajemy miodek Małpce Gizmo',
+                sub: 'Małpka ssie kciuk i uśmiecha się!',
+                nextStep: 3
+              }
+            ]
+          },
+          {
+            stepNum: 3,
+            badge: '👑 Krok 3 z 3: Słoneczna Uczta Przyjaciół',
+            img: 'thunder_cow_hero_nobg_1788268487338.jpg',
+            sticker: '⚡ Krówka ze złotymi rogami',
+            text: 'Wielka Łaciata Krówka ze złotymi rogami zatańczyła z radości! Wszyscy przyjaciele z pokoju zjedli po kropelce słodkiego miodu i mają mnóstwo energii i uśmiechu!',
+            roomDetail: '💛 Dzielenie się z przyjaciółmi to najpiękniejsza moc!',
+            choices: [
+              {
+                icon: '🍯',
+                main: 'Złoty Piknik Zakończony!',
+                sub: 'Odbierz Miodowe Serduszko!',
+                isFinal: true
+              }
+            ]
+          }
+        ]
+      },
+
+      story4: {
+        id: 'story4',
+        title: 'Tęczowy Domek Gabby i Minnie',
+        badge: 'badge1',
+        steps: [
+          {
+            stepNum: 1,
+            badge: '🎀 Krok 1 z 3: Kocia Magia',
+            img: 'originals/gabby_original.jpg',
+            sticker: '🐱 Gabby z kocimi uszkami',
+            text: 'Gabby założyła swoją magiczną opaskę z różowymi kocimi uszkami! Obok siedzi Myszka Minnie w fioletowej piżamce w wisienki oraz mały śpiący Niemowlaczek w różowym śpiworku.',
+            roomDetail: '🍒 Ubranko Minnie ma namalowane słodkie czerwone wisienki!',
+            choices: [
+              {
+                icon: '🪄',
+                main: 'Gabby macha czarodziejską różdżką',
+                sub: 'W pokoju pojawiają się brokatowe gwiazdki!',
+                nextStep: 2
+              },
+              {
+                icon: '🍼',
+                main: 'Kołyszemy małego Niemowlaczka',
+                sub: 'Śpiewamy cichutką kołysankę: Aaa, kotki dwa...',
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            stepNum: 2,
+            badge: '🌸 Krok 2 z 3: Wiśniowy Taniec Minnie',
+            img: 'originals/minnie_original.jpg',
+            sticker: '🎀 Minnie z wielką kokardą',
+            text: 'Minnie kręci piruety na dywanie! Jej wielka różowa kokarda rozbłyska serdecznym światłem. Niemowlaczek uśmiecha się przez sen, a Gabby rysuje w powietrzu świecące kocie serduszko.',
+            roomDetail: '🪽 Wszyscy w pokoju są bezpieczni i uśmiechnięci!',
+            choices: [
+              {
+                icon: '🌈',
+                main: 'Otwieramy Tęczowy Portal Marzeń',
+                sub: 'Wszystkie zabawki tańczą razem!',
+                nextStep: 3
+              }
+            ]
+          },
+          {
+            stepNum: 3,
+            badge: '👑 Krok 3 z 3: Kraina Czystej Miłości',
+            img: 'originals/baby_original.jpg',
+            sticker: '🍼 Mały Niemowlaczek śpi słodko',
+            text: 'Mały bobasek zamknął oczka, wtulony w miękki kocyk. Gabby, Minnie i wszystkie pluszaki pilnują jego spokoju. Jesteś najwspanialszą opiekunką całego pokoju!',
+            roomDetail: '💖 Miłość i dobroć zwyciężają wszystko!',
+            choices: [
+              {
+                icon: '👑',
+                main: 'Brawo! Jesteś Królową Pokoju!',
+                sub: 'Odbierz Gwiazdkę Przyjaźni!',
+                isFinal: true
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    let currentStoryKey = 'story1';
+    let currentStepIndex = 0;
+
+    function init() {
+      loadStory('story1');
+    }
+
+    function loadStory(storyKey) {
+      currentStoryKey = storyKey;
+      currentStepIndex = 0;
+
+      // Update Nav buttons
+      document.querySelectorAll('.story-btn').forEach((btn, idx) => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('onclick').includes(storyKey)) {
+          btn.classList.add('active');
+        }
+      });
+
+      renderStep();
+      playSound('click');
+    }
+
+    function renderStep() {
+      const story = stories[currentStoryKey];
+      const step = story.steps[currentStepIndex];
+
+      // Update Step Header
+      document.getElementById('stepBadge').innerHTML = `<span>${step.badge}</span>`;
+
+      // Update Step Dots
+      const dotsContainer = document.getElementById('stepDots');
+      dotsContainer.innerHTML = '';
+      story.steps.forEach((s, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${idx === currentStepIndex ? 'active' : (idx < currentStepIndex ? 'done' : '')}`;
+        dot.textContent = idx < currentStepIndex ? '✓' : (idx + 1);
+        dotsContainer.appendChild(dot);
+      });
+
+      // Update Image & Sticker
+      document.getElementById('sceneImg').src = step.img;
+      document.getElementById('roomSticker').textContent = step.sticker;
+
+      // Update Text
+      document.getElementById('storyText').textContent = step.text;
+      document.getElementById('roomDetail').innerHTML = `🦉 <em>${step.roomDetail}</em>`;
+
+      // Update Choices
+      const choicesGrid = document.getElementById('choicesGrid');
+      choicesGrid.innerHTML = '';
+
+      step.choices.forEach(ch => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-card-btn';
+        btn.innerHTML = `
+          <div class="choice-icon">${ch.icon}</div>
+          <div class="choice-texts">
+            <div class="choice-main-text">${ch.main}</div>
+            <div class="choice-sub-text">${ch.sub}</div>
+          </div>
+        `;
+        btn.onclick = () => makeChoice(ch);
+        choicesGrid.appendChild(btn);
+      });
+    }
+
+    function makeChoice(choice) {
+      playSound('magic');
+
+      if (choice.isFinal) {
+        showCelebration();
+      } else {
+        currentStepIndex = choice.nextStep - 1;
+        renderStep();
+      }
+    }
+
+    function showCelebration() {
+      const story = stories[currentStoryKey];
+      const badgeElem = document.getElementById(story.badge);
+      if (badgeElem) {
+        badgeElem.classList.add('unlocked');
+      }
+
+      document.getElementById('celebModal').style.display = 'flex';
+      playSound('fanfare');
+    }
+
+    function closeCelebration() {
+      document.getElementById('celebModal').style.display = 'none';
+      // Go to next story
+      if (currentStoryKey === 'story1') loadStory('story2');
+      else if (currentStoryKey === 'story2') loadStory('story3');
+      else if (currentStoryKey === 'story3') loadStory('story4');
+      else loadStory('story1');
+    }
+
+    function restartCurrentStory() {
+      currentStepIndex = 0;
+      renderStep();
+      playSound('click');
+    }
+
+    function speakCurrentStory() {
+      const story = stories[currentStoryKey];
+      const step = story.steps[currentStepIndex];
+      const textToRead = `${step.text} ${step.roomDetail}`;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(textToRead);
+        u.lang = 'pl-PL';
+        u.rate = 0.88;
+        u.pitch = 1.1;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>

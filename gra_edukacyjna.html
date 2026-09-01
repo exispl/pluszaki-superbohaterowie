@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akademia Pluszowych Bohaterów | Wszystkie 11 Pluszaków (5 Etapów Ewolucji)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff007f;
+      --secondary: #00f0ff;
+      --accent: #ffb703;
+      --green: #06d6a0;
+      --purple: #9d4edd;
+      --bg: #0d1127;
+      --bg-card: rgba(26, 32, 60, 0.85);
+      --text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Fredoka', cursive, sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 0, 127, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.15) 0%, transparent 60%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    .top-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: 'Fredoka', cursive;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 20px rgba(0, 240, 255, 0.4);
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 750px;
+      margin: 0.5rem auto 1.5rem;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .tab-btn {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      border-color: transparent;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+      transform: scale(1.05);
+    }
+
+    .main-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    /* Character Picker - 11 Heroes */
+    .character-picker {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-choice-card {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-choice-card:hover, .hero-choice-card.selected {
+      border-color: var(--secondary);
+      background: rgba(0, 240, 255, 0.15);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .hero-choice-card.selected::after {
+      content: '✓ WYBRANY';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--green);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 8px;
+    }
+
+    .hero-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--secondary);
+      margin-bottom: 0.5rem;
+      background: #000;
+    }
+
+    .hero-choice-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-choice-element {
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    /* Active Evolution Dashboard */
+    .evolution-dashboard {
+      background: var(--bg-card);
+      border: 2px solid rgba(0, 240, 255, 0.3);
+      border-radius: 25px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(20px);
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stage-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .stage-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .stage-dot.completed {
+      background: var(--green);
+      border-color: var(--green);
+      color: #000;
+      box-shadow: 0 0 15px rgba(6, 214, 160, 0.5);
+    }
+
+    .stage-dot.active {
+      background: var(--primary);
+      border-color: #fff;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.8);
+      transform: scale(1.15);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1.15); }
+      50% { transform: scale(1.25); }
+    }
+
+    .character-showcase {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+    }
+
+    .showcase-imgs {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .character-stage-img {
+      width: 190px;
+      height: 190px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 3px solid var(--secondary);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+      background: #000;
+    }
+
+    .orig-mini {
+      width: 100px;
+      height: 100px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stage-info {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .stage-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.25rem;
+    }
+
+    .stage-subtitle {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .stage-desc {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+      margin-bottom: 1rem;
+    }
+
+    /* Quest Box */
+    .quest-card {
+      background: linear-gradient(135deg, rgba(255, 0, 127, 0.15), rgba(0, 240, 255, 0.15));
+      border: 2px dashed var(--accent);
+      border-radius: 20px;
+      padding: 1.75rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .quest-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      padding: 0.3rem 1rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .quest-question {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    .audio-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .audio-btn:hover {
+      background: var(--secondary);
+      color: #000;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .option-btn {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 1.15rem 1rem;
+      border-radius: 18px;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-btn:hover {
+      transform: scale(1.06);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: var(--secondary);
+    }
+
+    .option-btn.correct {
+      background: var(--green) !important;
+      border-color: #fff !important;
+      color: #000 !important;
+      transform: scale(1.12);
+      box-shadow: 0 0 30px var(--green);
+    }
+
+    .option-btn.wrong {
+      background: #e63946 !important;
+      border-color: #fff !important;
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    /* Pokedex Section */
+    .pokedex-section {
+      display: none;
+    }
+
+    .evo-tree-card {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .evo-tree-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 1rem;
+    }
+
+    .evo-main-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    .evo-stages-flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem;
+    }
+
+    .evo-stage-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 18px;
+      padding: 1.2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .evo-stage-box:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(255, 0, 127, 0.2);
+    }
+
+    .stage-level-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      align-self: center;
+    }
+
+    .evo-box-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: #fff;
+    }
+
+    .evo-box-skill {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .evo-box-desc {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+
+    /* Story Section */
+    .story-section {
+      display: none;
+    }
+
+    .story-card {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 183, 3, 0.3);
+      border-radius: 25px;
+      padding: 2.5rem;
+      line-height: 1.8;
+      font-size: 1.15rem;
+      color: #f1f5f9;
+    }
+
+    .story-chapter {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .story-chapter h3 {
+      font-size: 1.45rem;
+      color: var(--secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .interactive-prompt-parent {
+      background: rgba(255, 183, 3, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1rem;
+      color: #fef08a;
+    }
+
+    /* Modal */
+    .evo-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .evo-modal-box {
+      text-align: center;
+      max-width: 520px;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .evo-sparkles {
+      font-size: 3rem;
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .evo-modal-btn {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--green), var(--secondary));
+      color: #000;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      box-shadow: 0 0 25px var(--green);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-badge">🌟 Akademia Supermocy &bull; 11 Pluszaków z Pokoju</div>
+    <h1>AKADEMIA PLUSZOWYCH BOHATERÓW</h1>
+    <p class="subtitle">
+      Wszystkie pluszaki z Twojej kolekcji! Ucz się kolorów, cyferek, literek i empatii, aby ewoluować je przez 5 poziomów mocy!
+    </p>
+
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('game')">🎮 Gra Ewolucji (11 Postaci)</button>
+      <button class="tab-btn" onclick="switchTab('pokedex')">📖 Wielki Pokédex (Wszystkie Drzewa)</button>
+      <button class="tab-btn" onclick="switchTab('story')">📚 Bajka & Scenariusz Zabawy</button>
+      <button class="tab-btn" onclick="window.location.href='index.html'">🖼️ Galeria Grafik</button>
+    </div>
+  </header>
+
+  <div class="main-container">
+
+    <!-- TAB 1: GAME -->
+    <div id="gameTab" class="game-section">
+      <div style="margin-bottom: 1rem; font-size: 1.2rem; font-weight: 600; color: var(--secondary);">
+        1. Wybierz swojego Pluszaka do Ewolucji (11 do wyboru):
+      </div>
+
+      <div class="character-picker" id="pickerContainer"></div>
+
+      <!-- Evolution Arena -->
+      <div class="evolution-dashboard">
+        <div class="dashboard-header">
+          <div>
+            <span style="font-size: 0.9rem; color: #94a3b8; text-transform: uppercase;">Aktualny Poziom Ewolucji:</span>
+            <div id="dashboardHeroName" style="font-size: 1.8rem; font-weight: 700; color: #fff;">Puszek-Babisia</div>
+          </div>
+          <div class="stage-indicator" id="stageDots"></div>
+        </div>
+
+        <div class="character-showcase">
+          <div class="showcase-imgs">
+            <img id="dashboardImg" class="character-stage-img" src="cyber_cupcake_cat_nobg_1788267229454.jpg" alt="Hero Stage">
+            <div style="text-align: center;">
+              <img id="dashboardOrig" class="orig-mini" src="originals/cat_original.jpg" alt="Oryginał">
+              <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.2rem;">Twój Pluszak</div>
+            </div>
+          </div>
+          <div class="stage-info">
+            <div id="dashboardStageTitle" class="stage-title">Etap 1: Początkujący Pluszaczek</div>
+            <div id="dashboardStageSubtitle" class="stage-subtitle">Żywioł: Tęczowa Plazma</div>
+            <p id="dashboardStageDesc" class="stage-desc">
+              Twój pluszak uczy się pierwszych mocy wiedzy. Pomóż mu rozwiązać zadanie!
+            </p>
+            <div id="dashboardPowers" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
+          </div>
+        </div>
+
+        <!-- Quest Card -->
+        <div class="quest-card">
+          <div class="quest-badge">🎯 MISJA EWOLUCYJNA DLA CIEBIE</div>
+          <div style="margin-bottom: 0.5rem;">
+            <button class="audio-btn" onclick="speakQuestion()">🔊 Przeczytaj na głos</button>
+          </div>
+          <div id="questQuestion" class="quest-question"></div>
+          <div class="options-grid" id="optionsGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: POKEDEX -->
+    <div id="pokedexTab" class="pokedex-section">
+      <div id="pokedexContainer"></div>
+    </div>
+
+    <!-- TAB 3: STORY -->
+    <div id="storyTab" class="story-section">
+      <div class="story-card">
+        <div class="story-chapter">
+          <h3>📖 Wstęp: Tajemnica Magicznego Pokoju Pluszaków</h3>
+          <p>
+            W pokoju mieszka <strong>11 wspaniałych przyjaciół</strong>: Kotek-Babeczka, Błękitny Pingwinek, Króliczka Diana, Piesek z dzwonkiem, Małpka, Wielka Krowa, Kubuś Puchatek, Mario, Gabby Kocia Czarodziejka, Wiśniowa Minnie i Mały Niemowlaczek!
+            Kiedy przychodzi czas nauki, każdy z nich może ewoluować w potężnego Strażnika Dobra!
+          </p>
+          <div class="interactive-prompt-parent">
+            👨‍👩‍👧 <strong>Zadanie Rodzinne:</strong> Rozłóżcie wszystkie pluszaki w kręgu na dywanie. Każde dziecko wybiera swojego przewodnika!
+          </div>
+        </div>
+
+        <div class="story-chapter">
+          <h3>🍯 Rozdział 1: Miodowa Tarcza Kubusia i Płomienie Mario</h3>
+          <p>
+            Kubuś Puchatek odkrył, że jego słodki miodek potrafi tworzyć ciepłą tarczę ochronną, a Mario potrafi przeskakiwać przez najwyższe chmury. 
+            Aby zdobyć moc, musimy policzyć do 5 i podskoczyć 5 razy!
+          </p>
+          <div class="interactive-prompt-parent">
+            🎯 <strong>Zabawa ruchowa:</strong> Skaczemy jak Mario i liczymy: 1, 2, 3, 4, 5!
+          </div>
+        </div>
+
+        <div class="story-chapter">
+          <h3>👑 Rozdział 2: Wielka Rada 11 Mistrzów</h3>
+          <p>
+            Gdy wszystkie pluszaki osiągną Poziom 5, łączą swoje moce: Tęczową Plazmę, Astralny Lód, Światło Księżyca, Złote Rogi Burzy i Magię Przyjaźni. 
+            Wtedy cały pokój rozświetla się uśmiechem, a wszystkie strachy i smutki znikają na zawsze!
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="evo-modal" id="evoModal">
+    <div class="evo-modal-box">
+      <div class="evo-sparkles">✨🌟⚡</div>
+      <h2 style="font-size: 2.2rem; color: var(--secondary); margin: 1rem 0 0.5rem;">BRAWO! EWOLUCJA!</h2>
+      <p id="evoModalText" style="font-size: 1.25rem; color: #f1f5f9; line-height: 1.6;"></p>
+      <button class="evo-modal-btn" onclick="closeEvoModal()">Super! Lecimy dalej! 🚀</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>Projekt <strong>Akademia Pluszowych Bohaterów</strong> &bull; Wszystkie 11 Postaci z Twojego Pokoju</p>
+  </footer>
+
+  <script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'correct') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15);
+        osc.frequency.exponentialRampToValueAtTime(1320, audioCtx.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.45);
+      } else if (type === 'wrong') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(180, audioCtx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } else if (type === 'fanfare') {
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(0.2, audioCtx.currentTime + idx * 0.12);
+          g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + idx * 0.12 + 0.4);
+          o.start(audioCtx.currentTime + idx * 0.12);
+          o.stop(audioCtx.currentTime + idx * 0.12 + 0.45);
+        });
+      }
+    }
+
+    // ALL 11 HEROES FROM USER'S PHOTOS
+    const allHeroes = [
+      {
+        id: 'cat',
+        name: 'Kotek Babeczkowy',
+        element: '⚡ Tęczowa Plazma',
+        thumb: 'originals/cat_original.jpg',
+        img: 'cyber_cupcake_cat_nobg_1788267229454.jpg',
+        stages: [
+          { level: 1, name: 'Puszek-Babisia', title: 'Etap 1: Początkujący Pluszaczek', subtitle: 'Moc: Kolory Tęczy', desc: 'Malutki kotek w foremce. Uczy się barw.', powers: ['✨ Mruczenie Mocy'], quest: { q: 'Jaki kolor ma brzuszek Kotka? Wybierz RÓŻOWY!', opts: ['RÓŻOWY', 'CZARNY', 'BRĄZOWY'], correct: 0 } },
+          { level: 2, name: 'Iskierka Cukrowa', title: 'Etap 2: Świecący Odkrywca', subtitle: 'Moc: Liczenie Gwiazdek', desc: 'Posypka na czole świeci w nocy.', powers: ['⭐ Błysk Posypki'], quest: { q: 'Ile uszek ma kotek? Policz: 1, 2...', opts: ['2 uszka', '5 uszek', '1 uszko'], correct: 0 } },
+          { level: 3, name: 'Cyber-Kotek Turbo', title: 'Etap 3: Cyber-Rycerz', subtitle: 'Moc: Laserowe Wąsy', desc: 'Małe skrzydełka odrzutowe i laserowe wąsy.', powers: ['🚀 Napęd Odrzutowy'], quest: { q: 'Na jaką literkę zaczyna się KOTEK?', opts: ['K', 'B', 'M'], correct: 0 } },
+          { level: 4, name: 'Plazmowy Obrońca', title: 'Etap 4: Mistrz Miasta', subtitle: 'Moc: Tarcza Plazmowa', desc: 'Lata nad miastem z tarczą energetyczną.', powers: ['🛡️ Tarcza Plazmy'], quest: { q: 'Co pije mały kotek?', opts: ['Wodę i mleczko', 'Benzynę', 'Sok z cytryny'], correct: 0 } },
+          { level: 5, name: 'Kosmiczny Feniks-Kot', title: 'Etap 5: MEGA AWATAR GWIAZD', subtitle: 'Moc: Korona Zorzy', desc: 'Gwiezdne skrzydła i wieczna opieka.', powers: ['👑 Korona Gwiazd', '💖 Super-Przyjaźń'], quest: { q: 'Jakie jest magiczne słowo na powitanie?', opts: ['DZIEŃ DOBRY', 'IDŹ STĄD', 'NIE'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'penguin',
+        name: 'Błękitny Pingwinek',
+        element: '❄️ Astralny Lód',
+        thumb: 'originals/penguin_original.jpg',
+        img: 'astral_penguin_nobg_1788267200543.jpg',
+        stages: [
+          { level: 1, name: 'Kropek Puchaty', title: 'Etap 1: Pisklak Śniegu', subtitle: 'Moc: Błękitne Oczka', desc: 'Puszyste pisklę o wielkich oczach.', powers: ['🐣 Lodowy Plusk'], quest: { q: 'Jaki kolor ma piórka Pingwinek?', opts: ['NIEBIESKI', 'CZERWONY', 'ZIELONY'], correct: 0 } },
+          { level: 2, name: 'Śnieżynkowy Pływak', title: 'Etap 2: Mistrz Ślizgu', subtitle: 'Moc: Śnieżny Ślizg', desc: 'Ślizga się po lodowcu.', powers: ['❄️ Śnieżka Mocy'], quest: { q: 'Co leci z nieba w zimie, gdy jest mróz?', opts: ['ŚNIEG', 'GORĄCA WODA', 'PIASEK'], correct: 0 } },
+          { level: 3, name: 'Astralny Nowicjusz', title: 'Etap 3: Lodowy Mag', subtitle: 'Moc: Kryształ Śnieżynki', desc: 'Kryształowy naszyjnik na piersi.', powers: ['💎 Kryształ Lodu'], quest: { q: 'Na jaką literkę zaczyna się PINGWIN?', opts: ['P', 'T', 'K'], correct: 0 } },
+          { level: 4, name: 'Władca Runicznej Zorzy', title: 'Etap 4: Mistrz Żywiołu', subtitle: 'Moc: Lewitacja i Runy', desc: 'Runiczne kręgi lodu wokół skrzydeł.', powers: ['🔮 Kręgi Runiczne'], quest: { q: 'Ile to jest 3 + 2 śnieżynki?', opts: ['5 śnieżynek', '2 śnieżynki', '9 śnieżynek'], correct: 0 } },
+          { level: 5, name: 'Tytan Polarnych Komet', title: 'Etap 5: MEGA AWATAR MROZU', subtitle: 'Moc: Zorza Polarna', desc: 'Rozświetla polarną noc ciepłym światłem.', powers: ['🌌 Polarna Zorza', '👑 Serce Zimy'], quest: { q: 'Co mówimy, gdy komuś za coś dziękujemy?', opts: ['DZIĘKUJĘ', 'NIC', 'DAJ JESZCZE'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'diana',
+        name: 'Króliczka Diana',
+        element: '🌙 Magia Księżyca',
+        thumb: 'originals/diana_original.jpg',
+        img: 'lunar_bunny_nobg_1788267172073.jpg',
+        stages: [
+          { level: 1, name: 'Śpiąca Diana', title: 'Etap 1: Króliczek Snu', subtitle: 'Moc: Spokojny Sen', desc: 'Lalka z metryczką urodzin na uszkach.', powers: ['💤 Spokojny Sen'], quest: { q: 'Kiedy dzieci kładą się spać?', opts: ['WIECZOREM', 'W POŁUDNIE', 'RANO'], correct: 0 } },
+          { level: 2, name: 'Gwiezdna Ścieżynka', title: 'Etap 2: Świecące Uszy', subtitle: 'Moc: Blask Konstelacji', desc: 'Napisy na uszkach świecą różowym blaskiem.', powers: ['⭐ Różowy Blask'], quest: { q: 'Co ma Króliczek na głowie?', opts: ['Długie uszka', 'Płetwy', 'Rogi'], correct: 0 } },
+          { level: 3, name: 'Księżycowa Diana', title: 'Etap 3: Strażniczka Serca', subtitle: 'Moc: Kryształowe Serce', desc: 'Zbroja z kryształowym sercem i motyle.', powers: ['💖 Kryształ Serca'], quest: { q: 'Na jaką literkę zaczyna się DIANA?', opts: ['D', 'A', 'S'], correct: 0 } },
+          { level: 4, name: 'Kapłanka Srebrnej Pełni', title: 'Etap 4: Mistrzyni Nocy', subtitle: 'Moc: Tarcza Marzeń', desc: 'Unosi się pod wielkim księżycem.', powers: ['🌸 Wirujące Płatki'], quest: { q: 'Jaki kształt ma okrągły księżyc w pełni?', opts: ['KOŁO', 'TRÓJKĄT', 'KWADRAT'], correct: 0 } },
+          { level: 5, name: 'Bogini Gwiezdnego Pyłu', title: 'Etap 5: MEGA AWATAR KSIĘŻYCA', subtitle: 'Moc: Królowa Marzeń', desc: 'Spełnia najpiękniejsze marzenia.', powers: ['👑 Srebrna Korona', '💖 Miłość i Spokój'], quest: { q: 'Co robimy, gdy widzimy smutnego kolegę?', opts: ['Pytamy czy pomóc', 'Śmiejemy się', 'Uciekamy'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'dog',
+        name: 'Dźwiękowy Piesek K9',
+        element: '🔊 Ultradźwięki & Błyskawice',
+        thumb: 'originals/dog_original.jpg',
+        img: 'sonic_puppy_hero_nobg_1788267042270.jpg',
+        stages: [
+          { level: 1, name: 'Szczeniak Hau', title: 'Etap 1: Wesoły Szczeniak', subtitle: 'Moc: Dzwoneczek', desc: 'Wesoły piesek z dzwonkiem.', powers: ['🔔 Dzyń-Dzyń'], quest: { q: 'Jaki dźwięk wydaje wesoły piesek?', opts: ['Hau! Hau!', 'Miau!', 'Kra!'], correct: 0 } },
+          { level: 2, name: 'Bystry Tropiciel', title: 'Etap 2: Szybkie Łapki', subtitle: 'Moc: Tropienie', desc: 'Odnajduje ukryte zabawki.', powers: ['🐾 Tropienie'], quest: { q: 'Gdzie piesek ma ogonek?', opts: ['Z tyłu', 'Na nosie', 'Na uchu'], correct: 0 } },
+          { level: 3, name: 'Soniczny Pies K9', title: 'Etap 3: Piorunujący Obrońca', subtitle: 'Moc: Fale Sonaru', desc: 'Obroża K9 i błyskawice z łapek.', powers: ['⚡ Piorunujące Łapy'], quest: { q: 'Na jaką literkę zaczyna się PIESEK?', opts: ['P', 'O', 'K'], correct: 0 } },
+          { level: 4, name: 'Gromowładny Ogar', title: 'Etap 4: Prędkość Dźwięku', subtitle: 'Moc: Naddźwiękowy Bieg', desc: 'Biega z prędkością dźwięku.', powers: ['💨 Naddźwiękowy Bieg'], quest: { q: 'Który kolor na sygnalizatorze oznacza STÓJ?', opts: ['CZERWONY', 'ZIELONY', 'NIEBIESKI'], correct: 0 } },
+          { level: 5, name: 'Gwiezdny Awatar Lojalności', title: 'Etap 5: MEGA AWATAR ODPOWIEDZIALNOŚCI', subtitle: 'Moc: Złoty Pancerz', desc: 'Złoty strażnik bezpieczeństwa rodziny.', powers: ['👑 Złoty Pancerz', '🌟 Piorun Światła'], quest: { q: 'Co mówimy, gdy przypadkowo kogoś potrącimy?', opts: ['PRZEPRASZAM', 'TO NIC', 'SAM JESTEŚ WINNY'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'monkey',
+        name: 'Cybernetyczna Małpka (Gizmo)',
+        element: '🦾 Cyber-Technologia',
+        thumb: 'originals/monkey_original.jpg',
+        img: 'techno_monkey_hero_nobg_1788267143753.jpg',
+        stages: [
+          { level: 1, name: 'Małpka Paluszek', title: 'Etap 1: Puszysty Bobasek', subtitle: 'Moc: Kciuk Mocy', desc: 'Małpka ssąca kciuk.', powers: ['🐒 Wesoły Chwyt'], quest: { q: 'Co najbardziej uwielbiają jeść małpki?', opts: ['BANANY', 'KAMIEŃ', 'ŚRUBKI'], correct: 0 } },
+          { level: 2, name: 'Mały Majsterkowicz', title: 'Etap 2: Młody Inżynier', subtitle: 'Moc: Pomarańczowe Gogle', desc: 'Uczy się składać klocki.', powers: ['🔧 Klucz Energetyczny'], quest: { q: 'Jaki kształt ma koło zębate?', opts: ['OKRĄGŁY', 'TRÓJKĄTNY', 'PŁASKI'], correct: 0 } },
+          { level: 3, name: 'Gizmo Cyber-Ręka', title: 'Etap 3: Bioniczny Rycerz', subtitle: 'Moc: Bioniczne Ramię', desc: 'Bioniczne ramię i holograficzny wizjer HUD.', powers: ['🦾 Ramię Siły', '🥽 Wizjer HUD'], quest: { q: 'Na jaką literkę zaczyna się MAŁPKA?', opts: ['M', 'L', 'S'], correct: 0 } },
+          { level: 4, name: 'Arcy-Inżynier Grawitacji', title: 'Etap 4: Mistrz Lewitacji', subtitle: 'Moc: Dysk Kinetyczny', desc: 'Lata na świetlistym dysku energii.', powers: ['🌀 Dysk Kinetyczny'], quest: { q: 'Ile to jest 4 klocki + 1 klocek?', opts: ['5 klocków', '2 klocki', '10 klocków'], correct: 0 } },
+          { level: 5, name: 'Mecha-Tytan Technologii', title: 'Etap 5: MEGA AWATAR CYBER-MOCY', subtitle: 'Moc: Pancerz Przyszłości', desc: 'Najpotężniejszy cybernetyczny wynalazca.', powers: ['👑 Nano-Pancerz', '⚡ Plazmowy Promień'], quest: { q: 'Co robimy ze zużytymi bateriami?', opts: ['Wrzucamy do specjalnego pojemnika', 'Wyrzucamy do lasu', 'Zostawiamy w piaskownicy'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'cow',
+        name: 'Tytaniczna Krowa Piorunów',
+        element: '⚡ Grzmot & Złote Rogi',
+        thumb: 'originals/cow_original.jpg',
+        img: 'thunder_cow_hero_nobg_1788268487338.jpg',
+        stages: [
+          { level: 1, name: 'Łatka Malutka', title: 'Etap 1: Puszyste Cielątko', subtitle: 'Moc: Muu-Muu', desc: 'Wielka pluszowa łaciata krowa.', powers: ['🐮 Wesołe Muu'], quest: { q: 'Jakie plamki ma na sobie krówka?', opts: ['CZARNE ŁATY', 'ZIELONE PASKI', 'RÓŻOWE KROPKI'], correct: 0 } },
+          { level: 2, name: 'Dzwoneczkowa Mućka', title: 'Etap 2: Dzwon Łąki', subtitle: 'Moc: Bieg po Trawie', desc: 'Dzwoneczek emituje wesoły dźwięk.', powers: ['🔔 Dzwon Łąki'], quest: { q: 'Co pysznego i zdrowego daje nam krówka?', opts: ['MLEKO', 'OLEJ', 'OCTET'], correct: 0 } },
+          { level: 3, name: 'Elektryczna Krowa Burzy', title: 'Etap 3: Piorunujący Obrońca', subtitle: 'Moc: Złote Rogi', desc: 'Złote rogi kumulują elektryczność.', powers: ['⚡ Rogi Piorunów'], quest: { q: 'Na jaką literkę zaczyna się KROWA?', opts: ['K', 'W', 'P'], correct: 0 } },
+          { level: 4, name: 'Tytan Piorunów', title: 'Etap 4: Sejsmiczny Mistrz', subtitle: 'Moc: Fala Uderzeniowa', desc: 'Tupnięcie kopyt tworzy falę światła.', powers: ['💥 Sejsmiczne Kopyta'], quest: { q: 'Ile nóżek/kopytek ma krówka?', opts: ['4 kopytka', '2 kopytka', '6 kopytek'], correct: 0 } },
+          { level: 5, name: 'Gaia - Matka Burzy', title: 'Etap 5: MEGA AWATAR ZIEMI', subtitle: 'Moc: Korona Burzowego Nieba', desc: 'Prastara opiekunka całej przyrody.', powers: ['👑 Korona Burzy', '🌿 Regeneracja Natury'], quest: { q: 'Dlaczego dbamy o zwierzątka i rośliny?', opts: ['Bo są naszymi przyjaciółmi', 'Bo tak trzeba', 'Dla zabawy'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'pooh',
+        name: 'Złoty Miś Miodowy (Pooh)',
+        element: '🍯 Słoneczny Bursztyn',
+        thumb: 'originals/pooh_original.jpg',
+        img: 'originals/pooh_original.jpg',
+        stages: [
+          { level: 1, name: 'Misiu Pysiu', title: 'Etap 1: Słodki Niedźwiadek', subtitle: 'Moc: Czerwona Koszulka', desc: 'Klasyczny żółty miś w czerwonym kubraczku.', powers: ['🍯 Baryłka Miodu'], quest: { q: 'Jaki kolor ma koszulka Kubusia?', opts: ['CZERWONY', 'NIEBIESKI', 'ZIELONY'], correct: 0 } },
+          { level: 2, name: 'Bursztynowy Tropiciel', title: 'Etap 2: Miodowy Odkrywca', subtitle: 'Moc: Pszczela Przyjaźń', desc: 'Znajduje najsłodszy nektar w lesie.', powers: ['🐝 Taniec Pszczół'], quest: { q: 'Kto robi pyszny słodki miodek?', opts: ['PSZCZOŁY', 'KOTKI', 'ŻABKI'], correct: 0 } },
+          { level: 3, name: 'Słoneczny Rycerz Miodu', title: 'Etap 3: Bursztynowy Pancerz', subtitle: 'Moc: Tarcza Słońca', desc: 'Bursztynowa zbroja odbijająca złe humory.', powers: ['🛡️ Tarcza Bursztynu'], quest: { q: 'Na jaką literkę zaczyna się MIŚ?', opts: ['M', 'S', 'D'], correct: 0 } },
+          { level: 4, name: 'Solarny Mistrz Ciepła', title: 'Etap 4: Ogrzewacz Serc', subtitle: 'Moc: Promień Życzliwości', desc: 'Promieniuje ciepłym światłem rozgrzewającym zimę.', powers: ['☀️ Promień Słońca'], quest: { q: 'Co robimy, gdy ktoś dzieli się z nami miodkiem?', opts: ['Mówimy DZIĘKUJĘ', 'Zabieramy wszystko', 'Płaczemy'], correct: 0 } },
+          { level: 5, name: 'Astralny Niedźwiedź Słońca', title: 'Etap 5: MEGA AWATAR ZŁOTA', subtitle: 'Moc: Złota Korona Solarna', desc: 'Władca słońca, przynoszący radość i uśmiech.', powers: ['👑 Złota Korona', '🌟 Słoneczna Aura'], quest: { q: 'Co sprawia, że jesteśmy najlepszymi przyjaciółmi?', opts: ['Dobre serduszko i pomoc', 'Krzyczenie', 'Zabieranie klocków'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'mario',
+        name: 'Gwiezdny Skoczek Mario',
+        element: '🍄 Ogień & Super-Skok',
+        thumb: 'originals/mario_original.jpg',
+        img: 'originals/mario_original.jpg',
+        stages: [
+          { level: 1, name: 'Czerwony Czapnik', title: 'Etap 1: Wesoły Wąsacz', subtitle: 'Moc: Literka M', desc: 'Pluszowy Mario w czerwonej czapce i ogrodniczkach.', powers: ['🍄 Grzybek Skoku'], quest: { q: 'Jaka literka jest na czapce Mario?', opts: ['M', 'L', 'P'], correct: 0 } },
+          { level: 2, name: 'Zwinny Skoczek', title: 'Etap 2: Mistrz Skakania', subtitle: 'Moc: Podwójny Skok', desc: 'Skacze wyżej niż meble w pokoju!', powers: ['👟 Sprężyste Buty'], quest: { q: 'Ile to jest 1 skok + 2 skoki?', opts: ['3 skoki', '1 skok', '5 skoków'], correct: 0 } },
+          { level: 3, name: 'Ognisty Mario Płomieni', title: 'Etap 3: Ognisty Rycerz', subtitle: 'Moc: Ognista Kula', desc: 'Biało-czerwony strój i ogniste kule ciepła.', powers: ['🔥 Ognisty Błysk'], quest: { q: 'Jaki kolor mają ogrodniczki Mario?', opts: ['NIEBIESKI', 'ŻÓŁTY', 'RÓŻOWY'], correct: 0 } },
+          { level: 4, name: 'Super-Hydraulik Gwiazd', title: 'Etap 4: Gwiezdna Nietykalność', subtitle: 'Moc: Tęczowa Gwiazdka', desc: 'Biega z prędkością tęczy, omijając przeszkody.', powers: ['⭐ Tęczowa Gwiazda'], quest: { q: 'Kogo zawsze ratuje dzielny Mario?', opts: ['Księżniczkę Peach i Przyjaciół', 'Smoka', 'Nikogo'], correct: 0 } },
+          { level: 5, name: 'Kosmiczny Bohater Wymiarów', title: 'Etap 5: MEGA AWATAR PRZYGODY', subtitle: 'Moc: Przylot na Kometach', desc: 'Lata po całej galaktyce na gwiezdnych platformach.', powers: ['👑 Złota Czapka Mocy', '🚀 Gwiezdny Napęd'], quest: { q: 'Co jest najważniejsze podczas trudnej gry?', opts: ['Nigdy się nie poddawać!', 'Płakać i rzucać padem', 'Wyłączyć od razu'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'gabby',
+        name: 'Magiczna Kotka Gabby',
+        element: '🎀 Kocia Magia Wyobraźni',
+        thumb: 'originals/gabby_original.jpg',
+        img: 'originals/gabby_original.jpg',
+        stages: [
+          { level: 1, name: 'Kocia Dziewczynka', title: 'Etap 1: Wesołe Uszka', subtitle: 'Moc: Koci Uśmiech', desc: 'Dziewczynka w magicznej opasce z kocimi uszkami.', powers: ['🐱 Koci Uśmiech'], quest: { q: 'Co ma na głowie Gabby?', opts: ['KOCIE USZKA', 'KASK', 'KORONĘ'], correct: 0 } },
+          { level: 2, name: 'Iskierka Radości', title: 'Etap 2: Błyszczące Uszka', subtitle: 'Moc: Błysk Brokatu', desc: 'Uszka świecą na różowo przy każdym pomyśle.', powers: ['✨ Brokatowy Błysk'], quest: { q: 'Jaki kolor mają kocie uszka Gabby?', opts: ['RÓŻOWY', 'ZIELONY', 'CZARNY'], correct: 0 } },
+          { level: 3, name: 'Magiczna Czarodziejka', title: 'Etap 3: Kocia Różdżka', subtitle: 'Moc: Zaklęcie Zmniejszania', desc: 'Potrafi przenieść się do magicznego domku dla lalek.', powers: ['🪄 Kocia Różdżka'], quest: { q: 'Na jaką literkę zaczyna się GABBY?', opts: ['G', 'B', 'M'], correct: 0 } },
+          { level: 4, name: 'Wróżka Tęczowych Pokoi', title: 'Etap 4: Kreatywny Mistrz', subtitle: 'Moc: Rysowanie Światłem', desc: 'Tworzy wspaniałe rysunki i budowle z klocków.', powers: ['🎨 Malowanie Światłem'], quest: { q: 'Jakie kolory ma TĘCZA?', opts: ['Czerwony, żółty, niebieski i inne', 'Tylko czarny', 'Brak kolorów'], correct: 0 } },
+          { level: 5, name: 'Królowa Kosmicznej Wyobraźni', title: 'Etap 5: MEGA AWATAR KREATYWNOŚCI', subtitle: 'Moc: Domek Marzeń', desc: 'Buduje całe światy ze snów i klocków.', powers: ['👑 Korona Kotka', '🌈 Tęczowy Portal'], quest: { q: 'Co robimy po skończonej zabawie?', opts: ['Sprzątamy swoje zabawki', 'Zostawiamy bałagan', 'Kopiemy klocki'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'minnie',
+        name: 'Wiśniowa Minnie',
+        element: '🍒 Wiśniowa Przyjaźń',
+        thumb: 'originals/minnie_original.jpg',
+        img: 'originals/minnie_original.jpg',
+        stages: [
+          { level: 1, name: 'Minnie w Piżamce', title: 'Etap 1: Słodka Myszkowo', subtitle: 'Moc: Wiśniowy Wzorek', desc: 'Pluszowa Minnie w fioletowym ubranku w wisienki.', powers: ['🍒 Słodka Wisienka'], quest: { q: 'Jaki owoc ma Minnie na ubranku?', opts: ['WISIENKI', 'JABŁKO', 'CYTRYNĘ'], correct: 0 } },
+          { level: 2, name: 'Wiśniowa Iskierka', title: 'Etap 2: Błyszcząca Kokarda', subtitle: 'Moc: Uśmiech Radości', desc: 'Kokardka na uszkach rozbłyska różowym światłem.', powers: ['🎀 Różowa Kokarda'], quest: { q: 'Jakie duże uszka ma Myszka Minnie?', opts: ['OKRĄGŁE MYSZKI', 'DŁUGIE KRÓLIKA', 'TRÓJKĄTNE KOTA'], correct: 0 } },
+          { level: 3, name: 'Czarodziejka Kokardek', title: 'Etap 3: Magiczna Projektantka', subtitle: 'Moc: Tęczowe Wstążki', desc: 'Tworzy magiczne kokardki chroniące przed smutkiem.', powers: ['✨ Magiczne Wstążki'], quest: { q: 'Na jaką literkę zaczyna się MINNIE?', opts: ['M', 'N', 'P'], correct: 0 } },
+          { level: 4, name: 'Strażniczka Radości', title: 'Etap 4: Baletnica Światła', subtitle: 'Moc: Wiśniowy Taniec', desc: 'Tańczy w powietrzu, rozsypując różowe płatki.', powers: ['🌸 Wiśniowy Pył'], quest: { q: 'Kto jest najlepszym przyjacielem Minnie?', opts: ['Myszka Miki', 'Wilk', 'Rekin'], correct: 0 } },
+          { level: 5, name: 'Kryształowa Księżniczka Uśmiechu', title: 'Etap 5: MEGA AWATAR PIĘKNA', subtitle: 'Moc: Korona z Kryształów', desc: 'Sprawia, że każdy uśmiech jest magiczny.', powers: ['👑 Diamentowa Kokarda', '💖 Promień Radości'], quest: { q: 'Co jest najpiękniejszą rzeczą na buzi dziecka?', opts: ['SZCZERY UŚMIECH', 'KAPRYSIENIE', 'KRZYK'], correct: 0 } }
+        ]
+      },
+      {
+        id: 'baby',
+        name: 'Kryształowy Niemowlaczek',
+        element: '🍼 Czyste Światło & Opieka',
+        thumb: 'originals/baby_original.jpg',
+        img: 'originals/baby_original.jpg',
+        stages: [
+          { level: 1, name: 'Słodki Bobasek', title: 'Etap 1: Mały Niemowlaczek', subtitle: 'Moc: Słodki Sen', desc: 'Lalka niemowlaka w różowym śpiworku.', powers: ['🍼 Czyste Serduszko'], quest: { q: 'Co lubi pić mały bobasek?', opts: ['CIEPŁE MLEKO', 'KAWĘ', 'HERBATĘ Z CYTRYNĄ'], correct: 0 } },
+          { level: 2, name: 'Raczkujący Promyczek', title: 'Etap 2: Pierwsze Krok', subtitle: 'Moc: Błyszczące Oczka', desc: 'Raczkuje po dywanie, zostawiając świecące ślady.', powers: ['✨ Świecące Ślady'], quest: { q: 'Co zakładamy bobaskowi na główkę na dworze?', opts: ['CZAPECZKĘ', 'BUTY', 'RĘKAWICZKI'], correct: 0 } },
+          { level: 3, name: 'Mały Aniołek Światła', title: 'Etap 3: Anielskie Skrzydełka', subtitle: 'Moc: Świetlista Aureola', desc: 'Zyskuje małe piórkowe skrzydełka opieki.', powers: ['🪽 Piórkowe Skrzydła'], quest: { q: 'Jak delikatnie głaszczemy małe dzidziusie?', opts: ['BARDZO DELIKATNIE', 'MOCNO I SZYBKO', 'SZARPIĄC'], correct: 0 } },
+          { level: 4, name: 'Strażnik Uśmiechu Maluchów', title: 'Etap 4: Kojący Głos', subtitle: 'Moc: Kołysanka Gwiazd', desc: 'Śpiewa najsłodszą kołysankę usypiającą wszystkie dzieci.', powers: ['🎶 Kołysanka Gwiazd'], quest: { q: 'Ile rączek ma mały bobasek?', opts: ['2 rączki', '4 rączki', '1 rączkę'], correct: 0 } },
+          { level: 5, name: 'Złote Dziecko Gwiazd', title: 'Etap 5: MEGA AWATAR NIEWINNOŚCI', subtitle: 'Moc: Aureola Nadziei', desc: 'Święty opiekun wszystkich nowo narodzonych dzieci.', powers: ['👑 Aureola Nadziei', '✨ Wieczna Czystość'], quest: { q: 'Dlaczego kochamy naszą rodzinę?', opts: ['Bo zawsze się nami opiekują', 'Bo dają cukierki', 'Bez powodu'], correct: 0 } }
+        ]
+      }
+    ];
+
+    let currentHeroIndex = 0;
+    let currentStageIndex = 0;
+
+    function init() {
+      renderPicker();
+      renderDashboard();
+      renderPokedex();
+    }
+
+    function renderPicker() {
+      const picker = document.getElementById('pickerContainer');
+      picker.innerHTML = '';
+      allHeroes.forEach((hero, index) => {
+        const card = document.createElement('div');
+        card.className = `hero-choice-card ${index === currentHeroIndex ? 'selected' : ''}`;
+        card.onclick = () => selectHero(index);
+        card.innerHTML = `
+          <img class="hero-thumb" src="${hero.thumb}" alt="${hero.name}">
+          <div class="hero-choice-name">${hero.name}</div>
+          <div class="hero-choice-element">${hero.element}</div>
+        `;
+        picker.appendChild(card);
+      });
+    }
+
+    function selectHero(index) {
+      currentHeroIndex = index;
+      currentStageIndex = 0;
+      renderPicker();
+      renderDashboard();
+    }
+
+    function renderDashboard() {
+      const hero = allHeroes[currentHeroIndex];
+      const stage = hero.stages[currentStageIndex];
+
+      document.getElementById('dashboardHeroName').innerHTML = `${hero.name} &bull; ${stage.name}`;
+      document.getElementById('dashboardImg').src = hero.img;
+      document.getElementById('dashboardOrig').src = hero.thumb;
+      document.getElementById('dashboardStageTitle').textContent = stage.title;
+      document.getElementById('dashboardStageSubtitle').textContent = stage.subtitle;
+      document.getElementById('dashboardStageDesc').textContent = stage.desc;
+
+      const powersContainer = document.getElementById('dashboardPowers');
+      powersContainer.innerHTML = '';
+      stage.powers.forEach(p => {
+        const span = document.createElement('span');
+        span.style = 'background: rgba(0,240,255,0.15); border: 1px solid var(--secondary); color: var(--secondary); padding: 0.25rem 0.75rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600;';
+        span.textContent = p;
+        powersContainer.appendChild(span);
+      });
+
+      const dotsContainer = document.getElementById('stageDots');
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < 5; i++) {
+        const dot = document.createElement('div');
+        dot.className = `stage-dot ${i < currentStageIndex ? 'completed' : (i === currentStageIndex ? 'active' : '')}`;
+        dot.textContent = i < currentStageIndex ? '✓' : (i + 1);
+        dotsContainer.appendChild(dot);
+      }
+
+      document.getElementById('questQuestion').textContent = stage.quest.q;
+      const optsGrid = document.getElementById('optionsGrid');
+      optsGrid.innerHTML = '';
+
+      stage.quest.opts.forEach((opt, oIndex) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt;
+        btn.onclick = () => handleAnswer(btn, oIndex === stage.quest.correct);
+        optsGrid.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(btn, isCorrect) {
+      if (isCorrect) {
+        btn.classList.add('correct');
+        playSound('correct');
+        setTimeout(() => {
+          if (currentStageIndex < 4) {
+            currentStageIndex++;
+            showEvoModal();
+          } else {
+            playSound('fanfare');
+            showEvoModal(true);
+          }
+        }, 600);
+      } else {
+        btn.classList.add('wrong');
+        playSound('wrong');
+        setTimeout(() => btn.classList.remove('wrong'), 500);
+      }
+    }
+
+    function showEvoModal(isFinal = false) {
+      const modal = document.getElementById('evoModal');
+      const text = document.getElementById('evoModalText');
+      const hero = allHeroes[currentHeroIndex];
+      const stage = hero.stages[currentStageIndex];
+
+      if (isFinal) {
+        text.innerHTML = `🌟 <strong>GRATULACJE!</strong> 🌟<br>Twój <strong>${hero.name}</strong> osiągnął ostateczny <strong>Poziom 5: ${stage.name}</strong>!<br>Jesteś Prawdziwym Mistrzem Wiedzy i Dobra! 👑`;
+      } else {
+        text.innerHTML = `Brawo! Twój pluszak ewoluował w:<br><strong style="font-size: 1.5rem; color: var(--accent);">${stage.name}</strong><br><em>(${stage.title})</em>! Odblokowano nową supermoc! ⚡`;
+      }
+      modal.style.display = 'flex';
+      playSound('fanfare');
+    }
+
+    function closeEvoModal() {
+      document.getElementById('evoModal').style.display = 'none';
+      renderDashboard();
+    }
+
+    function speakQuestion() {
+      const hero = allHeroes[currentHeroIndex];
+      const stage = hero.stages[currentStageIndex];
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(stage.quest.q);
+        u.lang = 'pl-PL';
+        u.rate = 0.9;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    function renderPokedex() {
+      const container = document.getElementById('pokedexContainer');
+      container.innerHTML = '';
+
+      allHeroes.forEach(hero => {
+        const card = document.createElement('div');
+        card.className = 'evo-tree-card';
+        card.innerHTML = `
+          <div class="evo-tree-header">
+            <img src="${hero.thumb}" style="width: 60px; height: 60px; border-radius: 12px; object-fit: cover;" alt="${hero.name}">
+            <div>
+              <div class="evo-main-title">${hero.name}</div>
+              <div style="color: var(--accent); font-weight: 600;">Żywioł: ${hero.element} &bull; 5 Poziomów Ewolucji</div>
+            </div>
+          </div>
+          <div class="evo-stages-flow">
+            ${hero.stages.map((st, i) => `
+              <div class="evo-stage-box">
+                <span class="stage-level-tag" style="${i === 4 ? 'background: var(--accent); color: #000;' : ''}">POZIOM ${st.level}</span>
+                <div class="evo-box-name">${st.name}</div>
+                <div class="evo-box-skill">${st.subtitle}</div>
+                <div class="evo-box-desc">${st.desc}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function switchTab(tabId) {
+      document.getElementById('gameTab').style.display = tabId === 'game' ? 'block' : 'none';
+      document.getElementById('pokedexTab').style.display = tabId === 'pokedex' ? 'block' : 'none';
+      document.getElementById('storyTab').style.display = tabId === 'story' ? 'block' : 'none';
+
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
