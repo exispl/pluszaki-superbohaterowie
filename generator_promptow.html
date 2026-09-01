@@ -271,6 +271,20 @@
       color: #fff;
     }
 
+    .prompt-num-badge {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #000;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(255, 209, 102, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.4rem;
+    }
+
     .prompt-ar-badge {
       font-size: 0.75rem;
       font-weight: 700;
@@ -647,24 +661,30 @@
       document.getElementById('bannerName').textContent = hero.name;
       document.getElementById('bannerAlias').textContent = `${hero.alias} • 10 Gotowych Promptów Nano Banana 2 / Imagen 3`;
 
+      const heroNum = idx + 1;
       const container = document.getElementById('promptsContainer');
       container.innerHTML = '';
 
       hero.prompts.forEach((p, pIdx) => {
+        const promptNum = `${heroNum}.${pIdx + 1}`;
+        const cleanTitle = p.title.replace(/^\d+\.\s*/, '');
         const card = document.createElement('div');
         card.className = 'prompt-card';
         card.innerHTML = `
           <div>
             <div class="prompt-card-header">
+              <span class="prompt-num-badge">${promptNum}</span>
               <span class="prompt-style-badge">${p.style}</span>
               <span class="prompt-ar-badge">Format: ${p.ar}</span>
             </div>
-            <div class="prompt-title" style="margin-top: 0.5rem;">${p.title}</div>
+            <div class="prompt-title" style="margin-top: 0.75rem;">
+              <span style="color: var(--primary); font-weight: 800;">${promptNum}</span> ${cleanTitle}
+            </div>
             <div class="prompt-desc">${p.desc}</div>
           </div>
           <div class="prompt-code-box">${p.prompt}</div>
           <button class="copy-single-btn" onclick="copyPromptText('${encodeURIComponent(p.prompt)}', this)">
-            📋 Kopiuj Prompt
+            📋 Kopiuj Prompt ${promptNum}
           </button>
         `;
         container.appendChild(card);
@@ -678,7 +698,7 @@
         btn.textContent = '✓ Skopiowano!';
         btn.classList.add('copied');
         setTimeout(() => {
-          btn.textContent = '📋 Kopiuj Prompt';
+          btn.innerHTML = btn.innerHTML.replace('✓ Skopiowano!', '📋 Kopiuj');
           btn.classList.remove('copied');
         }, 2000);
       });
@@ -686,9 +706,13 @@
 
     function copyAllPrompts() {
       const hero = promptStudioData[currentHeroIdx];
-      const allText = hero.prompts.map((p, i) => `### ${p.title} (${p.style} - ${p.ar})\n${p.prompt}\n`).join('\n');
+      const heroNum = currentHeroIdx + 1;
+      const allText = hero.prompts.map((p, i) => {
+        const cleanTitle = p.title.replace(/^\d+\.\s*/, '');
+        return `### ${heroNum}.${i + 1} ${cleanTitle} (${p.style} - ${p.ar})\n${p.prompt}\n`;
+      }).join('\n');
       navigator.clipboard.writeText(allText).then(() => {
-        showToast(`✓ Skopiowano wszystkie 10 promptów dla: ${hero.name}!`);
+        showToast(`✓ Skopiowano wszystkie 10 promptów (${heroNum}.1 - ${heroNum}.10) dla: ${hero.name}!`);
       });
     }
 
