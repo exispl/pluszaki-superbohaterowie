@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wielka Galeria 66 Wersji Pluszaków (Po 6 dla Każdego) | Magiczny Pokój</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff007f;
+      --secondary: #00f0ff;
+      --accent: #ffd166;
+      --pink: #ff85a2;
+      --green: #06d6a0;
+      --purple: #9d4edd;
+      --bg: #0a0e27;
+      --card-bg: rgba(20, 26, 54, 0.95);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 0, 127, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.15) 0%, transparent 60%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      padding: 0.4rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 25px rgba(255, 0, 127, 0.5);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: 'Comfortaa', cursive;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, var(--secondary), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 850px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Top Nav Buttons */
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-link-btn {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.6rem 1.4rem;
+      border-radius: 30px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-link-btn:hover, .nav-link-btn.active {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      transform: scale(1.05);
+    }
+
+    /* Quick Jump Pills for 11 Characters */
+    .quick-jump-bar {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.75rem 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+      justify-content: flex-start;
+      scrollbar-width: thin;
+    }
+
+    .quick-jump-bar::-webkit-scrollbar {
+      height: 6px;
+    }
+    .quick-jump-bar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    .jump-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .jump-pill:hover {
+      background: var(--secondary);
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      width: 100%;
+    }
+
+    /* Character Showcase Section */
+    .character-section {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 30px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(20px);
+      transition: border-color 0.3s;
+    }
+
+    .character-section:hover {
+      border-color: rgba(0, 240, 255, 0.4);
+    }
+
+    /* Section Header */
+    .char-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .char-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .char-header-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 3px solid var(--secondary);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    }
+
+    .char-header-title {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .char-header-element {
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .listen-voice-btn {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 25px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .listen-voice-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 20px var(--primary);
+    }
+
+    /* Child Quote Banner */
+    .char-child-banner {
+      background: linear-gradient(135deg, rgba(255, 133, 162, 0.12), rgba(255, 209, 102, 0.12));
+      border-left: 4px solid var(--pink);
+      border-radius: 0 16px 16px 0;
+      padding: 0.9rem 1.25rem;
+      margin-bottom: 1.75rem;
+      font-size: 1.05rem;
+      color: #fed7aa;
+      line-height: 1.6;
+    }
+
+    /* 6 Vertical Cards Horizontal Scrolling Rail */
+    .versions-scroll-rail {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.25rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: thin;
+    }
+
+    @media (max-width: 1200px) {
+      .versions-scroll-rail {
+        grid-template-columns: repeat(6, 260px);
+      }
+    }
+
+    .versions-scroll-rail::-webkit-scrollbar {
+      height: 8px;
+    }
+    .versions-scroll-rail::-webkit-scrollbar-thumb {
+      background: rgba(0, 240, 255, 0.3);
+      border-radius: 10px;
+    }
+
+    /* Tall Vertical Card (Pionowe Karty) */
+    .vertical-version-card {
+      background: rgba(10, 14, 32, 0.85);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .vertical-version-card:hover {
+      border-color: var(--secondary);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 240, 255, 0.3);
+    }
+
+    .version-type-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 5;
+    }
+
+    /* Tall Vertical Aspect Ratio Container (Pionowy Format Zdjęć) */
+    .vertical-img-wrap {
+      width: 100%;
+      height: 330px;
+      position: relative;
+      background: #000;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .vertical-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .vertical-version-card:hover .vertical-img {
+      transform: scale(1.08);
+    }
+
+    .zoom-overlay {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .vertical-card-body {
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .vertical-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .vertical-card-desc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .vertical-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .lightbox-content {
+      max-width: 900px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 18px;
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.4);
+    }
+
+    .lightbox-caption {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      font-size: 2.5rem;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: #64748b;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-badge">🌟 Pełen Zestaw 66 Grafik &bull; Po 6 Wersji dla Każdego Pluszaka</div>
+    <h1>WIELKA GALERIA PIONOWA 11 PLUSZAKÓW</h1>
+    <p class="subtitle">
+      Wszystkie 11 maskotek w pełnym pionowym formacie smartfonowym. Każdy pluszak posiada 6 unikalnych wersji: od zdjęcia z pokoju, przez wersje bez tła, karty TCG, awatary 3D, aż po sceny w pokoju!
+    </p>
+
+    <div class="nav-bar">
+      <a class="nav-link-btn" href="galerie_postaci.html">🏛️ Panteon Postaci & Drużynki</a>
+      <a class="nav-link-btn" href="gra_dla_4latki.html">🧸 Przygoda Krok po Kroku (4-Latka)</a>
+      <a class="nav-link-btn" href="gra_edukacyjna.html">🎮 Akademia Ewolucji</a>
+      <a class="nav-link-btn" href="index.html">🖼️ Główna Galeria 3D</a>
+    </div>
+  </header>
+
+  <!-- Quick Jump Bar to each of the 11 Characters -->
+  <div class="quick-jump-bar" id="quickJumpBar"></div>
+
+  <!-- Main Container: 11 Character Rows (6 vertical cards each) -->
+  <div class="main-container" id="charactersContainer"></div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+    <button class="close-modal-btn">&times;</button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img id="lightboxImg" class="lightbox-img" src="" alt="Powiększenie">
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Projekt <strong>Magiczny Pokój Pluszaków</strong> &bull; 66 Wersji Pionowych &bull; 11 Bohaterów</p>
+  </footer>
+
+  <script>
+    // Complete 11 Heroes with 6 Distinct Vertical Visual Options Each (66 total cards)
+    const galleryHeroes = [
+      {
+        id: 'cat',
+        name: 'Kotek-Babeczka',
+        alias: 'Sprinkle-Cat (Sparkle-Kat)',
+        element: '⚡ Tęczowa Plazma',
+        avatar: 'png/avatar_3d_cat.png',
+        quote: '„On ma na główce taką posypkę jak na babeczce u babci! Pachnie wanilią i pilnuje kocyka minky w kropeczki!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/cat_original.png', title: 'Oryginał w Pokoju', desc: 'Pionowe zdjęcie z telefonu maskotki na pościeli minky.' },
+          { type: '✂️ Wersja 2: 3D Transparent PNG', img: 'cyber_cupcake_cat_transparent.png', title: 'Cyber-Kotek Cutout', desc: 'Wycięty model 3D ze skrzydłami i tęczową plazmą.' },
+          { type: '🃏 Wersja 3: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_cat.png', title: 'Karta Mocy TCG', desc: 'Pełnowymiarowa karta z atrybutami i statystykami.' },
+          { type: '🌟 Wersja 4: Awatar 3D z Aurą', img: 'png/avatar_3d_cat.png', title: 'Gwiezdny Awatar', desc: 'Trójwymiarowy awatar z neonowym kręgiem plazmy.' },
+          { type: '🏠 Wersja 5: Duet w Pokoju 3D', img: 'duo_cat_penguin_1788270940922.jpg', title: 'Kotek & Pingwinek', desc: 'Przytuleni na różowym łóżeczku pod girlandami lampek.' },
+          { type: '🏙️ Wersja 6: Scena w Metropolii', img: 'cyber_cupcake_cat_hero_1788263620524.jpg', title: 'Obrońca Miasta 2099', desc: 'Lata nad neonowymi wieżowcami z polem siłowym.' }
+        ]
+      },
+      {
+        id: 'penguin',
+        name: 'Błękitny Pingwinek',
+        alias: 'Frosty-Nova',
+        element: '❄️ Astralny Lód',
+        avatar: 'png/avatar_3d_penguin.png',
+        quote: '„Pingwinek ma wielkie niebieskie oczka i śpi ze mną pod kołderką, a w lecie dmucha chłodnym wiaterkiem!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/penguin_original.png', title: 'Oryginał ze Zdjęcia', desc: 'Puszyste błękitne piórka i wielkie lśniące oczy.' },
+          { type: '✂️ Wersja 2: 3D Transparent PNG', img: 'astral_penguin_transparent.png', title: 'Astralny Pingwinek Cutout', desc: 'Lewituje z lodowymi kulami many i runami śniegu.' },
+          { type: '🃏 Wersja 3: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_penguin.png', title: 'Karta Mrozu TCG', desc: 'Karta z kryształami lodu i atakami polarnymi.' },
+          { type: '🌟 Wersja 4: Awatar 3D z Aurą', img: 'png/avatar_3d_penguin.png', title: 'Awatar Zorzy Polarnej', desc: 'Błękitny neonowy krąg i gwiezdne spojrzenie.' },
+          { type: '🏠 Wersja 5: Duet w Pokoju 3D', img: 'duo_cat_penguin_1788270940922.jpg', title: 'Duet z Kotkiem', desc: 'Siedzą razem na kocyku w ciepłym blasku lampek.' },
+          { type: '🌿 Wersja 6: Scena w Świecącym Lesie', img: 'mystic_astral_penguin_hero_1788263649251.jpg', title: 'Magiczny Gaj Lodu', desc: 'Czaruje sferę many wśród świecących roślin i wodospadów.' }
+        ]
+      },
+      {
+        id: 'diana',
+        name: 'Króliczka Diana',
+        alias: 'Lunar-Diana',
+        element: '🌙 Magia Księżyca',
+        avatar: 'png/avatar_3d_diana.png',
+        quote: '„Ma na uszku wyszyte kiedy dokładnie się urodziłam: 13.06.2022 o 13:13! Łaskocze mnie uszkiem w nos i strachy uciekają!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/diana_original.png', title: 'Oryginalna Lalka z Haftem', desc: 'Pamiątkowy haft narodzin na długich uszkach.' },
+          { type: '✂️ Wersja 2: 3D Transparent PNG', img: 'lunar_bunny_transparent.png', title: 'Księżycowa Diana Cutout', desc: 'Kryształowe serduszko na piersi i gwiezdne motyle.' },
+          { type: '🃏 Wersja 3: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_diana.png', title: 'Karta Srebrnej Pełni', desc: 'Karta z runami księżyca i ochroną snów dziecka.' },
+          { type: '🌟 Wersja 4: Awatar 3D z Aurą', img: 'png/avatar_3d_diana.png', title: 'Awatar Gwiezdnego Pyłu', desc: 'Różowa poświata księżycowa i szare uszka.' },
+          { type: '🌙 Wersja 5: Scena pod Pełnią 3D', img: 'lunar_bunny_guardian_hero_1788263677418.jpg', title: 'Diana w Nocnym Gaju', desc: 'Unosi się w zerowej grawitacji pod wielkim księżycem.' },
+          { type: '🧸 Wersja 6: Kadr z Pokoju', img: 'originals_png/diana_original.png', title: 'Strażniczka Łóżeczka', desc: 'Czuwa nad poduszką w sówki na różowym kocyku.' }
+        ]
+      },
+      {
+        id: 'dog',
+        name: 'Dźwiękowy Piesek K9',
+        alias: 'Sonic-Pup (Sonic Bark)',
+        element: '🔊 Ultradźwięki & Pioruny',
+        avatar: 'png/avatar_3d_dog.png',
+        quote: '„Piesek ma dzwoneczek i robi dzyń dzyń dzyń! Ma białe łapki i pilnuje kapci koło łóżka!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/dog_original.png', title: 'Oryginalny Piesek', desc: 'Brązowy piesek z czerwoną obrożą i dzwoneczkiem.' },
+          { type: '✂️ Wersja 2: 3D Transparent PNG', img: 'sonic_puppy_transparent.png', title: 'Soniczny Pies K9 Cutout', desc: 'Łapki rozbłyskające piorunami i pulsujący sonar.' },
+          { type: '🃏 Wersja 3: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_dog.png', title: 'Karta Odwagi TCG', desc: 'Karta z prędkością dźwięku i zwinnością K9.' },
+          { type: '🌟 Wersja 4: Awatar 3D z Aurą', img: 'png/avatar_3d_dog.png', title: 'Awatar Błyskawicy', desc: 'Złoto-bursztynowy krąg mocy i zielone oczka.' },
+          { type: '⚡ Wersja 5: Wersja Render 3D', img: 'sonic_puppy_hero_nobg_1788267042270.jpg', title: 'Gwardzista Pokoju', desc: 'Piorunujący obrońca na czystym białym tle studyjnym.' },
+          { type: '🐾 Wersja 6: Pamiątka Pokoju', img: 'originals_png/dog_original.png', title: 'Wierny Przyjaciel', desc: 'Zawsze czujny na miękkim dywanie dziecięcym.' }
+        ]
+      },
+      {
+        id: 'monkey',
+        name: 'Cybernetyczna Małpka (Gizmo)',
+        alias: 'Gizmo-Prime',
+        element: '🦾 Cyber-Technologia',
+        avatar: 'png/avatar_3d_monkey.png',
+        quote: '„Małpka ssie kciuk, bo jest małym bobaskiem! Pomaga mi składać wieże z klocków i je banana!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/monkey_original.png', title: 'Oryginalna Małpka', desc: 'Puszysta brązowa maskotka w pozycji ssania kciuka.' },
+          { type: '✂️ Wersja 2: 3D Transparent PNG', img: 'techno_monkey_transparent.png', title: 'Techno-Małpka Cutout', desc: 'Bioniczna rękawica mocy i holograficzny wizjer HUD.' },
+          { type: '🃏 Wersja 3: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_monkey.png', title: 'Karta Inżyniera TCG', desc: 'Karta technologii, klocków i antygrawitacji.' },
+          { type: '🌟 Wersja 4: Awatar 3D z Aurą', img: 'png/avatar_3d_monkey.png', title: 'Awatar Inżyniera', desc: 'Pomarańczowy krąg danych HUD i bionika.' },
+          { type: '🦾 Wersja 5: Wersja Render 3D', img: 'techno_monkey_hero_nobg_1788267143753.jpg', title: 'Gizmo w Akcji', desc: 'Unosi się na świetlistych iskrach kinetycznych.' },
+          { type: '🧸 Wersja 6: Kadr z Pokoju', img: 'originals_png/monkey_original.png', title: 'Mistrz Klocków', desc: 'Siedzi przy szafce z zabawkami i czuwa nad pokojem.' }
+        ]
+      },
+      {
+        id: 'cow',
+        name: 'Tytaniczna Krowa Piorunów',
+        alias: 'Thunder-Moo',
+        element: '⚡ Grzmot & Złote Rogi',
+        avatar: 'png/avatar_3d_cow.png',
+        quote: '„Ona jest taka olbrzymia i mięciutka! Udaję, że jadę na krowie do sklepu po lody truskawkowe!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/cow_original.png', title: 'Wielka Łaciata Krowa', desc: 'Puszysta krowa w czarne łaty z różowym pyszczkiem.' },
+          { type: '✂️ Wersja 2: 3D Transparent PNG', img: 'thunder_cow_transparent.png', title: 'Tytaniczna Krowa Cutout', desc: 'Złote rogi z błyskawicami i świecące oczy grzmotu.' },
+          { type: '🃏 Wersja 3: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_cow.png', title: 'Karta Tytana TCG', desc: 'Karta sejsmicznej siły i regeneracji natury.' },
+          { type: '🌟 Wersja 4: Awatar 3D z Aurą', img: 'png/avatar_3d_cow.png', title: 'Awatar Złotych Rogów', desc: 'Szmaragdowo-złoty krąg mocy burzowej.' },
+          { type: '⚡ Wersja 5: Wersja Render 3D', img: 'thunder_cow_hero_nobg_1788268487338.jpg', title: 'Thunder-Moo 3D', desc: 'Błyskawice skaczące między kopytkami krowy.' },
+          { type: '🐮 Wersja 6: Kadr z Pokoju', img: 'originals_png/cow_original.png', title: 'Największy Pluszak', desc: 'Wygodnie odpoczywa na fotelu dziecięcym.' }
+        ]
+      },
+      {
+        id: 'pooh',
+        name: 'Złoty Miś Miodowy (Kubuś)',
+        alias: 'Solar-Pooh (Amber-Bear)',
+        element: '🍯 Słoneczny Bursztyn',
+        avatar: 'png/avatar_3d_pooh.png',
+        quote: '„Kubuś ma czerwony sweterek i gruby brzuszek od miodu! Kładę go koło poduszki w sówki!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/pooh_original.png', title: 'Kubuś na Pościeli', desc: 'Żółty miś w czerwonej koszulce obok sówkowej poduszki.' },
+          { type: '🃏 Wersja 2: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_pooh.png', title: 'Karta Miodu TCG', desc: 'Karta słonecznego bursztynu i dzielenia się z innymi.' },
+          { type: '🌟 Wersja 3: Awatar 3D z Aurą', img: 'png/avatar_3d_pooh.png', title: 'Awatar Słońca', desc: 'Złocisty bursztynowy krąg ciepła i przyjaźni.' },
+          { type: '🍯 Wersja 4: Słoneczny Strażnik', img: 'originals_png/pooh_original.png', title: 'Miś w Pokoju', desc: 'Opiekun dobrego humoru i słodkich snów.' },
+          { type: '🦉 Wersja 5: Z Sówkami', img: 'originals_png/pooh_original.png', title: 'Rozmowa z Sówkami', desc: 'Pilnuje poduszki w sówki i opowiada im bajki.' },
+          { type: '💛 Wersja 6: Złote Serce', img: 'originals_png/pooh_original.png', title: 'Wieczna Dobroć', desc: 'Symbol szczerej miłości i opiekuńczości.' }
+        ]
+      },
+      {
+        id: 'mario',
+        name: 'Gwiezdny Skoczek Mario',
+        alias: 'Super-Jump Mario',
+        element: '🍄 Ogień & Super-Skok',
+        avatar: 'png/avatar_3d_mario.png',
+        quote: '„Mario ma wąsy i czerwoną czapkę z literką M! Skacze z krzesła na dywan, bo podłoga to lawa!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/mario_original.png', title: 'Mario w Ogrodniczkach', desc: 'Pluszowy bohater w czapce z literką M i rękawiczkach.' },
+          { type: '🃏 Wersja 2: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_mario.png', title: 'Karta Skoczka TCG', desc: 'Karta ognistego kwiatu i podwójnego super-skoku.' },
+          { type: '🌟 Wersja 3: Awatar 3D z Aurą', img: 'png/avatar_3d_mario.png', title: 'Awatar Mario', desc: 'Ognisto-czerwony krąg super-skoków i odwagi.' },
+          { type: '🍄 Wersja 4: Skok przez Klocki', img: 'originals_png/mario_original.png', title: 'Mistrz Zwinności', desc: 'Skacze przez przeszkody z poduszek i klocków.' },
+          { type: '⭐ Wersja 5: Gwiezdna Moc', img: 'originals_png/mario_original.png', title: 'Gwiezdny Hydraulik', desc: 'Nigdy się nie poddaje i ratuje przyjaciół.' },
+          { type: '👟 Wersja 6: Gotowy do Gry', img: 'originals_png/mario_original.png', title: 'Podłoga to Lawa', desc: 'Główny mistrz zabaw ruchowych na dywanie.' }
+        ]
+      },
+      {
+        id: 'gabby',
+        name: 'Magiczna Kotka Gabby',
+        alias: 'Star-Gabby',
+        element: '🎀 Kocia Magia Wyobraźni',
+        avatar: 'png/avatar_3d_gabby.png',
+        quote: '„Jak mówię Pitu-pitu-miauu, to jej uszka świecą i przenosimy się do domku dla lalek!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/gabby_original.png', title: 'Gabby w Pokoju', desc: 'Lalka z kręconymi lokami i magiczną opaską z uszkami.' },
+          { type: '🃏 Wersja 2: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_gabby.png', title: 'Karta Wyobraźni TCG', desc: 'Karta tęczowego domku i czarodziejskiego brokatu.' },
+          { type: '🌟 Wersja 3: Awatar 3D z Aurą', img: 'png/avatar_3d_gabby.png', title: 'Awatar Kocich Uszek', desc: 'Fioletowo-różowa kocia poświata kreatywności.' },
+          { type: '🎨 Wersja 4: Malowanie Światłem', img: 'originals_png/gabby_original.png', title: 'Artystka Pokoju', desc: 'Rysuje w powietrzu tęcze i świecące motylki.' },
+          { type: '🏰 Wersja 5: Domek dla Lalek', img: 'originals_png/gabby_original.png', title: 'Królowa Zabawy', desc: 'Organizator przyjęć herbacianych dla pluszaków.' },
+          { type: '✨ Wersja 6: Kocia Magia', img: 'originals_png/gabby_original.png', title: 'Brokatowy Błysk', desc: 'Czysta radość tworzenia rysunków i budowli.' }
+        ]
+      },
+      {
+        id: 'minnie',
+        name: 'Wiśniowa Minnie',
+        alias: 'Cherry-Minnie',
+        element: '🍒 Wiśniowy Kwiat & Balet',
+        avatar: 'png/avatar_3d_minnie.png',
+        quote: '„Minnie ma piżamkę w czerwone wisienki i uczy mnie kręcić piruety baletowe na paluszkach!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/minnie_original.png', title: 'Minnie w Wisienki', desc: 'Pluszowa Minnie w fioletowej piżamce w wisienki.' },
+          { type: '🃏 Wersja 2: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_minnie.png', title: 'Karta Baletnicy TCG', desc: 'Karta wiśniowego tańca i dobrych manier.' },
+          { type: '🌟 Wersja 3: Awatar 3D z Aurą', img: 'png/avatar_3d_minnie.png', title: 'Awatar Wiśni', desc: 'Różowy welurowy krąg kokardy i tańca.' },
+          { type: '🌸 Wersja 4: Wiśniowy Taniec', img: 'originals_png/minnie_original.png', title: 'Piruety na Dywanie', desc: 'Tańczy z gracją i uśmiechem na twarzy.' },
+          { type: '🎀 Wersja 5: Wielka Kokarda', img: 'originals_png/minnie_original.png', title: 'Magiczna Projektantka', desc: 'Kokardka chroniąca przed wszelkimi smutkami.' },
+          { type: '💖 Wersja 6: Księżniczka Uśmiechu', img: 'originals_png/minnie_original.png', title: 'Najlepsza Przyjaciółka', desc: 'Dobre serce i wzór pięknego zachowania.' }
+        ]
+      },
+      {
+        id: 'baby',
+        name: 'Kryształowy Niemowlaczek',
+        alias: 'Starlight-Baby',
+        element: '🍼 Czyste Światło & Opieka',
+        avatar: 'png/avatar_3d_baby.png',
+        quote: '„To mój mały dzidziuś, przykrywam go różowym kocykiem i śpiewam: Aaa kotki dwa!”',
+        versions: [
+          { type: '📱 Wersja 1: Oryginał Smartfon', img: 'originals_png/baby_original.png', title: 'Dzidziuś w Śpiworku', desc: 'Lalka niemowlaka śpiąca w różowym kąciku łóżka.' },
+          { type: '🃏 Wersja 2: Karta Kolekcjonerska', img: 'png/karta_kolekcjonerska_baby.png', title: 'Karta Niewinności TCG', desc: 'Karta czystego serca i kołysanki gwiazd.' },
+          { type: '🌟 Wersja 3: Awatar 3D z Aurą', img: 'png/avatar_3d_baby.png', title: 'Awatar Aniołka', desc: 'Błękitno-złoty krąg anielskiej opieki i miłości.' },
+          { type: '🍼 Wersja 4: Słodki Sen', img: 'originals_png/baby_original.png', title: 'Kącik Snu', desc: 'Otulony kocykiem minky pod czułą opieką.' },
+          { type: '🪽 Wersja 5: Skrzydła Światła', img: 'originals_png/baby_original.png', title: 'Aniołek Pokoju', desc: 'Sprawia, że wszyscy mówią cicho i są życzliwi.' },
+          { type: '💖 Wersja 6: Skarb Rodziny', img: 'originals_png/baby_original.png', title: 'Złote Dziecko', desc: 'Najważniejsza istota chroniona przez 10 bohaterów.' }
+        ]
+      }
+    ];
+
+    function init() {
+      renderQuickJump();
+      renderCharacters();
+    }
+
+    function renderQuickJump() {
+      const bar = document.getElementById('quickJumpBar');
+      bar.innerHTML = '';
+      galleryHeroes.forEach(h => {
+        const a = document.createElement('a');
+        a.className = 'jump-pill';
+        a.href = `#section-${h.id}`;
+        a.innerHTML = `<span>${h.name}</span>`;
+        bar.appendChild(a);
+      });
+    }
+
+    function renderCharacters() {
+      const container = document.getElementById('charactersContainer');
+      container.innerHTML = '';
+
+      galleryHeroes.forEach((h, idx) => {
+        const sec = document.createElement('div');
+        sec.className = 'character-section';
+        sec.id = `section-${h.id}`;
+        sec.innerHTML = `
+          <div class="char-section-header">
+            <div class="char-header-left">
+              <img class="char-header-avatar" src="${h.avatar}" alt="${h.name}">
+              <div>
+                <div class="char-header-title">${idx + 1}. ${h.name}</div>
+                <div class="char-header-element">Kryptonim: ${h.alias} &bull; ${h.element}</div>
+              </div>
+            </div>
+            <button class="listen-voice-btn" onclick="speakHero('${h.name}', '${h.quote}')">
+              🔊 Posłuchaj Opowieści Dziecka
+            </button>
+          </div>
+
+          <div class="char-child-banner">
+            👶 <strong>Głos 4-Latki:</strong> ${h.quote}
+          </div>
+
+          <!-- 6 Vertical Cards Rail -->
+          <div class="versions-scroll-rail">
+            ${h.versions.map((v, vIdx) => `
+              <div class="vertical-version-card">
+                <span class="version-type-tag">${v.type}</span>
+                <div class="vertical-img-wrap" onclick="openLightbox('${v.img}', '${h.name} - ${v.title}')">
+                  <img class="vertical-img" src="${v.img}" alt="${v.title}" loading="lazy">
+                  <div class="zoom-overlay">🔍 Powiększ</div>
+                </div>
+                <div class="vertical-card-body">
+                  <div class="vertical-card-title">${v.title}</div>
+                  <div class="vertical-card-desc">${v.desc}</div>
+                  <div class="vertical-card-footer">
+                    <span>Wersja ${vIdx + 1} z 6</span>
+                    <span>★ ★ ★ ★ ★</span>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(sec);
+      });
+    }
+
+    function speakHero(name, quote) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(`${name}. ${quote}`);
+        u.lang = 'pl-PL';
+        u.rate = 0.9;
+        u.pitch = 1.15;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    function openLightbox(src, caption) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxCaption').textContent = caption;
+      document.getElementById('lightboxModal').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').style.display = 'none';
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
