@@ -645,12 +645,24 @@
 
     <!-- Story Text Box with Audio Button -->
     <div class="story-text-card">
-      <button class="voice-read-btn" onclick="speakCurrentStory()">
-        🔊 Posłuchaj Bajki
-      </button>
+      <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-bottom: 0.5rem;">
+        <button class="action-btn" style="background: linear-gradient(135deg, #ffd166, #ff85a2); color: #181938; font-size: 0.85rem;" onclick="toggleChildQuote()">
+          👶 Oczami 4-Latki (Cytat Dziecka)
+        </button>
+        <button class="voice-read-btn" style="position: static;" onclick="speakCurrentStory()">
+          🔊 Posłuchaj Bajki
+        </button>
+      </div>
+
       <div class="story-paragraph" id="storyText">
         Kotek-Babeczka i Błękitny Pingwinek siedzą przytuleni na różowym kocyku minky. W pokoju świecą małe ciepłe lampki jak gwiazdki. Co nasi przyjaciele robią najpierw?
       </div>
+      
+      <!-- Child Quote Bubble -->
+      <div id="childQuoteBox" style="display: none; background: #fff; border: 2px dashed #ff5c8a; border-radius: 18px; padding: 1rem; margin-top: 0.75rem; color: #831843; font-size: 1.15rem; line-height: 1.6;">
+        💬 <strong>Głos 4-Latki:</strong> <span id="childQuoteText">„On ma na główce taką posypkę jak na babeczce u babci! Jak go ściskam, to pachnie wanilią i pilnuje mojego kocyka minky!”</span>
+      </div>
+
       <div class="story-room-detail" id="roomDetail">
         🦉 <em>Spójrz: w tle widać poduszkę w kolorowe sówki i książeczki z bajkami!</em>
       </div>
@@ -1126,6 +1138,33 @@
       currentStepIndex = 0;
       renderStep();
       playSound('click');
+    }
+
+    const childQuotes = {
+      story1: '„Kotek ma na główce taką posypkę jak na babeczce u babci! Jak go ściskam, to pachnie wanilią i mówi cichutko miau, a Pingwinek ma wielkie niebieskie oczka i śpi ze mną pod kocykiem!”',
+      story2: '„Diana to moja najważniejsza lalka, bo ma na uszku napisane kiedy się urodziłam! A piesek robi dzyń dzyń i pilnuje moich kapci koło łóżka, żeby potwory uciekły!”',
+      story3: '„Kubuś zjadł cały słoik miodku i ma gruby brzuszek, a Mario ma wąsy i skacze z łóżka na dywan, bo podłoga to jest lawa!”',
+      story4: '„Gabby ma uszka, które świecą i robimy herbatkę w domku, a Minnie ma piżamkę w czerwone wisienki i uczy mnie tańczyć balet na paluszkach!”'
+    };
+
+    function toggleChildQuote() {
+      const box = document.getElementById('childQuoteBox');
+      const text = document.getElementById('childQuoteText');
+      if (box.style.display === 'none' || box.style.display === '') {
+        text.textContent = childQuotes[currentStoryKey] || '„To są moi najlepsi przyjaciele w całym pokoju!”';
+        box.style.display = 'block';
+        playSound('magic');
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(text.textContent);
+          u.lang = 'pl-PL';
+          u.rate = 0.9;
+          u.pitch = 1.25;
+          window.speechSynthesis.speak(u);
+        }
+      } else {
+        box.style.display = 'none';
+      }
     }
 
     function speakCurrentStory() {
