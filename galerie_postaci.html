@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indywidualne Galerie Wszystkich 11 Pluszaków | Magiczny Pokój</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff007f;
+      --secondary: #00f0ff;
+      --accent: #ffd166;
+      --pink: #ff85a2;
+      --green: #06d6a0;
+      --purple: #9d4edd;
+      --bg: #0b0f24;
+      --card-bg: rgba(22, 28, 56, 0.9);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 0, 127, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.12) 0%, transparent 60%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      padding: 0.4rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: 'Comfortaa', cursive;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, var(--secondary), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Top Navigation Bar */
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .nav-link-btn {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.6rem 1.4rem;
+      border-radius: 30px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-link-btn:hover, .nav-link-btn.active {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      transform: scale(1.05);
+    }
+
+    /* Main Layout: Character Tabs Grid + Detailed View */
+    .main-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 992px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Sidebar: 11 Character Selector Cards */
+    .character-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .character-sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .character-sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    .sidebar-char-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 20px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.25s ease;
+    }
+
+    .sidebar-char-card:hover, .sidebar-char-card.active {
+      border-color: var(--secondary);
+      background: rgba(0, 240, 255, 0.15);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+      transform: translateX(6px);
+    }
+
+    .sidebar-char-thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 2px solid var(--secondary);
+      background: #000;
+      flex-shrink: 0;
+    }
+
+    .sidebar-char-info {
+      flex-grow: 1;
+    }
+
+    .sidebar-char-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .sidebar-char-element {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 0.2rem;
+    }
+
+    /* Right Main Panel: Comprehensive Character Gallery */
+    .profile-panel {
+      background: var(--card-bg);
+      border: 2px solid rgba(0, 240, 255, 0.25);
+      border-radius: 30px;
+      padding: 2.2rem;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Profile Header */
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 1.5rem;
+    }
+
+    .profile-title-area h2 {
+      font-family: 'Comfortaa', cursive;
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-hero-alias {
+      font-size: 1.15rem;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    .audio-narration-btn {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.6rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(255, 0, 127, 0.5);
+      transition: all 0.25s;
+    }
+
+    .audio-narration-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 25px var(--primary);
+    }
+
+    /* Section 1: Gallery Showcase (Multiple Graphics) */
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .graphics-carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .graphic-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .graphic-card:hover {
+      border-color: var(--pink);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 133, 162, 0.25);
+    }
+
+    .graphic-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: #000;
+      cursor: pointer;
+    }
+
+    .graphic-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .graphic-card:hover .graphic-img {
+      transform: scale(1.05);
+    }
+
+    .graphic-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .graphic-info {
+      padding: 1rem;
+    }
+
+    .graphic-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .graphic-desc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    /* Section 2: Child Quote & Room Origins */
+    .child-quote-card {
+      background: linear-gradient(135deg, rgba(255, 133, 162, 0.15), rgba(255, 209, 102, 0.15));
+      border: 2px dashed var(--pink);
+      border-radius: 22px;
+      padding: 1.5rem 1.75rem;
+      position: relative;
+    }
+
+    .child-quote-badge {
+      display: inline-block;
+      background: var(--pink);
+      color: #1a1a2e;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+    }
+
+    .child-quote-text {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: #fed7aa;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .child-fav-game {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    /* Section 3: Lore & Room Origins */
+    .lore-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .info-card-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 1.25rem;
+    }
+
+    .info-box-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .info-box-content {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #e2e8f0;
+    }
+
+    /* Section 4: Stat Bars */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .stat-row {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+    }
+
+    .stat-name-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-bar-track {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+    }
+
+    /* Section 5: 5 Evolution Stages */
+    .evolution-timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .evo-node {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 18px;
+      padding: 1.2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .evo-level-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      align-self: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .evo-node-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .evo-node-skill {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    /* Section 6: AI Prompts */
+    .prompt-box-area {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 1.25rem;
+    }
+
+    .prompt-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .copy-btn {
+      font-family: 'Fredoka', sans-serif;
+      background: var(--secondary);
+      color: #000;
+      border: none;
+      font-weight: 700;
+      padding: 0.4rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: #fff;
+      transform: scale(1.05);
+    }
+
+    .prompt-text-display {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #93c5fd;
+      line-height: 1.5;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.75rem;
+      border-radius: 10px;
+      word-break: break-all;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .lightbox-content {
+      max-width: 900px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 15px;
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
+    }
+
+    .lightbox-caption {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      font-size: 2.5rem;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #64748b;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-badge">🏛️ Wielki Panteon Postaci &bull; 11 Bohaterów Pokoju</div>
+    <h1>INDYWIDUALNE GALERIE POSTACI</h1>
+    <p class="subtitle">
+      Wybierz dowolnego pluszaka z listy po lewej, aby zobaczyć wszystkie jego grafiki, autentyczny opis dziecka, supermoce, 5 etapów ewolucji oraz prompty AI!
+    </p>
+
+    <div class="nav-bar">
+      <button class="nav-link-btn active" id="btnModeSingle" onclick="switchViewMode('single')">🧸 11 Indywidualnych Postaci</button>
+      <button class="nav-link-btn" id="btnModeSquads" style="background: linear-gradient(135deg, #ffd166, #ff007f); color: #1a1a2e; font-weight: 700;" onclick="switchViewMode('squads')">🛡️ Drużynki: Duety, Tria, Czworokąty & Wielka 11 🌟</button>
+      <a class="nav-link-btn" href="gra_dla_4latki.html">🧸 Przygoda Krok po Kroku</a>
+      <a class="nav-link-btn" href="gra_edukacyjna.html">🎮 Akademia Ewolucji</a>
+      <a class="nav-link-btn" href="index.html">🖼️ Główna Galeria</a>
+    </div>
+  </header>
+
+  <!-- SQUADS CONTAINER (Duos, Trios, Quartets, Grand 11) -->
+  <div id="squadsContainer" style="display: none; max-width: 1400px; margin: 0 auto; padding: 0 1.5rem 4rem; width: 100%;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h2 style="font-family: 'Comfortaa', cursive; font-size: 2.2rem; color: var(--accent); margin-bottom: 0.5rem;">Sojusze & Drużyny Pluszowych Bohaterów</h2>
+      <p style="color: #cbd5e1; font-size: 1.1rem;">Kombinacje mocy, ataki łączone i taktyki obrony dziecięcego pokoju!</p>
+    </div>
+    <div id="squadsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;"></div>
+  </div>
+
+  <div class="main-layout" id="singleCharLayout">
+    
+    <!-- Left Sidebar: 11 Characters -->
+    <div class="character-sidebar" id="sidebarList">
+      <!-- Dynamically populated -->
+    </div>
+
+    <!-- Right Main Profile Panel -->
+    <div class="profile-panel" id="profilePanel">
+      
+      <!-- Top Profile Info -->
+      <div class="profile-header">
+        <div class="profile-title-area">
+          <h2 id="charTitle">Kotek-Babeczka</h2>
+          <div class="profile-hero-alias" id="charAlias">Kryptonim: Sprinkle-Cat &bull; ⚡ Tęczowa Plazma</div>
+        </div>
+        <button class="audio-narration-btn" onclick="speakCharProfile()">
+          🔊 Posłuchaj Historii Postaci
+        </button>
+      </div>
+
+      <!-- Section 1: All Graphic Assets for this character -->
+      <div>
+        <div class="section-title">🖼️ Baza Plików Graficznych & Renderów Postaci</div>
+        <div class="graphics-carousel-grid" id="graphicsGrid"></div>
+      </div>
+
+      <!-- Section 2: Child's Authentic Voice -->
+      <div class="child-quote-card">
+        <div class="child-quote-badge">👶 OCZAMI 4-LATKI (AUTENTYCZNA OPOWIEŚĆ)</div>
+        <div class="child-quote-text" id="charChildQuote"></div>
+        <div class="child-fav-game" id="charChildGame"></div>
+      </div>
+
+      <!-- Section 3: Lore & Room Origins -->
+      <div>
+        <div class="section-title">📖 Pochodzenie w Pokoju & Supermoce</div>
+        <div class="lore-grid">
+          <div class="info-card-box">
+            <div class="info-box-title">🧸 Oryginał w Pokoju</div>
+            <div class="info-box-content" id="charOrigin"></div>
+          </div>
+          <div class="info-card-box">
+            <div class="info-box-title">⚡ Supermoce & Rola</div>
+            <div class="info-box-content" id="charLore"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Stats -->
+      <div>
+        <div class="section-title">📊 Parametry & Statystyki Mocy</div>
+        <div class="stats-container" id="charStats"></div>
+      </div>
+
+      <!-- Section 5: 5 Evolution Stages -->
+      <div>
+        <div class="section-title">🧬 Drzewo 5 Poziomów Ewolucji (w stylu Pokémonów)</div>
+        <div class="evolution-timeline" id="charEvoTimeline"></div>
+      </div>
+
+      <!-- Section 6: AI Prompts Box -->
+      <div>
+        <div class="section-title">🎨 Dokładny Prompt AI (Google Imagen 3)</div>
+        <div class="prompt-box-area">
+          <div class="prompt-box-header">
+            <span style="font-weight: 700; color: #fff;">Prompt do Wygenerowania Nowych Wersji</span>
+            <button class="copy-btn" onclick="copyCharPrompt()">📋 Kopiuj Prompt</button>
+          </div>
+          <div class="prompt-text-display" id="charPromptText"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+    <button class="close-modal-btn">&times;</button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img id="lightboxImg" class="lightbox-img" src="" alt="Powiększenie">
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Projekt <strong>Magiczny Pokój Pluszaków</strong> &bull; Indywidualne Galerie Wszystkich 11 Postaci</p>
+  </footer>
+
+  <script>
+    // Comprehensive Character Database with All Details
+    const characterData = [
+      {
+        id: 'cat',
+        name: 'Kotek-Babeczka',
+        alias: 'Sprinkle-Cat (Sparkle-Kat)',
+        element: '⚡ Tęczowa Plazma & Antygrawitacja',
+        thumb: 'originals/cat_original.jpg',
+        origin: 'Okrągły biały pluszak kotka w foremce na babeczkę z posypką na różowej pościeli minky.',
+        lore: 'Kapitan Eskadry Dobrego Humoru. Jego tęczowa posypka służy jako reaktor plazmowy generujący strumienie elektryczności i antygrawitację.',
+        childQuote: '„On ma na główce taką posypkę jak na babeczce z cukierni u babci! Jak go mocno przytulam do policzka, to pachnie wanilią i mówi cichutko miau, żeby nie obudzić mamy!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Przytulanie do snu i karmienie niewidzialnymi chrupkami na różowym kocyku.',
+        stats: [
+          { name: 'Miękkość i Przytulanie', val: '100%' },
+          { name: 'Tęczowa Energia', val: '95%' },
+          { name: 'Antygrawitacja', val: '90%' },
+          { name: 'Ochrona Snów', val: '98%' }
+        ],
+        graphics: [
+          { tag: '🏠 Scena w Pokoju', img: 'duo_cat_penguin_1788270940922.jpg', name: 'Kotek & Pingwinek na Łóżku', desc: 'Siedzą razem na różowej pościeli pod girlandami lampek.' },
+          { tag: '✂️ Bez Tła (Cutout)', img: 'cyber_cupcake_cat_nobg_1788267229454.jpg', name: 'Cyber-Kotek 3D Cutout', desc: 'Wyizolowana postać ze skrzydłami odrzutowymi i plazmą.' },
+          { tag: '🏙️ Scena w Mieście', img: 'cyber_cupcake_cat_hero_1788263620524.jpg', name: 'Kotek nad Metropolią', desc: 'Unosi się nad neonowym miastem 2099.' },
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/cat_original.jpg', name: 'Prawdziwy Pluszak z Pokoju', desc: 'Oryginalna maskotka sfotografowana w pokoju.' }
+        ],
+        stages: [
+          { level: 1, name: 'Puszek-Babisia', skill: 'Kolory Tęczy' },
+          { level: 2, name: 'Iskierka Cukrowa', skill: 'Liczenie Gwiazdek' },
+          { level: 3, name: 'Cyber-Kotek Turbo', skill: 'Pierwsze Literki' },
+          { level: 4, name: 'Plazmowy Obrońca', skill: 'Tarcza Plazmowa' },
+          { level: 5, name: 'Kosmiczny Feniks-Kot 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A 3D superhero character version of the round white cat plush with sprinkles from the image, completely isolated on a pure solid white background. The character is a round cute white feline guardian floating in mid-air. Its sprinkles on its head glow with neon rainbow energy crystals, it has laser-glowing whiskers, high-tech cybernetic mini jet wings on its back, and twin streams of electric pink and cyan lightning shooting from its paws. Unreal Engine 5 render style.'
+      },
+      {
+        id: 'penguin',
+        name: 'Błękitny Pingwinek',
+        alias: 'Frosty-Nova (Astral-Penguin)',
+        element: '❄️ Astralny Lód & Światło Gwiazd',
+        thumb: 'originals/penguin_original.jpg',
+        origin: 'Niezwykle miękki jasnoniebieski pluszowy pingwinek o wielkich błyszczących oczach.',
+        lore: 'Przybył z krainy wiecznego lśnienia. Jego wielkie oczy potrafią zamienić każdy smutek w lśniące kryształki radości i ciepłą zorzę polarną.',
+        childQuote: '„Pingwinek ma takie wielgachne niebieskie oczka i zawsze patrzy na mnie, jak jem śniadanie. On nie lubi jak w pokoju jest za gorąco, więc dmucha zimnym wiaterkiem, a w zimie śpi ze mną pod kołderką!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Zjeżdżanie na brzuszku po kołdrze jak po lodowej górze.',
+        stats: [
+          { name: 'Magia Lodu i Śniegu', val: '96%' },
+          { name: 'Czystość Serca', val: '100%' },
+          { name: 'Puszystość Piórek', val: '95%' },
+          { name: 'Światło Zorzy', val: '92%' }
+        ],
+        graphics: [
+          { tag: '🏠 Scena w Pokoju', img: 'duo_cat_penguin_1788270940922.jpg', name: 'Duet z Kotkiem w Pokoju', desc: 'Przytulony do Kotka na różowej pościeli minky.' },
+          { tag: '✂️ Bez Tła (Cutout)', img: 'astral_penguin_nobg_1788267200543.jpg', name: 'Astralny Pingwinek Cutout', desc: 'Lewituje ze sferami lodu i runicznymi śnieżynkami.' },
+          { tag: '🌿 Mistyczny Las', img: 'mystic_astral_penguin_hero_1788263649251.jpg', name: 'Pingwinek w Świecącym Lesie', desc: 'Czaruje lodową sferę wśród świecącej flory.' },
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/penguin_original.jpg', name: 'Prawdziwy Pluszak z Pokoju', desc: 'Oryginalna fotografia błękitnego pingwinka.' }
+        ],
+        stages: [
+          { level: 1, name: 'Kropek Puchaty', skill: 'Dźwięki i Melodie' },
+          { level: 2, name: 'Śnieżynkowy Pływak', skill: 'Porównywanie Rozmiarów' },
+          { level: 3, name: 'Astralny Nowicjusz', skill: 'Rymowanki' },
+          { level: 4, name: 'Władca Runicznej Zorzy', skill: 'Ekologia' },
+          { level: 5, name: 'Tytan Polarnych Komet 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A cute fantasy superhero version of the fluffy blue penguin plush from the image, completely isolated on a pure solid white background. Large anime eyes sparkling with cosmic nebula colors, a crystal elemental chest plate, floating glowing aqua mana spheres and swirling snowflake runes. 3D Disney Pixar style.'
+      },
+      {
+        id: 'diana',
+        name: 'Króliczka Diana',
+        alias: 'Lunar-Diana (Gwiezdna Strażniczka)',
+        element: '🌙 Magia Księżyca & Gwiezdne Sny',
+        thumb: 'originals/diana_original.jpg',
+        origin: 'Szara lalka-króliczek w kapturku z haftem metryczki urodzin: 13.06.2022 r. godz. 13:13, 2980g, 50cm.',
+        lore: 'Urodzona pod szczęśliwą gwiazdą 13 czerwca 2022 roku. Jej haftowane uszka są współrzędnymi gwiezdnych bram snów. Jej kryształowe serduszko rozprasza wszelkie nocne strachy.',
+        childQuote: '„To jest moja najważniejsza króliczka na świecie, bo ma na uszku wyszyte kiedy dokładnie się urodziłam – 13 czerwca o trzynastej trzynaście! Jak się boję ciemności, to łaskocze mnie uszkiem w nosek i wiem, że potwory uciekły!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Opowiadanie sekretów przed snem i głaskanie szarych uszek.',
+        stats: [
+          { name: 'Magia Księżyca', val: '99%' },
+          { name: 'Wartość Sentymentalna', val: '100%' },
+          { name: 'Gwiezdne Motyle', val: '94%' },
+          { name: 'Spokojny Sen', val: '100%' }
+        ],
+        graphics: [
+          { tag: '✂️ Bez Tła (Cutout)', img: 'lunar_bunny_nobg_1788267172073.jpg', name: 'Króliczka Diana Cutout', desc: 'Szara lalka z różowymi runami i motylkami światła.' },
+          { tag: '🌙 Nocna Pełnia', img: 'lunar_bunny_guardian_hero_1788263677418.jpg', name: 'Diana pod Pełnią Księżyca', desc: 'Unosi się w nocnym gaju pod wielkim księżycem.' },
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/diana_original.jpg', name: 'Prawdziwa Lalka Diana', desc: 'Oryginalna fotografia lalki z haftem metryczki na uszkach.' }
+        ],
+        stages: [
+          { level: 1, name: 'Śpiąca Diana', skill: 'Zegar Snu' },
+          { level: 2, name: 'Gwiezdna Ścieżynka', skill: 'Dni Tygodnia' },
+          { level: 3, name: 'Księżycowa Diana', skill: 'Magiczne Słowa' },
+          { level: 4, name: 'Kapłanka Srebrnej Pełni', skill: 'Empatia' },
+          { level: 5, name: 'Bogini Gwiezdnego Pyłu 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A magical fantasy superhero character version of the grey plush bunny doll from the image, completely isolated on a pure solid white background. Soft grey plush fabric, long floating bunny ears with glowing pink constellation runes, glowing crystal heart on chest, holding glowing pink magical spirit butterflies and swirling stardust rings. 3D animated movie render.'
+      },
+      {
+        id: 'dog',
+        name: 'Dźwiękowy Piesek K9',
+        alias: 'Sonic-Pup (Sonic Bark)',
+        element: '🔊 Ultradźwięki & Błyskawice',
+        thumb: 'originals/dog_original.jpg',
+        origin: 'Brązowy piesek z dzwoneczkiem na czerwonej obroży i białymi łapkami.',
+        lore: 'Najwierniejszy strażnik pokoju. Jego dzwoneczek wydaje kojące fale dźwiękowe, a białe łapki gromadzą energię piorunów do błyskawicznego biegu.',
+        childQuote: '„Piesek ma na szyjce czerwony pasek z dzwoneczkiem i jak biegam po pokoju, to dzwoneczek robi: dzyń, dzyń, dzyń! Piesek ma białe łapki i zawsze pilnuje moich kapci koło łóżka, żeby nie uciekły!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Szukanie ukrytych klocków i dzwonienie dzwoneczkiem na wyścigi.',
+        stats: [
+          { name: 'Wierność i Odwaga', val: '100%' },
+          { name: 'Szybkość Biegowa', val: '98%' },
+          { name: 'Dźwięk Dzwoneczka', val: '95%' },
+          { name: 'Szukanie Zabawek', val: '96%' }
+        ],
+        graphics: [
+          { tag: '✂️ Bez Tła (Cutout)', img: 'sonic_puppy_hero_nobg_1788267042270.jpg', name: 'Soniczny Pies K9 Cutout', desc: 'Białe łapy z piorunami i pulsujący dzwoneczek.' },
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/dog_original.jpg', name: 'Prawdziwy Piesek z Pokoju', desc: 'Oryginalna fotografia pluszowego pieska.' }
+        ],
+        stages: [
+          { level: 1, name: 'Szczeniak Hau', skill: 'Kierunki Lewo/Prawo' },
+          { level: 2, name: 'Bystry Tropiciel', skill: 'Odnajdywanie Par' },
+          { level: 3, name: 'Soniczny Pies K9', skill: 'Bezpieczeństwo' },
+          { level: 4, name: 'Gromowładny Ogar', skill: 'Naddźwiękowy Bieg' },
+          { level: 5, name: 'Gwiezdny Awatar Lojalności 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A superhero version of the brown puppy plush from the image, completely isolated on a pure solid white background. Brave canine guardian standing proudly, red collar and bell pulsing with sonic soundwave energy rings, big white paws crackling with electric lightning, glowing green eyes. Unreal Engine 5 render.'
+      },
+      {
+        id: 'monkey',
+        name: 'Cybernetyczna Małpka (Gizmo)',
+        alias: 'Gizmo-Prime',
+        element: '🦾 Cyber-Technologia & Antygrawitacja',
+        thumb: 'originals/monkey_original.jpg',
+        origin: 'Brązowa małpka ssąca kciuk przy szafce z klockami.',
+        lore: 'Geniusz technologii. Skonstruowała bioniczne ramię mocy oraz wizjer HUD, który pomaga budować najwyższe wieże z klocków bez przewracania.',
+        childQuote: '„Małpka cały czas trzyma kciuk w buzi, bo jest jeszcze malutkim bobaskiem małpim. Jak układam wysoką wieżę z klocków, to ona siedzi obok i patrzy, a potem daję jej gryza banana!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Budowanie zamków z klocków i udawanie, że małpka jest inżynierem.',
+        stats: [
+          { name: 'Spryt Technologiczny', val: '97%' },
+          { name: 'Zwinność Chwytu', val: '94%' },
+          { name: 'Słodki Kciuk', val: '100%' },
+          { name: 'Układanie Klocków', val: '96%' }
+        ],
+        graphics: [
+          { tag: '✂️ Bez Tła (Cutout)', img: 'techno_monkey_hero_nobg_1788267143753.jpg', name: 'Techno-Małpka Cutout', desc: 'Bioniczna rękawica, pomarańczowy HUD i antygrawitacja.' },
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/monkey_original.jpg', name: 'Prawdziwa Małpka z Pokoju', desc: 'Oryginalna fotografia puszystej małpki.' }
+        ],
+        stages: [
+          { level: 1, name: 'Małpka Paluszek', skill: 'Kształty Geometryczne' },
+          { level: 2, name: 'Mały Majsterkowicz', skill: 'Układanie Klocków' },
+          { level: 3, name: 'Gizmo Cyber-Ręka', skill: 'Liczenie Elementów' },
+          { level: 4, name: 'Arcy-Inżynier Grawitacji', skill: 'Łamigłówki' },
+          { level: 5, name: 'Mecha-Tytan Technologii 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A superhero version of the cute brown furry baby monkey plush from the image, completely isolated on a pure solid white background. Glowing high-tech cybernetic robotic gauntlet on one hand, sleek holographic visor over one eye with orange HUD data, hovering with gravity-defying kinetic energy sparks. 3D animated character style.'
+      },
+      {
+        id: 'cow',
+        name: 'Tytaniczna Krowa Piorunów',
+        alias: 'Thunder-Moo (Gaia)',
+        element: '⚡ Grzmot, Złote Rogi & Ziemia',
+        thumb: 'originals/cow_original.jpg',
+        origin: 'Wielka czarno-biała łaciata pluszowa krowa na fotelu.',
+        lore: 'Najpotężniejsza siła w pokoju. Jej złote rogi ściągają energię burzy, zamieniając ją w fale wesołego śmiechu i ochronę całej przyrody.',
+        childQuote: '„Ona jest taka olbrzymia i miękka! Ma czarne łatki jak prawdziwa krówka na łące. Jak na niej siadam, to udaję, że jadę na krowie do sklepu po truskawkowe lody i krzyczę: Wio, Mućka, wio!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Siedzenie na krowie jak na rumaku i czytanie jej bajek.',
+        stats: [
+          { name: 'Wielkość i Siła', val: '100%' },
+          { name: 'Złote Rogi Grzmotu', val: '98%' },
+          { name: 'Miękkość Futra', val: '95%' },
+          { name: 'Opieka nad Łąką', val: '99%' }
+        ],
+        graphics: [
+          { tag: '✂️ Bez Tła (Cutout)', img: 'thunder_cow_hero_nobg_1788268487338.jpg', name: 'Tytaniczna Krowa Cutout', desc: 'Złote rogi, błękitne oczy pioruna i świecący dzwonek.' },
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/cow_original.jpg', name: 'Prawdziwa Krowa z Pokoju', desc: 'Oryginalna fotografia wielkiej łaciatej krowy.' }
+        ],
+        stages: [
+          { level: 1, name: 'Łatka Malutka', skill: 'Zdrowe Mleczko' },
+          { level: 2, name: 'Dzwoneczkowa Mućka', skill: 'Rośliny i Zioła' },
+          { level: 3, name: 'Elektryczna Krowa Burzy', skill: 'Orientacja' },
+          { level: 4, name: 'Tytan Piorunów', skill: 'Zdrowe Nawyki' },
+          { level: 5, name: 'Gaia - Matka Burzy 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A powerful superhero version of the large fluffy black-and-white spotted cow plush from the image, completely isolated on a pure solid white background. Soft fluffy plush fur, cute curved golden horns crackling with electrical lightning, glowing blue eyes of thunder power, glowing lightning bolts between hooves. 3D cinematic style.'
+      },
+      {
+        id: 'pooh',
+        name: 'Złoty Miś Miodowy (Kubuś)',
+        alias: 'Solar-Pooh (Amber-Bear)',
+        element: '🍯 Słoneczny Bursztyn & Ciepło Serca',
+        thumb: 'originals/pooh_original.jpg',
+        origin: 'Żółty miś w czerwonej koszulce przy poduszce w sówki.',
+        lore: 'Opiekun dobroci i przyjaźni. Jego złocisty miodek tworzy bursztynową tarczę, która zamienia każdy smutek w promienny uśmiech.',
+        childQuote: '„Kubuś ma czerwoną koszulkę i taki okrąglutki brzuszek, bo zjadł cały słoik miodu! Kładę go zawsze koło poduszki w sówki, żeby sobie porozmawiał z sówkami o motylkach.”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Piknik na dywanie z herbatką i częstowanie klocków miodem.',
+        stats: [
+          { name: 'Słodycz Miodu', val: '100%' },
+          { name: 'Ciepło Serca', val: '100%' },
+          { name: 'Dobry Humor', val: '98%' },
+          { name: 'Przyjaźń', val: '100%' }
+        ],
+        graphics: [
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/pooh_original.jpg', name: 'Prawdziwy Kubuś z Pokoju', desc: 'Żółty miś w czerwonej koszulce na pościeli.' }
+        ],
+        stages: [
+          { level: 1, name: 'Misiu Pysiu', skill: 'Kolory Podstawowe' },
+          { level: 2, name: 'Bursztynowy Tropiciel', skill: 'Pracowite Pszczółki' },
+          { level: 3, name: 'Słoneczny Rycerz Miodu', skill: 'Dzielenie się' },
+          { level: 4, name: 'Solarny Mistrz Ciepła', skill: 'Ciepłe Słowa' },
+          { level: 5, name: 'Astralny Niedźwiedź Słońca 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A cute superhero version of the classic yellow teddy bear plush in red shirt from the image. Floating in a golden sunny room, amber crystal honey jar emitting warm glowing sunlight, floating honeybee spirit familiars, soft warm 3D Disney Pixar style.'
+      },
+      {
+        id: 'mario',
+        name: 'Gwiezdny Skoczek Mario',
+        alias: 'Super-Jump Mario',
+        element: '🍄 Ogień & Super-Skok',
+        thumb: 'originals/mario_original.jpg',
+        origin: 'Mario w czerwonej czapce z daszkiem i niebieskich ogrodniczkach.',
+        lore: 'Mistrz akrobacji w dziecięcym pokoju. Potrafi przeskakiwać przez kanapy i wieże z klocków, omijając niewidzialną lawę na podłodze.',
+        childQuote: '„Mario ma wąsa i czerwoną czapkę z literką M! Jak rzucam go na łóżko, to krzyczę: Hop! Mario potrafi skakać z krzesła na dywan i podłoga to wtedy jest lawa, a Mario zawsze wygrywa!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Zabawa w „podłoga to lawa” i skoki przez poduszki.',
+        stats: [
+          { name: 'Wysokość Skoku', val: '100%' },
+          { name: 'Niezłomna Odwaga', val: '98%' },
+          { name: 'Ognista Energia', val: '95%' },
+          { name: 'Zwinność', val: '99%' }
+        ],
+        graphics: [
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/mario_original.jpg', name: 'Prawdziwy Mario z Pokoju', desc: 'Pluszowy Mario w ogrodniczkach i czapce.' }
+        ],
+        stages: [
+          { level: 1, name: 'Czerwony Czapnik', skill: 'Litera M' },
+          { level: 2, name: 'Zwinny Skoczek', skill: 'Liczenie Skoków' },
+          { level: 3, name: 'Ognisty Mario Płomieni', skill: 'Zwinność' },
+          { level: 4, name: 'Super-Hydraulik Gwiazd', skill: 'Pokonywanie Przeszkód' },
+          { level: 5, name: 'Kosmiczny Bohater Wymiarów 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A 3D fantasy superhero version of the plush Mario doll with red cap and blue overalls from the image. Jumping high above colorful toy blocks in a child bedroom with floating rainbow stars and fire flower power effects, Unreal Engine 5 render.'
+      },
+      {
+        id: 'gabby',
+        name: 'Magiczna Kotka Gabby',
+        alias: 'Star-Gabby',
+        element: '🎀 Kocia Magia Wyobraźni',
+        thumb: 'originals/gabby_original.jpg',
+        origin: 'Lalka Gabby z bujnymi lokami i świecącą opaską z kocimi uszkami.',
+        lore: 'Artystka i marzycielka. Wystarczy, że naciśnie swoje kocie uszka, a cały pokój zamienia się w czarodziejski tęczowy domek marzeń.',
+        childQuote: '„Gabby ma takie super kocie uszka! Jak naciskam jej uszka i mówię zaklęcie Pitu-pitu-miauu, to przenosimy się do małego domku dla lalek i robimy przyjęcie z brokatem!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Czesanie lalki, ubieranie opasek i malowanie tęczowych rysunków.',
+        stats: [
+          { name: 'Kreatywność i Magia', val: '100%' },
+          { name: 'Kocie Uszka', val: '98%' },
+          { name: 'Błysk Brokatu', val: '95%' },
+          { name: 'Uśmiech', val: '100%' }
+        ],
+        graphics: [
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/gabby_original.jpg', name: 'Prawdziwa Gabby z Pokoju', desc: 'Lalka Gabby z opaską z uszkami w pokoju.' }
+        ],
+        stages: [
+          { level: 1, name: 'Kocia Dziewczynka', skill: 'Części Twarzy' },
+          { level: 2, name: 'Iskierka Radości', skill: 'Mieszanie Kolorów' },
+          { level: 3, name: 'Magiczna Czarodziejka', skill: 'Czarodziejskie Rymy' },
+          { level: 4, name: 'Wróżka Tęczowych Pokoi', skill: 'Sprzątanie Zabawek' },
+          { level: 5, name: 'Królowa Kosmicznej Wyobraźni 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A magical fantasy 3D render of the Gabby doll with curly hair and cat ears headband from the image. Holding a glowing star wand, sparkling pink magical aura, floating miniature dollhouse rooms in zero gravity, Pixar 3D animation style.'
+      },
+      {
+        id: 'minnie',
+        name: 'Wiśniowa Minnie',
+        alias: 'Cherry-Minnie',
+        element: '🍒 Wiśniowy Kwiat & Balet',
+        thumb: 'originals/minnie_original.jpg',
+        origin: 'Myszka Minnie w fioletowej piżamce w wisienki i z wielką kokardą.',
+        lore: 'Baletnica radości. Jej wielka różowa kokarda rozsiewa zapach wiśni i uczy wszystkich w pokoju pięknego tańca na paluszkach.',
+        childQuote: '„Myszka Minnie ma najpiękniejszą fioletową piżamkę w czerwone wisienki! Ja też chcę mieć taką piżamkę w wisienki! Minnie ma wielką kokardę i uczy mnie tańczyć balet na paluszkach!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Kręcenie piruetów na dywanie i nauka baletu.',
+        stats: [
+          { name: 'Gracja i Taniec', val: '99%' },
+          { name: 'Słodycz Wisienek', val: '100%' },
+          { name: 'Urok Kokardy', val: '98%' },
+          { name: 'Dobre Maniery', val: '95%' }
+        ],
+        graphics: [
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/minnie_original.jpg', name: 'Prawdziwa Minnie z Pokoju', desc: 'Pluszowa Minnie w fioletowej piżamce w wisienki.' }
+        ],
+        stages: [
+          { level: 1, name: 'Minnie w Piżamce', skill: 'Owoce i Witaminy' },
+          { level: 2, name: 'Wiśniowa Iskierka', skill: 'Rytmika i Taniec' },
+          { level: 3, name: 'Czarodziejka Kokardek', skill: 'Równowaga' },
+          { level: 4, name: 'Strażniczka Radości', skill: 'Dobre Maniery' },
+          { level: 5, name: 'Kryształowa Księżniczka Uśmiechu 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A 3D character render of the Minnie plush in lavender cherry pattern pajamas with big pink bow from the image. Dancing gracefully in the air surrounded by swirling pink cherry blossom petals and glowing sparkles, 3D animated Disney style.'
+      },
+      {
+        id: 'baby',
+        name: 'Kryształowy Niemowlaczek',
+        alias: 'Starlight-Baby',
+        element: '🍼 Czyste Światło & Opieka',
+        thumb: 'originals/baby_original.jpg',
+        origin: 'Lalka niemowlaka w różowym śpiworku w kąciku łóżka.',
+        lore: 'Najważniejszy skarb całego pokoju. Wszyscy pozostali bohaterowie strzegą jego spokojnego snu i czystego uśmiechu.',
+        childQuote: '„To jest mój mały dzidziuś! Trzeba go delikatnie przykrywać różowym kocykiem, dawać mu smoczek i śpiewać cichuteńko: Aaa kotki dwa, żeby nie płakał. Ja jestem jego mamusią!”',
+        childGame: '🎯 <strong>Ulubiona zabawa:</strong> Wożenie w wózeczku, karmienie butelką i tulenie do snu.',
+        stats: [
+          { name: 'Niewinność i Czystość', val: '100%' },
+          { name: 'Słodki Sen', val: '100%' },
+          { name: 'Anielska Opieka', val: '99%' },
+          { name: 'Miłość Rodziny', val: '100%' }
+        ],
+        graphics: [
+          { tag: '🧸 Oryginał ze Zdjęcia', img: 'originals/baby_original.jpg', name: 'Prawdziwy Dzidziuś z Pokoju', desc: 'Lalka niemowlaka w różowym śpiworku.' }
+        ],
+        stages: [
+          { level: 1, name: 'Słodki Bobasek', skill: 'Czułość i Opieka' },
+          { level: 2, name: 'Raczkujący Promyczek', skill: 'Pierwsze Słowa' },
+          { level: 3, name: 'Mały Aniołek Światła', skill: 'Kołysanki' },
+          { level: 4, name: 'Strażnik Uśmiechu Maluchów', skill: 'Troska' },
+          { level: 5, name: 'Złote Dziecko Gwiazd 👑', skill: 'Mega Awatar' }
+        ],
+        prompt: 'A gentle 3D fairy tale render of the baby doll in pink swaddle blanket from the image. Sleeping peacefully in a glowing crescent moon cradle in a cozy nursery room with floating feathers and soft star glow, 3D Pixar render style.'
+      }
+    ];
+
+    let currentCharIndex = 0;
+
+    function init() {
+      renderSidebar();
+      renderProfile(0);
+    }
+
+    function renderSidebar() {
+      const list = document.getElementById('sidebarList');
+      list.innerHTML = '';
+      characterData.forEach((char, index) => {
+        const card = document.createElement('div');
+        card.className = `sidebar-char-card ${index === currentCharIndex ? 'active' : ''}`;
+        card.onclick = () => renderProfile(index);
+        card.innerHTML = `
+          <img class="sidebar-char-thumb" src="${char.thumb}" alt="${char.name}">
+          <div class="sidebar-char-info">
+            <div class="sidebar-char-name">${char.name}</div>
+            <div class="sidebar-char-element">${char.element}</div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function renderProfile(index) {
+      currentCharIndex = index;
+      renderSidebar();
+
+      const char = characterData[index];
+
+      document.getElementById('charTitle').textContent = char.name;
+      document.getElementById('charAlias').textContent = `Kryptonim: ${char.alias} • ${char.element}`;
+      document.getElementById('charChildQuote').textContent = char.childQuote;
+      document.getElementById('charChildGame').innerHTML = char.childGame;
+      document.getElementById('charOrigin').textContent = char.origin;
+      document.getElementById('charLore').textContent = char.lore;
+      document.getElementById('charPromptText').textContent = char.prompt;
+
+      // Render Graphics Grid
+      const gGrid = document.getElementById('graphicsGrid');
+      gGrid.innerHTML = '';
+      char.graphics.forEach(g => {
+        const c = document.createElement('div');
+        c.className = 'graphic-card';
+        c.innerHTML = `
+          <div class="graphic-img-wrap" onclick="openLightbox('${g.img}', '${g.name}')">
+            <span class="graphic-tag">${g.tag}</span>
+            <img class="graphic-img" src="${g.img}" alt="${g.name}" loading="lazy">
+          </div>
+          <div class="graphic-info">
+            <div class="graphic-name">${g.name}</div>
+            <div class="graphic-desc">${g.desc}</div>
+          </div>
+        `;
+        gGrid.appendChild(c);
+      });
+
+      // Render Stats
+      const statsContainer = document.getElementById('charStats');
+      statsContainer.innerHTML = '';
+      char.stats.forEach(st => {
+        const row = document.createElement('div');
+        row.className = 'stat-row';
+        row.innerHTML = `
+          <div class="stat-name-row">
+            <span>${st.name}</span>
+            <span style="color: var(--secondary);">${st.val}</span>
+          </div>
+          <div class="stat-bar-track">
+            <div class="stat-bar-fill" style="width: ${st.val};"></div>
+          </div>
+        `;
+        statsContainer.appendChild(row);
+      });
+
+      // Render Evolution Timeline
+      const evoContainer = document.getElementById('charEvoTimeline');
+      evoContainer.innerHTML = '';
+      char.stages.forEach(st => {
+        const node = document.createElement('div');
+        node.className = 'evo-node';
+        node.innerHTML = `
+          <span class="evo-level-tag">POZIOM ${st.level}</span>
+          <div class="evo-node-name">${st.name}</div>
+          <div class="evo-node-skill">${st.skill}</div>
+        `;
+        evoContainer.appendChild(node);
+      });
+    }
+
+    const squadsData = [
+      {
+        type: '👯 DUET',
+        name: 'Eskadra Słodkiego Lodu',
+        members: 'Kotek-Babeczka + Błękitny Pingwinek',
+        thumbs: ['originals/cat_original.jpg', 'originals/penguin_original.jpg'],
+        synergy: '⚡ Tęczowa Plazma + ❄️ Astralny Lód',
+        combo: '🌈 Zorza Cukierkowego Mrozu – Pingwinek zamraża zły humor, a Kotek rozpuszcza go ciepłą posypką.',
+        mission: 'Czuwanie na różowym łóżeczku pod ciepłymi girlandami lampek.'
+      },
+      {
+        type: '👯 DUET',
+        name: 'Nocni Strażnicy Snów',
+        members: 'Króliczka Diana + Dźwiękowy Piesek K9',
+        thumbs: ['originals/diana_original.jpg', 'originals/dog_original.jpg'],
+        synergy: '🌙 Magia Księżyca + 🔊 Fale Sonaru',
+        combo: '🔔 Kołysanka Srebrnego Dzwonka – Piesek biega z dzwonkiem tworząc barierę, a Diana sypie gwiezdny pył.',
+        mission: 'Pilnowanie kapci i sprawdzanie, czy pod łóżkiem nie czai się żaden cień.'
+      },
+      {
+        type: '👯 DUET',
+        name: 'Miodowi Skoczkowie',
+        members: 'Kubuś Puchatek + Super Mario',
+        thumbs: ['originals/pooh_original.jpg', 'originals/mario_original.jpg'],
+        synergy: '🍯 Słoneczny Bursztyn + 🍄 Ogień Odwagi',
+        combo: '🔥 Wulkan Słodkiej Energii – Mario wyskakuje z miodowej tarczy Kubusia ponad szafy.',
+        mission: 'Zabawa w „Podłoga to Lawa” i pikniki na kocyku.'
+      },
+      {
+        type: '👯 DUET',
+        name: 'Bioniczni Inżynierowie',
+        members: 'Cyber-Małpka Gizmo + Tytaniczna Krowa',
+        thumbs: ['originals/monkey_original.jpg', 'originals/cow_original.jpg'],
+        synergy: '🦾 Nano-Technologia + ⚡ Grzmot Sejsmiczny',
+        combo: '💥 Błyskawiczna Wieża Mocy – Krówka podrzuca klocki, a Małpka układa je w 1 sekundę!',
+        mission: 'Błyskawiczne sprzątanie i budowanie gigantycznych zamków.'
+      },
+      {
+        type: '👯 DUET',
+        name: 'Magiczne Baletnice',
+        members: 'Kocia Gabby + Wiśniowa Minnie',
+        thumbs: ['originals/gabby_original.jpg', 'originals/minnie_original.jpg'],
+        synergy: '🎀 Kocia Wyobraźnia + 🍒 Wiśniowy Kwiat',
+        combo: '🌸 Wiśniowy Domek Marzeń – Gabby otwiera portal, a Minnie sypie różowe płatki.',
+        mission: 'Pokazy mody, herbatki dla lalek i czesanie fryzur.'
+      },
+      {
+        type: '🌟 TRIO',
+        name: 'Trybunał Trzech Żywiołów',
+        members: 'Kotek-Babeczka + Błękitny Pingwinek + Króliczka Diana',
+        thumbs: ['originals/cat_original.jpg', 'originals/penguin_original.jpg', 'originals/diana_original.jpg'],
+        synergy: '🌌 Kosmos + ❄️ Lód + 🌙 Księżyc',
+        combo: '✨ Potrójna Zorza Polarna – rozświetla sufit w pokoju tysiącem małych gwiazdek.',
+        mission: 'Spokój, harmonia, najpiękniejsze bajkowe sny i regeneracja sił po całym dniu.'
+      },
+      {
+        type: '🌟 TRIO',
+        name: 'Brygada Żelaznej Tarczy',
+        members: 'Piesek K9 + Małpka Gizmo + Tytaniczna Krowa',
+        thumbs: ['originals/dog_original.jpg', 'originals/monkey_original.jpg', 'originals/cow_original.jpg'],
+        synergy: '🛡️ Odwaga + 🦾 Spryt + ⚡ Siła',
+        combo: '⚡ Trójkąt Gromowładnej Bariery – nieprzepuszczalna ściana dobrej energii.',
+        mission: 'Szybka reakcja i obrona pokoju przed jakimkolwiek hałasem.'
+      },
+      {
+        type: '🌟 TRIO',
+        name: 'Magiczne Przedszkole Miłości',
+        members: 'Gabby + Minnie + Kryształowy Niemowlaczek',
+        thumbs: ['originals/gabby_original.jpg', 'originals/minnie_original.jpg', 'originals/baby_original.jpg'],
+        synergy: '💖 Czysta Miłość + 🍼 Anielska Opieka',
+        combo: '🍼 Czyste Źródło Uśmiechu – ociera każdą łezkę i leczy stłuczone kolanko.',
+        mission: 'Czułość, opieka nad najmłodszymi i śpiewanie kołysanek.'
+      },
+      {
+        type: '🛡️ KWARTET',
+        name: 'Gwardia Czuwania Nocnego (Night Watch)',
+        members: 'Diana + Kotek + Pingwinek + Niemowlaczek',
+        thumbs: ['originals/diana_original.jpg', 'originals/cat_original.jpg', 'originals/penguin_original.jpg', 'originals/baby_original.jpg'],
+        synergy: '🌙 Księżyc + ⚡ Plazma + ❄️ Lód + 🍼 Światło',
+        combo: '🛌 Czteroramienna Tarcza Spokoju – rozstawiają się na 4 rogach łóżeczka.',
+        mission: 'Pilnowanie poduszki w sówki i otulenie kocykiem minky.'
+      },
+      {
+        type: '🛡️ KWARTET',
+        name: 'Sojusz Prędkości i Technologii (Velocity)',
+        members: 'Piesek K9 + Małpka Gizmo + Krówka + Mario',
+        thumbs: ['originals/dog_original.jpg', 'originals/monkey_original.jpg', 'originals/cow_original.jpg', 'originals/mario_original.jpg'],
+        synergy: '💨 Bieg + 🦾 Antygrawitacja + ⚡ Grzmot + 🍄 Skok',
+        combo: '🚀 Mega Tor Przeszkód – błyskawiczne pokonywanie przeszkód na dywanie.',
+        mission: 'Dynamiczne zabawy w ciągu dnia i zawody w skakaniu.'
+      },
+      {
+        type: '👑 WIELKA 11',
+        name: 'Panteon 11 Mistrzów (The Grand 11)',
+        members: 'Wszystkie 11 Pluszaków z Pokoju w Jednym Kręgu!',
+        thumbs: ['originals/cat_original.jpg', 'originals/penguin_original.jpg', 'originals/diana_original.jpg', 'originals/dog_original.jpg', 'originals/monkey_original.jpg', 'originals/cow_original.jpg', 'originals/pooh_original.jpg', 'originals/mario_original.jpg', 'originals/gabby_original.jpg', 'originals/minnie_original.jpg', 'originals/baby_original.jpg'],
+        synergy: '🌟 11 Zjednoczonych Żywiołów Przyjaźni',
+        combo: '👑 Harmonia Wiecznego Uśmiechu – łączy wszystkie moce w niezniszczalną tarczę miłości i mądrości.',
+        mission: 'Wieczna ochrona pokoju dziecięcego i uśmiech na buzi każdego dnia!'
+      }
+    ];
+
+    function switchViewMode(mode) {
+      const singleLayout = document.getElementById('singleCharLayout');
+      const squadsContainer = document.getElementById('squadsContainer');
+      const btnSingle = document.getElementById('btnModeSingle');
+      const btnSquads = document.getElementById('btnModeSquads');
+
+      if (mode === 'squads') {
+        singleLayout.style.display = 'none';
+        squadsContainer.style.display = 'block';
+        btnSingle.classList.remove('active');
+        btnSquads.classList.add('active');
+        renderSquads();
+      } else {
+        singleLayout.style.display = 'grid';
+        squadsContainer.style.display = 'none';
+        btnSingle.classList.add('active');
+        btnSquads.classList.remove('active');
+      }
+    }
+
+    function renderSquads() {
+      const grid = document.getElementById('squadsGrid');
+      grid.innerHTML = '';
+
+      squadsData.forEach(sq => {
+        const card = document.createElement('div');
+        card.style = 'background: rgba(22, 28, 56, 0.95); border: 2px solid rgba(0, 240, 255, 0.3); border-radius: 25px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4);';
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="background: linear-gradient(135deg, var(--primary), var(--accent)); color: #000; font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.8rem; border-radius: 10px;">${sq.type}</span>
+            <span style="font-size: 0.85rem; color: var(--secondary); font-weight: 600;">${sq.synergy}</span>
+          </div>
+          <div style="font-size: 1.4rem; font-weight: 700; color: #fff;">${sq.name}</div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.2rem 0;">
+            ${sq.thumbs.map(t => `<img src="${t}" style="width: 55px; height: 55px; border-radius: 14px; object-fit: cover; border: 2px solid var(--secondary);" alt="Member">`).join('')}
+          </div>
+          <div style="font-size: 0.95rem; color: #fed7aa; font-weight: 600;">Skład: ${sq.members}</div>
+          <div style="background: rgba(0,0,0,0.3); padding: 0.9rem; border-radius: 14px; font-size: 0.9rem; line-height: 1.5; color: #cbd5e1;">
+            <strong style="color: var(--accent);">Atak Łączony:</strong> ${sq.combo}
+          </div>
+          <div style="font-size: 0.85rem; color: #94a3b8;">
+            🎯 <strong>Misja w Pokoju:</strong> ${sq.mission}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function speakCharProfile() {
+      const char = characterData[currentCharIndex];
+      const textToRead = `${char.name}. ${char.lore}. A oto co mówi o nim dziecko: ${char.childQuote}`;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(textToRead);
+        u.lang = 'pl-PL';
+        u.rate = 0.9;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    function copyCharPrompt() {
+      const char = characterData[currentCharIndex];
+      navigator.clipboard.writeText(char.prompt);
+      alert('Skopiowano prompt dla: ' + char.name);
+    }
+
+    function openLightbox(src, caption) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxCaption').textContent = caption;
+      document.getElementById('lightboxModal').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').style.display = 'none';
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
+
