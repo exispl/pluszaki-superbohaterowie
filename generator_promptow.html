@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Promptów Nano Banana 2 & Imagen 3 | 110 Gotowych Promptów (11 Pluszaków)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ffd166;
+      --secondary: #00f0ff;
+      --accent: #ff007f;
+      --pink: #ff85a2;
+      --green: #06d6a0;
+      --purple: #9d4edd;
+      --bg: #090d24;
+      --card-bg: rgba(18, 24, 52, 0.92);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 209, 102, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.12) 0%, transparent 60%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(90deg, #ffd166, #ff007f);
+      color: #1a1a2e;
+      padding: 0.4rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 0 25px rgba(255, 209, 102, 0.5);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: 'Comfortaa', cursive;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #ffd166, #00f0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 850px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Top Nav Bar */
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-link-btn {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.6rem 1.4rem;
+      border-radius: 30px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-link-btn:hover, .nav-link-btn.active {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      transform: scale(1.05);
+    }
+
+    /* Character Selection Wheel / Grid */
+    .character-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+      gap: 0.75rem;
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+      padding: 0 1.5rem;
+    }
+
+    .char-select-btn {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 20px;
+      padding: 0.75rem 0.5rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .char-select-btn:hover, .char-select-btn.active {
+      border-color: var(--primary);
+      background: rgba(255, 209, 102, 0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(255, 209, 102, 0.35);
+    }
+
+    .char-select-thumb {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--secondary);
+    }
+
+    .char-select-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #fff;
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      width: 100%;
+    }
+
+    /* Character Banner Card */
+    .hero-banner {
+      background: var(--card-bg);
+      border: 2px solid rgba(0, 240, 255, 0.3);
+      border-radius: 28px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-banner-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 22px;
+      object-fit: cover;
+      border: 3px solid var(--secondary);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    }
+
+    .hero-banner-title {
+      font-family: 'Comfortaa', cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .hero-banner-sub {
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .copy-all-btn {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, var(--green), var(--secondary));
+      color: #000;
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 0.75rem 1.6rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(6, 214, 160, 0.4);
+      transition: all 0.25s;
+    }
+
+    .copy-all-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px var(--green);
+    }
+
+    /* 10 Prompt Cards Grid */
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .prompt-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 24px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .prompt-card:hover {
+      border-color: var(--secondary);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.25);
+    }
+
+    .prompt-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .prompt-style-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .prompt-ar-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .prompt-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .prompt-desc {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    .prompt-code-box {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #93c5fd;
+      line-height: 1.5;
+      word-break: break-all;
+      user-select: text;
+    }
+
+    .copy-single-btn {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: #fff;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.6rem 1.25rem;
+      border-radius: 20px;
+      cursor: pointer;
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .copy-single-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    }
+
+    .copy-single-btn.copied {
+      background: var(--green);
+      color: #000;
+    }
+
+    /* Toast Notification */
+    .toast-msg {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, var(--green), var(--secondary));
+      color: #000;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      box-shadow: 0 10px 40px rgba(6, 214, 160, 0.6);
+      z-index: 10000;
+      animation: popToast 0.3s ease;
+    }
+
+    @keyframes popToast {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: #64748b;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-badge">🍌 Nano Banana 2 &bull; Imagen 3 Studio Prompter</div>
+    <h1>STUDIO 110 PROMPTÓW NANO BANANA 2</h1>
+    <p class="subtitle">
+      10 wyspecjalizowanych wariantów stylistycznych dla każdego z 11 pluszaków (Pionowe 9:16, Modele 3D bez tła, Cyberpunk, Plastelina Claymation, Mega Ewolucje, Akwarele, Pixar 3D i figurki).
+    </p>
+
+    <div class="nav-bar">
+      <a class="nav-link-btn" href="galeria_66_wersji.html">📱 Galeria Pionowa 66 Wersji</a>
+      <a class="nav-link-btn" href="galerie_postaci.html">🏛️ Panteon Postaci & Drużynki</a>
+      <a class="nav-link-btn" href="gra_dla_4latki.html">🧸 Przygoda Krok po Kroku</a>
+      <a class="nav-link-btn" href="index.html">🖼️ Główna Galeria</a>
+    </div>
+  </header>
+
+  <!-- Character Selector Grid (11 Plushies) -->
+  <div class="character-selector-grid" id="charSelectorGrid"></div>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-banner-left">
+        <img id="bannerAvatar" class="hero-banner-avatar" src="png/avatar_3d_cat.png" alt="Avatar">
+        <div>
+          <div id="bannerName" class="hero-banner-title">Kotek-Babeczka</div>
+          <div id="bannerAlias" class="hero-banner-sub">Sprinkle-Cat &bull; 10 Gotowych Promptów Nano Banana 2</div>
+        </div>
+      </div>
+      <button class="copy-all-btn" onclick="copyAllPrompts()">
+        📦 Kopiuj Wszystkie 10 Promptów Tej Postaci
+      </button>
+    </div>
+
+    <!-- 10 Prompts Grid -->
+    <div class="prompts-grid" id="promptsContainer"></div>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-msg" id="toastMsg">✓ Skopiowano prompt do schowka!</div>
+
+  <footer>
+    <p>Projekt <strong>Magiczny Pokój Pluszaków</strong> &bull; 110 Promptów Nano Banana 2 / Google Imagen 3</p>
+  </footer>
+
+  <script>
+    // 110 Prompts Database for all 11 Heroes (10 styles each)
+    const promptStudioData = [
+      {
+        id: 'cat',
+        name: 'Kotek-Babeczka',
+        alias: 'Sprinkle-Cat (Sparkle-Kat)',
+        avatar: 'png/avatar_3d_cat.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Przytulny Kadr w Pokoju Dziecięcym', desc: 'Pionowy portret na kocyku minky w kropeczki pod girlandami lampek.', prompt: 'Vertical 9:16 smartphone photo of a round fluffy white cat plush with pastel sprinkles on its head, sitting cozy on a soft pink minky dotted blanket in a warm toddler bedroom, glowing fairy lights and owl pillows blurred in background, adorable 3D Disney Pixar character style, soft volumetric lighting --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Czysty Model Cutout z Plazmą', desc: 'Okrągły kotek ze skrzydłami odrzutowymi i wąsami laserowymi na białym tle.', prompt: 'A 3D superhero character cutout of the round white cat plush with rainbow sprinkles, completely isolated on a pure solid white background. Miniature glowing jetpack wings on its back, glowing neon laser whiskers, floating in mid-air with soft contact shadow underneath, Unreal Engine 5 studio render.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Cyber-Metropolia Nocą', desc: 'Lata nad neonowym miastem ze strumieniami tęczowej plazmy.', prompt: 'A futuristic cybernetic superhero version of the round white cat plush with sprinkles. Floating over a rain-slicked neon cyberpunk metropolis at night, rainbow plasma energy swirling from its paws, glowing holographic forcefield, neon cyan and magenta reflections, 8k octane render.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Święty Gaj Bioluminescencji', desc: 'Unosi się w czarodziejskim lesie z motylami i wielkimi grzybami.', prompt: 'Fantasy fairy tale version of the round white cat plush with sprinkles, hovering in an enchanted glowing forest with giant luminous mushrooms and glowing spirit butterflies, soft ethereal turquoise and lavender fog, magical stardust particles, cinematic fantasy lighting.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Rękodzieło Stop-Motion (Aardman)', desc: 'Ręcznie ulepiona figurka z plasteliny z posypką i fakturą palców.', prompt: 'Stop-motion claymation style of a round cute white cat with colorful clay sprinkles on its head, handcrafted plasticine textures, fingerprint details on clay, charming warm bedroom backdrop, Aardman Animation style, tactile studio lighting.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Kosmiczny Feniks-Kot Gwiazd', desc: 'Skrzydła z zorzy polarnej, korona stardustu i galaktyki w tle.', prompt: 'Mega Evolution cosmic god form of the white sprinkle cat. Massive ethereal wings made of glowing rainbow aurora borealis, floating in deep outer space surrounded by swirling galaxies, stardust crown above its head, glowing cosmic crystal paws, epic celestial scale.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Ciepła Ilustracja Książkowa', desc: 'Delikatne akwarelowe plamy w stylu klasycznych bajek dla dzieci.', prompt: 'Gentle vintage watercolor storybook illustration of a round fluffy white kitten sitting in a cupcake wrapper with colorful sugar sprinkles, warm pastel colors, soft pencil outlines, whimsical Beatrix Potter style on textured watercolor paper.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Portret Emocjonalny z Głębią', desc: 'Zbliżenie z lśniącymi oczami odbijającymi światło i puszystym futerkiem.', prompt: 'Close-up cinematic shot of a fluffy round white cat plush with sugar sprinkles on its forehead, big expressive anime eyes reflecting warm fairy lights, shallow depth of field, ultra-detailed plush fur textures, 3D animated feature film render.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Designer Toy w Pudełku (Pop Mart)', desc: 'Kolekcjonerska figurka winylowa w przezroczystym blisterze neonowym.', prompt: 'Premium vinyl collector art toy of Cyber-Sprinkle Cat inside a transparent neon futuristic display blister packaging box, detailed accessories, high-tech decals, Pop Mart style designer toy render.' },
+          { style: '👯 Scena Duetu w Pokoju', ar: '1:1', title: '10. Przyjaciele na Kocyku (z Pingwinkiem)', desc: 'Kotek i Pingwinek przytuleni na różowej pościeli pod lampkami.', prompt: 'Cute round white sprinkle cat plush and fluffy blue penguin plush sitting happily together sharing a cozy blanket on a pink bed in a child bedroom with soft warm lighting, 3d animated pixar style.' }
+        ]
+      },
+      {
+        id: 'penguin',
+        name: 'Błękitny Pingwinek',
+        alias: 'Frosty-Nova',
+        avatar: 'png/avatar_3d_penguin.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Puszysty Pingwinek na Dywanie', desc: 'Pionowe ujęcie z klockami i lampkami w pokoju.', prompt: 'Vertical 9:16 poster of an ultra-fluffy baby blue penguin plush with large sparkling anime eyes, sitting happily on a soft fluffy rug in a cozy kid room, fairy lights and colorful wooden blocks in background, 3D Pixar animated vertical portrait --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Astralny Mag Lodu Cutout', desc: 'Śnieżynkowe runy i sfery many na czystym białym tle.', prompt: 'Cute superhero version of the fluffy blue penguin plush with sparkling cosmic eyes, crystal elemental chest emblem, hovering with swirling snowflake runes and glowing aqua mana spheres around its wings, isolated on solid pure white background, 3D character cutout.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Cryo-Surfer w Neonowym Mieście', desc: 'Ślizg na świetlistej ścieżce lodu nad drapaczami chmur.', prompt: 'High-tech cyber penguin superhero with holographic ice-visor and cryo-thruster flippers, surfing on a floating neon light trail over a futuristic neon skyline, cyan and electric blue lighting, dynamic action pose.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Wodospad Błękitnej Many', desc: 'Czaruje lodową sferę przy świecącym wodospadzie.', prompt: 'Mythical fantasy penguin hovering near a glowing turquoise magical waterfall in an enchanted bioluminescent twilight jungle, summoning floating ice crystals and glowing floral wisps, magical cinematic fantasy art.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowy Pingwinek Stop-Motion', desc: 'Błyszczące oczka z koralików i modelowany dzióbek.', prompt: 'Handmade claymation style blue baby penguin with round glossy black bead eyes and sculpted orange clay beak, visible clay fingerprint textures, cozy felt bedroom miniature set, stop-motion animation look.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Tytan Polarnych Komet', desc: 'Skrzydła z diamentowego lodu i kosmiczne komety.', prompt: 'Supreme Ice Titan Mega Evolution of the blue penguin. Majestic crystallized glacier wings, floating halo of icy stellar comets, crown of diamond frost, soaring over a frozen celestial nebula.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Śnieżynkowa Bajka Akwarelowa', desc: 'Mały pingwinek w szaliczku w śnieżynki ze złotym pyłem.', prompt: 'Charming children book watercolor painting of a fluffy little blue penguin wearing a tiny snowflake scarf, soft pastel washes, gold splatter stars, whimsical vintage illustration style.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Zjazd po Kołderkowej Górze', desc: 'Radosny ślizg na brzuszku z miękkim oświetleniem puchu.', prompt: 'Cinematic dramatic close-up of the fluffy blue penguin plush sliding playfully down a pink blanket hill in a warm bedroom, motion blur, soft backlight glow on downy fur, 3D animation quality.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Kryształowy Nendoroid', desc: 'Przezroczyste skrzydełka i podstawka w pudełku z japońskimi napisami.', prompt: 'Designer vinyl toy of Frosty Penguin with clear translucent crystal wings, metallic chrome base, sitting inside an exclusive collector packaging box with Japanese typography, Nendoroid style.' },
+          { style: '👯 Scena Drużynowa w Pokoju', ar: '1:1', title: '10. Trybunał Trzech Żywiołów (z Kotkiem i Dianą)', desc: 'Trzy pluszaki w kręgu światła na dywanie w pokoju.', prompt: 'Fluffy blue penguin, round white sprinkle cat, and grey bunny doll Diana sitting in a magical glowing circle on a bedroom carpet, casting a gentle rainbow light dome, cozy bedtime fantasy render.' }
+        ]
+      },
+      {
+        id: 'diana',
+        name: 'Króliczka Diana',
+        alias: 'Lunar-Diana',
+        avatar: 'png/avatar_3d_diana.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Diana z Haftem na Uszkach', desc: 'Haft 13.06.2022 r. świeci różowym blaskiem w pokoju.', prompt: 'Vertical 9:16 wallpaper of a sweet grey plush bunny doll with long floppy ears embroidered with glowing pink numbers, wearing a soft grey hood, sitting in a dreamy bedroom under a nightlight, fairy starlight glow --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Księżycowa Diana Cutout', desc: 'Kryształowe serduszko na piersi i lewitujące motylki.', prompt: 'Magical superhero version of the grey bunny doll Diana, long floating plush ears with glowing pink constellation runes, holding glowing spirit butterflies and stardust rings, isolated on pure white background, 3D cutout render.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Cyber-Gotycka Strażniczka', desc: 'Neonowe obwody na uszkach i chrome serce na dachu.', prompt: 'Cyber-Gothic superhero rabbit guardian with glowing pink neon ear circuits, chrome heart core on chest, floating in zero-gravity over a neon rooftop, dark cyberpunk aesthetic with vivid magenta highlights.' },
+          { style: '🌿 Nocna Pełnia Księżyca', ar: '16:9', title: '4. Srebrny Gaj pod Pełnią', desc: 'Lewituje w nocnym ogrodzie pod gigantycznym księżycem.', prompt: 'Ethereal celestial bunny guardian levitating gracefully in an enchanted night garden under a gigantic silver full moon, glowing cherry blossom petals and translucent spirit butterflies swirling around, hyper-detailed.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowa Lalka w Kapturku', desc: 'Ulepione z plasteliny płatki kwiatów i szary kapturek.', prompt: 'Cute plasticine stop-motion doll of a grey rabbit in a hood with delicate clay flowers, warm cozy miniature wooden dollhouse setting, soft studio spotlights.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Bogini Gwiezdnego Pyłu', desc: 'Szaty z pyłu gwiezdnego i diamentowy sierp księżyca.', prompt: 'Divine celestial goddess mega evolution of the Diana bunny doll. Flowing ethereal silver robes made of stardust, giant crescent moon floating behind her, crown of sparkling diamonds, cosmic scale.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Śpiący Króliczek i Piwonie', desc: 'Pastelowa akwarela z księżycem i różowymi kwiatami.', prompt: 'Delicate pastel watercolor of a sleeping grey rabbit with long ears surrounded by blooming pink peonies and crescent moon, gentle storybook art style, soft textured paper.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Dotyk Gwiezdnego Motyla', desc: 'Emocjonalne zbliżenie na pluszową łapkę i motylka.', prompt: 'Emotional cinematic close-up of the grey bunny doll Diana gently touching a glowing magical butterfly with her plush paw, warm rim lighting, detailed fabric textures, Pixar quality.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Porcelanowa Statuetka Artystyczna', desc: 'Półprzezroczyste motyle z żywicy i srebrne akcenty.', prompt: 'Limited edition porcelain-style designer art figure of Lunar Diana with translucent pink resin butterflies and metallic silver accents, collector showcase pedestal.' },
+          { style: '👯 Scena Duetu (z Pieskiem K9)', ar: '1:1', title: '10. Nocny Patrol z Pieskiem', desc: 'Diana i piesek z dzwonkiem na różowym dywanie z klockami.', prompt: 'Grey bunny doll Diana and brown puppy plush with bell sitting side by side on a fluffy pink bedroom carpet, playing with glowing alphabet blocks under warm fairy lights, 3D Pixar render.' }
+        ]
+      },
+      {
+        id: 'dog',
+        name: 'Dźwiękowy Piesek K9',
+        alias: 'Sonic-Pup',
+        avatar: 'png/avatar_3d_dog.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Dzielny Szczeniak z Dzwonkiem', desc: 'Białe łapki i lśniący dzwoneczek na obroży w słońcu.', prompt: 'Vertical 9:16 action shot of a cute brown plush puppy with floppy ears and red collar with shiny brass bell, sitting bravely on a wooden floor in a cozy kid room, soft glowing morning sun rays --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Piorunujący Obrońca Cutout', desc: 'Kręgi sonaru z dzwonka i pioruny z białych łapek.', prompt: 'Superhero brown canine guardian in 3D render style, red collar with pulsing sonic soundwave energy rings, big white paws crackling with electric lightning, heroic stance, isolated on pure white background.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Cyber-Pies na Autostradzie Światła', desc: 'Neonowy pancerz i emitery ultradźwięków w biegu.', prompt: 'Futuristic cyber K9 robotic pup with glowing neon red armor plates, sonic pulse emitter collar, racing down a neon cyber highway with electric lightning trails, high-speed action shot.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Szmaragdowy Strażnik Puszczy', desc: 'Szmaragdowe oczy i runy dźwiękowe na moście z grzybów.', prompt: 'Magical forest guardian puppy with emerald glowing eyes and a collar that emits glowing melodic sound runes, walking across a bridge of glowing mushrooms in a magical forest.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowy Merdający Piesek', desc: 'Ręcznie modelowana plastelina z miedzianym dzwoneczkiem.', prompt: 'Charming claymation brown puppy with a shiny yellow bell, sculpted clay fur textures, wagging plasticine tail, playful stop-motion animation frame.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Gwiezdny Awatar Lojalności', desc: 'Złoto-szmaragdowy pancerz i planetarne fale dźwiękowe.', prompt: 'Supreme Mega Avatar K9 guardian clad in celestial gold-and-emerald cosmic armor, giant paws crackling with thunderous light, standing upon a ring of planetary soundwaves.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Złoty Szczeniak na Łące', desc: 'Piesek goniący motyle w ciepłych promieniach słońca.', prompt: 'Vintage storybook watercolor of a floppy-eared brown puppy with a little bell collar chasing golden butterflies across a sunny meadow, warm golden hour palette.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Bieg przez Zakręt w Pokoju', desc: 'Dynamiczny kadr z drobinkami kurzu tańczącymi w słońcu.', prompt: 'Dynamic low-angle action shot of the plush puppy skidding around a bedroom corner, dust motes glowing in sunlight, joyful heroic expression, 3D animated movie render.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Figurka Akcji z Efektami Dźwięku', desc: 'Efekty fal sonaru na łapkach i retro pudełko z blistrem.', prompt: 'Action figure of Sonic Pup K9 with removable sonic blast effects for paws, metallic painted bell, custom display stand, retro blister pack toy design.' },
+          { style: '👯 Scena Drużynowa (z Małpką i Krówką)', ar: '1:1', title: '10. Baza w Forcie z Poduszek', desc: 'Piesek, Małpka i Krówka w bazie z klocków i kocyków.', prompt: 'Brown puppy with bell, cyber monkey Gizmo, and giant spotted cow sitting together in a fort made of colorful building blocks and pillows in a cozy bedroom.' }
+        ]
+      },
+      {
+        id: 'monkey',
+        name: 'Cyber-Małpka (Gizmo)',
+        alias: 'Gizmo-Prime',
+        avatar: 'png/avatar_3d_monkey.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Puszysty Bobasek z Kciukiem', desc: 'Słodka małpka przy szafce z klockami w słońcu.', prompt: 'Vertical 9:16 portrait of a fluffy brown baby monkey plush sucking its thumb, sitting next to a colorful toy box in a child bedroom, warm sunlight streaming through window --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Bioniczna Ręka i HUD Cutout', desc: 'Świetliste iskry kinetyczne i pomarańczowy celownik.', prompt: 'Superhero baby monkey plush with high-tech glowing cybernetic gauntlet on one arm, holographic orange HUD visor over one eye, hovering with kinetic sparks, isolated on white background.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Mistrz Antygrawitacji na Hoverboardzie', desc: 'Lata między neonami i naprawia drony laserem.', prompt: 'Genius inventor cyber-monkey floating on an anti-gravity hoverboard through a neon skyline, soldering floating micro-drones with laser tools, cyberpunk workshop aesthetic.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Technomanta Pradawnych Drzew', desc: 'Łączy gałęzie w świecące kanały energii.', prompt: 'Jungle technomancer monkey perched on a glowing ancient branch, turning bio-plants into glowing energy conduits, mystical turquoise and amber lighting.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Mały Inżynier z Plasteliny', desc: 'Okularki z kół zębatych i klockowa wieża.', prompt: 'Handcrafted claymation brown monkey with tiny plasticine wrench and gear glasses, building a clay toy tower, stop-motion animation aesthetic.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Mecha-Tytan Technologii', desc: 'Pilotuje białego mecha ze skrzydłami słonecznymi.', prompt: 'Mega Evolution Mecha Titan form of Gizmo. Piloting a colossal gleaming white-and-gold guardian mech with solar wings and gravity-manipulating matrix cores.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Małpka i Klocki z Literkami', desc: 'Urocza akwarela z bananem i drewnianymi klockami.', prompt: 'Whimsical watercolor illustration of a little brown monkey in dungarees holding a giant banana and balancing on top of colorful wooden alphabet blocks.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Błysk w Oku Wynalazcy', desc: 'Zbliżenie na futerko i pomarańczowy holograficzny wizjer.', prompt: 'Heartwarming close-up of the fluffy monkey plush adjusting its glowing orange holographic visor with a cheeky grin, detailed plush fur shaders, Pixar 3D quality.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Metalowy Chogokin Mecha-Monkey', desc: 'Ruchome bioniczne ramiona i magnetyczna podstawka.', prompt: 'Articulated mecha-monkey action figure with interchangeable bionic arms, magnetic hover base, and miniature accessory tools, Chogokin collector style.' },
+          { style: '👯 Scena Drużynowa (z Mario i Kubusiem)', ar: '1:1', title: '10. Hologram dla Przyjaciół', desc: 'Gizmo pokazuje świecący projekt zamku dla Mario i Pooh.', prompt: 'Cyber monkey Gizmo showing a glowing holographic blueprint to Mario and Winnie the Pooh who are sitting on a fluffy bedroom carpet eating honey.' }
+        ]
+      },
+      {
+        id: 'cow',
+        name: 'Tytaniczna Krowa Piorunów',
+        alias: 'Thunder-Moo',
+        avatar: 'png/avatar_3d_cow.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Wielka Łaciata Krówka na Fotelu', desc: 'Pionowe zdjęcie gigantycznej pluszowej krowy w pokoju.', prompt: 'Vertical 9:16 wallpaper of a giant fluffy black-and-white spotted cow plush with a cute pink muzzle, resting peacefully on a big armchair in a child bedroom, cozy warm daylight --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Złote Rogi Grzmotu Cutout', desc: 'Elektryczne błyskawice między rogami i świecące oczy.', prompt: 'Powerful superhero version of the large spotted cow plush with curved golden horns crackling with electrical thunder, glowing blue eyes, energy bell collar, isolated on solid white background.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Tytan Pancerza Piorunów', desc: 'Tytanowe kopyta i plazmowe rogi na neonowym placu.', prompt: 'Armored cyber-bovine juggernaut with glowing plasma horns and reinforced titanium hooves, charging across a neon cyber plaza, volumetric electrical arcs.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Pradawny Opiekun Ziemi', desc: 'Kryształowe rogi i świecące kwiaty w nocnym gaju.', prompt: 'Primal earth-guardian cow with mossy floral patterns on its spotted coat and golden crystal horns, grazing in a glowing moonlit meadow with luminous flora.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowa Mućka Stop-Motion', desc: 'Ręcznie lepione czarne łaty i miedziany dzwonek.', prompt: 'Chunky stop-motion clay cow with hand-sculpted black patches, pink clay nose, ringing tiny copper bell, charming handcrafted animation style.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Gaia - Matka Burzy i Ziemi', desc: 'Złote rogi z burzą i kosmiczny wzór łat na futrze.', prompt: 'Colossal Divine Gaia Titan Cow. Majestic golden horns holding a miniature swirling thunderstorm, cosmic starry fur pattern, standing upon floating terrestrial islands.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Krowa w Wianku z Koniczynki', desc: 'Ciepła rustykalna ilustracja z motylami i kwiatami.', prompt: 'Gentle vintage pastoral watercolor of a friendly smiling cow with a flower crown around her neck, grazing in a sunny clover field with butterflies, storybook art.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Przejażdżka na Grzbiecie Krówki', desc: 'Kotek i Pingwinek jadą na grzbiecie krowy po dywanie.', prompt: 'Epic yet adorable shot of the giant plush cow happily carrying the small cat and penguin plushes on its broad back across a bedroom carpet, cinematic lighting.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Winylowa Statuetka Sofubi', desc: 'Złote chromowane rogi i półprzezroczyste pioruny.', prompt: 'Oversized designer vinyl toy of Thunder-Moo with gold-chrome horns, translucent lightning effects, collector pedestal, Sofubi toy style.' },
+          { style: '👯 Scena Wielkiego Kręgu Pluszaków', ar: '1:1', title: '10. Cała Drużyna wokół Krówki', desc: 'Wszystkie pluszaki siedzą wokół wielkiej krowy na dywanie.', prompt: 'Giant spotted cow surrounded by all the small toy heroes sitting in a cozy circle on a bedroom rug, sharing stories under soft string lights.' }
+        ]
+      },
+      {
+        id: 'pooh',
+        name: 'Złoty Miś Miodowy',
+        alias: 'Solar-Pooh (Amber-Bear)',
+        avatar: 'png/avatar_3d_pooh.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Miś w Czerwonej Koszulce przy Sówkach', desc: 'Żółty miś obok poduszki w sówki na różowej pościeli.', prompt: 'Vertical 9:16 wallpaper of a classic yellow plush teddy bear in red t-shirt, sitting comfortably next to an owl-patterned pillow on a pink bed in a sunny toddler room --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Bursztynowy Dzbanek Miodu Cutout', desc: 'Złocisty promień słońca i duchowe pszczółki.', prompt: 'Cute fantasy superhero yellow bear with an amber crystal honey pot emitting warm golden sunbeams, floating honeybee spirit familiars, isolated on pure white background.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Solarny Strażnik Energetyczny', desc: 'Futurystyczna kurtka i holograficzne pszczoły.', prompt: 'Solar-powered cyber bear in futuristic red jacket with glowing amber energy conduits, projecting warm holographic honeybee drones in a neon cityscape.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Słoik Gwiezdnego Nektaru', desc: 'Płynny miód rozświetla bioluminescencyjny gaj.', prompt: 'Enchanted forest bear holding a jar of liquid star-honey that illuminates the dark bioluminescent woods, friendly glowing forest spirits gathering around.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowy Miś z Miodkiem', desc: 'Ręcznie ulepiony brzuszek i lśniący garnuszek.', prompt: 'Tactile claymation yellow bear in red clay shirt with a glossy clay honey pot, visible fingerprint textures, nostalgic stop-motion picture look.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Astralny Niedźwiedź Słońca', desc: 'Korona z promieni słonecznych i bursztynowa aura.', prompt: 'Celestial Solar Avatar Bear. Radiant golden crown of pure sunlight, massive amber aura that brings joy to entire star systems, floating in a golden stellar core.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Klasyczny Kubuś w Stumilowym Lesie', desc: 'Styl E.H. Sheparda z ciepłym nastrojem popołudnia.', prompt: 'Classic E.H. Shepard inspired watercolor of a thoughtful yellow bear sitting in Hundred Acre Wood with a honey pot, warm vintage storybook illustration.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Łyżeczka Miodu z Miłością', desc: 'Zbliżenie na uśmiech misia częstującego miodem.', prompt: 'Heartwarming close-up of the yellow teddy bear plush offering a tiny wooden spoon of honey, warm golden backlight, ultra-soft fabric fuzz, 3D animated film render.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Ceramiczna Figurka Pop Mart', desc: 'Płynna bursztynowa żywica i złote pudełko.', prompt: 'Premium ceramic-finish collectible figure of Amber Bear with clear amber resin honey spill and gold-foil collector packaging, Pop Mart Disney series.' },
+          { style: '👯 Scena Duetu (z Mario na Pikniku)', ar: '1:1', title: '10. Piknik na Dywanie', desc: 'Kubuś i Mario dzielą się przekąskami na kocyku.', prompt: 'Yellow teddy bear in red shirt and plush Mario sitting together on a checkered picnic cloth spread out on a bedroom carpet, sharing a snack, warm friendly 3D scene.' }
+        ]
+      },
+      {
+        id: 'mario',
+        name: 'Gwiezdny Skoczek Mario',
+        alias: 'Super-Jump Mario',
+        avatar: 'png/avatar_3d_mario.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Mario na Wieży z Klocków', desc: 'Pionowy portret w czerwonej czapce i ogrodniczkach.', prompt: 'Vertical 9:16 shot of a plush Mario doll in red cap with letter M and blue dungarees, perched on top of wooden building blocks in a bright playroom --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Ognisty Skoczek z Gwiazdką Cutout', desc: 'Tęczowa gwiazdka nietykalności i płomienie z dłoni.', prompt: 'Heroic 3D render of plush Mario mid-jump with glowing fiery hand effects, rainbow invincibility star orbiting him, isolated on solid white background.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Cyber-Skoczek nad Wieżowcami', desc: 'Neonowe ogrodniczki i holograficzny daszek.', prompt: 'Cyber-Jumper Mario with neon-piped denim overalls, holographic red visor cap, leaping between neon skyscraper signs in a 2099 cyber-metropolis.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Skoki po Świecących Grzybach', desc: 'Zbiera gwiezdne świetliki w czarodziejskim lesie.', prompt: 'Fantasy Mario bouncing across giant glowing fluorescent mushrooms in an enchanted fantasy jungle, collecting glowing firefly stars.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowy Mario z Wąsem', desc: 'Retro stop-motion z modelowanym wąsem i czapką.', prompt: 'Stop-motion claymation Mario with sculpted clay mustache and bright red cap, jumping over colorful plasticine blocks, handcrafted retro look.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Kosmiczny Bohater Wymiarów', desc: 'Galaktyczne rury czasoprzestrzeni i korona supernowej.', prompt: 'Dimensional Cosmic Champion Mario soaring through a galaxy of multi-colored warp pipes, wearing a crown of supernova stars and radiant solar cape.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Mario z Bukietem Ognistych Kwiatów', desc: 'Żywa akwarela z miękkimi rozpryskami barw.', prompt: 'Whimsical watercolor illustration of Mario holding a bouquet of fire flowers and smiling, soft splash art style, vibrant red and blue hues.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Skok nad Lawą na Dywanie', desc: 'Dynamiczny skok z fotela na łóżko w pokoju.', prompt: 'Action-packed cinematic frame of plush Mario making a dramatic jump from a chair to a bed to avoid the lava floor carpet, dynamic camera angle, Pixar 3D.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Retro Figurka w Blisterze z Lat 80.', desc: 'Wymienne pozy skoków i tarcza z tęczową gwiazdką.', prompt: 'Retro 80s blister pack toy of Super-Jump Mario with interchangeable jump poses, translucent star power shield, collector box.' },
+          { style: '👯 Scena Wyścigu (z K9 i Małpką)', ar: '1:1', title: '10. Tor Przeszkód z Poduszek', desc: 'Mario, Piesek i Małpka ścigają się po pokoju.', prompt: 'Plush Mario, puppy with bell, and cyber monkey Gizmo racing across an obstacle course of cushions and books on a bedroom carpet.' }
+        ]
+      },
+      {
+        id: 'gabby',
+        name: 'Magiczna Kotka Gabby',
+        alias: 'Star-Gabby',
+        avatar: 'png/avatar_3d_gabby.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Gabby z Błyszczącymi Uszkami', desc: 'Pionowy portret lalki z lokami i uszkami w pokoju.', prompt: 'Vertical 9:16 poster of Gabby doll with big curly brown hair and pink glowing cat-ears headband, wearing a sparkly outfit in a cozy colorful bedroom --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Czarodziejka z Różdżką Cutout', desc: 'Różdżka z gwiazdką i brokatowe iskry wokół uszek.', prompt: 'Magical fantasy 3D render of Gabby with glowing star wand, sparkling pink magical aura, cat ears emitting glitter sparks, isolated on pure white background.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Cyber-Pop Idol z Konsolą DJ', desc: 'Światła neonowych uszek i holograficzne decki.', prompt: 'Cyber-Pop Idol Gabby with neon magenta cat ear lights, holographic holographic DJ deck, performing in a neon-lit cyber club, vibrant energetic lighting.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Księżniczka Kotków i Domków', desc: 'Lewitujące pokoiki domku dla lalek w świecącym gaju.', prompt: 'Fairy Princess Gabby walking with glowing spirit cats in an enchanted twilight grove filled with floating miniature dollhouse rooms.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowa Gabby na Przyjęciu', desc: 'Ręcznie lepione loczki i miniaturowy czajniczek.', prompt: 'Handcrafted claymation doll of Gabby with textured plasticine curls and glossy pink cat ears, miniature tea party set, stop-motion animation.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Królowa Kosmicznej Wyobraźni', desc: 'Tron z pastelowych galaktyk i korona z tęczowych diamentów.', prompt: 'Supreme Queen of Dreams Mega Evolution. Floating upon a throne of pastel galaxies, celestial cat ears crown of rainbow diamonds, weaving constellations with her fingertips.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Tęczowe Bańki Mydlane', desc: 'Delikatna akwarela z uśmiechniętą Gabby.', prompt: 'Soft dreamy watercolor of Gabby smiling with sparkling cat ears and floating bubbles of rainbow colors, dreamy childrens book illustration.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Zaklęcie Pitu-Pitu w Akcji', desc: 'Błysk w oczach podczas włączania kocich uszek.', prompt: 'Expressive 3D cinematic close-up of Gabby pressing her cat ears with a magical chime sound, eyes twinkling with excitement, Pixar animation quality.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Designerska Lalka w Pudełku', desc: 'Zdejmowane uszka i miniaturowe akcesoria domku.', prompt: 'Designer vinyl fashion doll of Star-Gabby with removable glitter cat ears and miniature magical companion figures in collector window box.' },
+          { style: '👯 Scena Przyjęcia (z Minnie i Bobaskiem)', ar: '1:1', title: '10. Przyjęcie z Herbatką w Forcie', desc: 'Gabby, Minnie i bobasek w forcie z poduszek i lampek.', prompt: 'Gabby, Minnie Mouse, and sleeping baby doll in swaddle sitting in a decorated toy fort with pink fairy lights and stuffed pillows.' }
+        ]
+      },
+      {
+        id: 'minnie',
+        name: 'Wiśniowa Minnie',
+        alias: 'Cherry-Minnie',
+        avatar: 'png/avatar_3d_minnie.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Minnie w Piżamce w Wisienki', desc: 'Pionowy portret z wielką różową kokardą na dywanie.', prompt: 'Vertical 9:16 portrait of plush Minnie Mouse in lavender velour cherry-pattern pajamas with a giant pink bow, sitting on a soft pink carpet --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Baletnica Wiśniowych Płatków Cutout', desc: 'Piruet w powietrzu z płatkami kwiatów wiśni.', prompt: '3D ballerina Minnie dancing in the air surrounded by swirling pink cherry blossom petals and glowing sparkles, giant pink bow, isolated on white background.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Neonowa Baletnica Neo-Tokyo', desc: 'Podświetlana kokarda LED i szklany parkiet nad miastem.', prompt: 'Neon-Cyber Minnie with glowing magenta LED bow and cyber-kimono with cherry blossom neon holos, dancing on a glass dancefloor above Neo-Tokyo.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Duch Wiosny nad Rzeką Kwiatów', desc: 'Taniec w świetle fioletowego księżyca w gaju.', prompt: 'Enchanted spring spirit Minnie dancing along a luminous cherry blossom river under a lavender moonlit sky in a fantasy magical forest.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowy Piruet Minnie', desc: 'Fioletowa piżamka z plasteliny na drewnianej scenie.', prompt: 'Charming claymation Minnie in purple cherry pajamas, sculpted clay ribbon bow, practicing ballerina spins on a miniature wooden stage.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Kryształowa Księżniczka Uśmiechu', desc: 'Suknia utkana ze stardustu i tiara z diamentów.', prompt: 'Celestial Diamond Princess Minnie. Wearing a colossal gown woven from starlight cherry blossoms, diamond-crusted tiara bow, dancing among nebula clouds.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Minnie z Koszykiem Wisienek', desc: 'Klasyczna akwarela w stylu vintage Disney.', prompt: 'Delicate pastel watercolor of Minnie Mouse holding a bunch of sweet cherries, wearing her favorite bow, vintage Disney storybook style.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Aksamitny Piruet w Zachodzie Słońca', desc: 'Welurowy kombinezon łapiący złociste światło zachodu.', prompt: 'Cinematic shot of plush Minnie performing a graceful pirouette on a bedroom rug, velvety fabric textures catching the golden sunset light.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Porcelanowa Minnie w Sukni z Satyny', desc: 'Jedwabna kokarda i luksusowe pudełko prezentowe.', prompt: 'Limited edition porcelain-look Minnie figure in cherry pajama costume with real satin ribbon bow, luxury collector gift box.' },
+          { style: '👯 Scena Tańca (z Gabby)', ar: '1:1', title: '10. Taniec Przyjaciółek w Pokoju', desc: 'Minnie i Gabby kręcą piruety pod fioletowymi lampkami.', prompt: 'Minnie Mouse and Gabby holding hands and twirling together in a bedroom illuminated by pink and purple fairy lights, joyful 3D animation style.' }
+        ]
+      },
+      {
+        id: 'baby',
+        name: 'Kryształowy Niemowlaczek',
+        alias: 'Starlight-Baby',
+        avatar: 'png/avatar_3d_baby.png',
+        prompts: [
+          { style: '📱 Pionowy Portret Smartfon', ar: '9:16', title: '1. Słodki Dzidziuś w Śpiworku', desc: 'Pionowe zdjęcie śpiącego bobaska w różowym kocyku.', prompt: 'Vertical 9:16 photo of a cute baby doll in soft pink swaddle blanket, sleeping peacefully in a cozy corner of a toddler bed with soft pillows --ar 9:16' },
+          { style: '✂️ Model 3D Bez Tła', ar: '1:1', title: '2. Aniołek na Chmurce Cutout', desc: 'Piórkowe skrzydełka i złota aureola na białym tle.', prompt: 'Gentle 3D angel baby doll floating on a soft glowing cloud, tiny feathered wings, glowing golden halo of pure innocence, isolated on white background.' },
+          { style: '⚡ Cyberpunk 2099', ar: '16:9', title: '3. Kapsuła Spokoju w Przyszłości', desc: 'Czułe drony i kojąca tarcza w futurystycznym pokoju.', prompt: 'Sci-fi stasis pod guardian with a sweet sleeping baby doll protected by a warm holographic shield and gentle floating lullaby drones in a serene futuristic nursery.' },
+          { style: '🌿 Mistyczny Świecący Las', ar: '16:9', title: '4. Kołyska z Kwiatu Lotosu', desc: 'Śpi na spokojnym stawie wśród świetlików.', prompt: 'Fairy tale baby sleeping inside a glowing lotus flower on a calm celestial pond in an enchanted moonlit forest, surrounded by firefly guardians.' },
+          { style: '🧸 Plastelina Claymation', ar: '1:1', title: '5. Plastelinowa Kołyska Stop-Motion', desc: 'Ręcznie ulepiona kołyska z drewna i różowa plastelina.', prompt: 'Adorable stop-motion clay baby wrapped in pink textured plasticine swaddle, sleeping peacefully in a tiny handmade wooden cradle.' },
+          { style: '👑 Mega Ewolucja Poziom 5', ar: '16:9', title: '6. Złote Dziecko Gwiazd', desc: 'Serce kosmicznej kołyski galaktyk i wieczna miłość.', prompt: 'Divine Starlight Avatar of Pure Love. Floating within the heart of a cosmic galaxy cradle, radiating unconditional love and eternal hope across the universe.' },
+          { style: '🎨 Bajkowa Akwarela 2D', ar: '3:4', title: '7. Śpiący Aniołek w Chmurkach', desc: 'Subtelna akwarela do dziecięcego pokoiku.', prompt: 'Ethereal watercolor painting of a sleeping newborn baby wrapped in pink blanket with gentle silver angel wings, soft nursery room art.' },
+          { style: '🎬 Kinowy Kadr 3D Pixar', ar: '16:9', title: '8. Czuwanie 10 Pluszaków nad Snem', desc: 'Wszystkie zabawki stoją na straży wokół łóżeczka.', prompt: 'Heartwarming close-up of the baby doll smiling softly in its sleep while all plush toys stand watch around the bed, warm golden cinematic lighting.' },
+          { style: '🦾 Figurka Kolekcjonerska', ar: '1:1', title: '9. Kula Śnieżna z Księżycem', desc: 'Świecąca lampka nocna z bobaskiem w szklanej kuli.', prompt: 'Art collectible baby doll inside a glowing crescent moon display dome with soft ambient nightlight, Pop Mart Sweet Dreams edition.' },
+          { style: '👯 Scena Wielkiego Panteonu (11 Bohaterów)', ar: '1:1', title: '10. Wielki Krąg Ochrony Pokoju', desc: 'Wszystkie 11 pluszaków otacza kocyk bobaska na dywanie.', prompt: 'Grand 11 plushies sitting in a protective loving circle on a bedroom carpet around the sleeping baby doll in pink swaddle, glowing warm aura of total peace.' }
+        ]
+      }
+    ];
+
+    let currentHeroIdx = 0;
+
+    function init() {
+      renderSelector();
+      renderHeroPrompts(0);
+    }
+
+    function renderSelector() {
+      const grid = document.getElementById('charSelectorGrid');
+      grid.innerHTML = '';
+      promptStudioData.forEach((hero, idx) => {
+        const btn = document.createElement('div');
+        btn.className = `char-select-btn ${idx === currentHeroIdx ? 'active' : ''}`;
+        btn.onclick = () => renderHeroPrompts(idx);
+        btn.innerHTML = `
+          <img class="char-select-thumb" src="${hero.avatar}" alt="${hero.name}">
+          <div class="char-select-name">${hero.name}</div>
+        `;
+        grid.appendChild(btn);
+      });
+    }
+
+    function renderHeroPrompts(idx) {
+      currentHeroIdx = idx;
+      renderSelector();
+
+      const hero = promptStudioData[idx];
+
+      document.getElementById('bannerAvatar').src = hero.avatar;
+      document.getElementById('bannerName').textContent = hero.name;
+      document.getElementById('bannerAlias').textContent = `${hero.alias} • 10 Gotowych Promptów Nano Banana 2 / Imagen 3`;
+
+      const container = document.getElementById('promptsContainer');
+      container.innerHTML = '';
+
+      hero.prompts.forEach((p, pIdx) => {
+        const card = document.createElement('div');
+        card.className = 'prompt-card';
+        card.innerHTML = `
+          <div>
+            <div class="prompt-card-header">
+              <span class="prompt-style-badge">${p.style}</span>
+              <span class="prompt-ar-badge">Format: ${p.ar}</span>
+            </div>
+            <div class="prompt-title" style="margin-top: 0.5rem;">${p.title}</div>
+            <div class="prompt-desc">${p.desc}</div>
+          </div>
+          <div class="prompt-code-box">${p.prompt}</div>
+          <button class="copy-single-btn" onclick="copyPromptText('${encodeURIComponent(p.prompt)}', this)">
+            📋 Kopiuj Prompt
+          </button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function copyPromptText(encodedText, btn) {
+      const text = decodeURIComponent(encodedText);
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('✓ Skopiowano prompt do schowka!');
+        btn.textContent = '✓ Skopiowano!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = '📋 Kopiuj Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyAllPrompts() {
+      const hero = promptStudioData[currentHeroIdx];
+      const allText = hero.prompts.map((p, i) => `### ${p.title} (${p.style} - ${p.ar})\n${p.prompt}\n`).join('\n');
+      navigator.clipboard.writeText(allText).then(() => {
+        showToast(`✓ Skopiowano wszystkie 10 promptów dla: ${hero.name}!`);
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toastMsg');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => {
+        t.style.display = 'none';
+      }, 2500);
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
